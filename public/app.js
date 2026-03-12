@@ -1552,7 +1552,13 @@ function renderBalanceSheetSection(c) {
     const eq   = bs.totalEquity || [null, null, null];
 
     const allVals = [...cash, ...ar, ...inv, ...tca, ...ta, ...ap, ...std, ...tcl, ...ltd, ...tl, ...eq];
-    if (allVals.every(v => v == null)) return '';
+    if (allVals.every(v => v == null)) {
+        return `
+    <div class="dd-analysis-block">
+        <span class="dd-analysis-label">Balance Sheet</span>
+        <p style="color:var(--text-muted);font-size:0.82rem;margin-top:8px;">No balance sheet data yet. Use <strong>Edit</strong> to enter manually or <strong>+ Doc</strong> to extract from an uploaded file.</p>
+    </div>`;
+    }
 
     const fmt = v => formatMoney(v);
 
