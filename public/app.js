@@ -1535,6 +1535,137 @@ function renderFinancialInsights(c) {
     </div>`;
 }
 
+function renderBalanceSheetSection(c) {
+    const bs = c.balanceSheet || {};
+    const years = c.years || ['Year 1', 'Year 2', 'Year 3'];
+
+    const cash = bs.cash || [null, null, null];
+    const ar   = bs.accountsReceivable || [null, null, null];
+    const inv  = bs.inventory || [null, null, null];
+    const tca  = bs.totalCurrentAssets || [null, null, null];
+    const ta   = bs.totalAssets || [null, null, null];
+    const ap   = bs.accountsPayable || [null, null, null];
+    const std  = bs.shortTermDebt || [null, null, null];
+    const tcl  = bs.totalCurrentLiabilities || [null, null, null];
+    const ltd  = bs.longTermDebt || [null, null, null];
+    const tl   = bs.totalLiabilities || [null, null, null];
+    const eq   = bs.totalEquity || [null, null, null];
+
+    const allVals = [...cash, ...ar, ...inv, ...tca, ...ta, ...ap, ...std, ...tcl, ...ltd, ...tl, ...eq];
+    if (allVals.every(v => v == null)) return '';
+
+    const fmt = v => formatMoney(v);
+
+    function bsRow(label, vals, cls = '') {
+        if (vals.every(v => v == null)) return '';
+        return `<tr class="${cls}"><td>${label}</td>${vals.map(v => `<td>${fmt(v)}</td>`).join('')}</tr>`;
+    }
+    function bsHead(label) {
+        return `<tr class="dd-row-section-head"><td colspan="4">${label}</td></tr>`;
+    }
+    function ratioRow(label, vals, fmtFn) {
+        if (vals.every(v => v == null)) return '';
+        return `<tr class="dd-row-sub"><td>${label}</td>${vals.map(v => `<td>${v == null ? '—' : fmtFn(v)}</td>`).join('')}</tr>`;
+    }
+
+    // Derived ratios per year
+    const currentRatio = [0,1,2].map(i => (tca[i] != null && tcl[i] != null && tcl[i] !== 0) ? tca[i] / tcl[i] : null);
+    const netDebt      = [0,1,2].map(i => {
+        const d = (std[i] || 0) + (ltd[i] || 0);
+        return (d === 0 && cash[i] == null) ? null : d - (cash[i] || 0);
+    });
+    const deRatio      = [0,1,2].map(i => (tl[i] != null && eq[i] != null && eq[i] !== 0) ? tl[i] / eq[i] : null);
+    const hasRatios    = currentRatio.some(v => v != null) || netDebt.some(v => v != null) || deRatio.some(v => v != null);
+
+    const tableHtml = `
+    <div class="dd-fin-table-wrap" style="margin-top:12px">
+        <table class="dd-fin-table">
+            <thead><tr><th></th>${years.map(y => `<th>${y}</th>`).join('')}</tr></thead>
+            <tbody>
+                ${bsHead('Assets')}
+                ${bsRow('Cash &amp; Equiv.', cash, 'dd-row-primary')}
+                ${bsRow('Accounts Receivable', ar, 'dd-row-sub')}
+                ${bsRow('Inventory', inv, 'dd-row-sub')}
+                ${bsRow('Total Current Assets', tca, 'dd-row-primary')}
+                ${bsRow('Total Assets', ta, 'dd-row-primary')}
+                ${bsHead('Liabilities')}
+                ${bsRow('Accounts Payable', ap, 'dd-row-sub')}
+                ${bsRow('Short-term Debt', std, 'dd-row-sub')}
+                ${bsRow('Total Current Liab.', tcl, 'dd-row-primary')}
+                ${bsRow('Long-term Debt', ltd, 'dd-row-sub')}
+                ${bsRow('Total Liabilities', tl, 'dd-row-primary')}
+                ${bsHead('Equity')}
+                ${bsRow('Total Equity', eq, 'dd-row-primary')}
+                ${hasRatios ? bsHead('Derived Ratios') : ''}
+                ${ratioRow('Current Ratio', currentRatio, v => v.toFixed(2) + 'x')}
+                ${ratioRow('Net Debt', netDebt, v => formatMoney(v))}
+                ${ratioRow('Debt / Equity', deRatio, v => v.toFixed(2) + 'x')}
+            </tbody>
+        </table>
+    </div>`;
+
+    // Key insights — use latest period with data
+    const latestI = tca[2] != null || cash[2] != null ? 2 : tca[1] != null || cash[1] != null ? 1 : 0;
+    const prevI   = latestI > 0 ? latestI - 1 : null;
+    const rev     = c.revenue || [null, null, null];
+    const insights = [];
+
+    const cr = currentRatio[latestI];
+    if (cr != null) {
+        const col   = cr >= 2 ? '#10b981' : cr >= 1.5 ? '#84cc16' : cr >= 1 ? '#f59e0b' : '#ef4444';
+        const label = cr >= 2 ? 'strong liquidity' : cr >= 1.5 ? 'adequate liquidity' : cr >= 1 ? 'thin liquidity buffer — monitor closely' : 'current liabilities exceed current assets — liquidity risk';
+        insights.push(`<span style="color:${col};font-weight:700">Current ratio ${cr.toFixed(2)}x</span> — ${label}.`);
+    }
+
+    if (cash[latestI] != null && prevI != null && cash[prevI] != null) {
+        const delta = cash[latestI] - cash[prevI];
+        const col   = delta >= 0 ? '#10b981' : '#ef4444';
+        const dir   = delta >= 0 ? 'increased' : 'decreased';
+        insights.push(`<span style="color:${col};font-weight:700">Cash ${dir} by ${formatMoney(Math.abs(delta))}</span> to ${formatMoney(cash[latestI])} in ${years[latestI]} — ${delta >= 0 ? 'positive cash generation' : 'cash burn requires monitoring'}.`);
+    }
+
+    const nd = netDebt[latestI];
+    if (nd != null) {
+        const latestRev = rev[latestI];
+        if (latestRev && nd > 0) {
+            const ndRev = nd / latestRev;
+            const col   = ndRev < 1 ? '#84cc16' : ndRev < 2 ? '#f59e0b' : '#ef4444';
+            insights.push(`<span style="color:${col};font-weight:700">Leverage at ${ndRev.toFixed(1)}x Net Debt/Revenue</span> — ${formatMoney(nd)} net debt vs ${formatMoney(latestRev)} revenue.`);
+        } else if (nd <= 0) {
+            insights.push(`<span style="color:#10b981;font-weight:700">Net cash position</span> of ${formatMoney(Math.abs(nd))} in ${years[latestI]} — no net debt on the balance sheet.`);
+        }
+    }
+
+    const de = deRatio[latestI];
+    if (de != null) {
+        const col   = de <= 0.5 ? '#10b981' : de <= 1 ? '#84cc16' : de <= 2 ? '#f59e0b' : '#ef4444';
+        const label = de <= 0.5 ? 'conservatively financed' : de <= 1 ? 'moderate leverage' : de <= 2 ? 'moderately leveraged — debt servicing warrants attention' : 'highly leveraged';
+        insights.push(`<span style="color:${col};font-weight:700">Debt/Equity ${de.toFixed(2)}x</span> — ${label}.`);
+    }
+
+    if (tca[latestI] != null && tcl[latestI] != null && prevI != null && tca[prevI] != null && tcl[prevI] != null) {
+        const wcNow  = tca[latestI] - tcl[latestI];
+        const wcPrev = tca[prevI] - tcl[prevI];
+        const delta  = wcNow - wcPrev;
+        const col    = delta >= 0 ? '#10b981' : '#f59e0b';
+        const dir    = delta >= 0 ? 'improved' : 'tightened';
+        insights.push(`<span style="color:${col};font-weight:700">Working capital ${dir}</span> from ${formatMoney(wcPrev)} to ${formatMoney(wcNow)} — ${wcNow >= 0 ? 'positive working capital supports operations' : 'negative working capital — operational funding risk'}.`);
+    }
+
+    const insightBox = insights.length === 0 ? '' : `
+    <div style="margin-top:10px;padding:10px 14px;background:var(--surface-1);border:1px solid var(--border-color);border-radius:7px;font-size:0.78rem;line-height:1.65;color:var(--text-secondary);">
+        <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Balance Sheet Key Takeaways</div>
+        ${insights.map(s => `<div style="margin-bottom:6px;padding-left:10px;border-left:2px solid var(--border-color);">${s}</div>`).join('')}
+    </div>`;
+
+    return `
+    <div class="dd-analysis-block">
+        <span class="dd-analysis-label">Balance Sheet</span>
+        ${tableHtml}
+        ${insightBox}
+    </div>`;
+}
+
 function renderCompanyCard(c) {
     const expanded = ddExpanded.has(c.id);
     const rev = c.revenue || [null, null, null];
@@ -1620,6 +1751,7 @@ function renderCompanyCard(c) {
                 </table>
             </div>
             ${renderFinancialInsights(c)}
+            ${renderBalanceSheetSection(c)}
         </div>` : '';
 
     const websiteDisplay = c.website ? c.website.replace(/^https?:\/\//, '') : '';
@@ -1673,6 +1805,19 @@ function openDDEditor(id = null) {
             document.getElementById(`dd-gp${i}`).value = gp[i - 1] != null ? formatMoney(gp[i - 1]).replace(/[$,]/g, '') : '';
             document.getElementById(`dd-sga${i}`).value = sga[i - 1] != null ? formatMoney(sga[i - 1]).replace(/[$,]/g, '') : '';
         });
+        // Balance sheet
+        const bs = c.balanceSheet || {};
+        const bsFields = ['cash','accountsReceivable','inventory','totalCurrentAssets','totalAssets',
+                          'accountsPayable','shortTermDebt','totalCurrentLiabilities','longTermDebt',
+                          'totalLiabilities','totalEquity'];
+        const bsIds    = ['cash','ar','inv','tca','ta','ap','std','tcl','ltd','tl','eq'];
+        bsFields.forEach((field, fi) => {
+            const vals = bs[field] || [null, null, null];
+            [1, 2, 3].forEach(i => {
+                const el = document.getElementById(`dd-bs-${bsIds[fi]}${i}`);
+                if (el) el.value = vals[i - 1] != null ? formatMoney(vals[i - 1]).replace(/[$,]/g, '') : '';
+            });
+        });
     } else {
         titleEl.textContent = 'Add Company';
         document.getElementById('dd-editor-form').reset();
@@ -1697,6 +1842,15 @@ document.getElementById('dd-editor-form').addEventListener('submit', async e => 
     e.preventDefault();
     const id = document.getElementById('dd-edit-id').value;
     const panel = document.getElementById('dd-editor-panel');
+    const bsFieldNames = ['cash','accountsReceivable','inventory','totalCurrentAssets','totalAssets',
+                          'accountsPayable','shortTermDebt','totalCurrentLiabilities','longTermDebt',
+                          'totalLiabilities','totalEquity'];
+    const bsInputIds   = ['cash','ar','inv','tca','ta','ap','std','tcl','ltd','tl','eq'];
+    const balanceSheet = {};
+    bsFieldNames.forEach((field, fi) => {
+        balanceSheet[field] = [1, 2, 3].map(i => parseMoney(document.getElementById(`dd-bs-${bsInputIds[fi]}${i}`).value));
+    });
+
     const payload = {
         name: document.getElementById('dd-edit-name').value.trim(),
         website: document.getElementById('dd-edit-website').value.trim(),
@@ -1706,6 +1860,7 @@ document.getElementById('dd-editor-form').addEventListener('submit', async e => 
         ebitda: [1, 2, 3].map(i => parseMoney(document.getElementById(`dd-ebitda${i}`).value)),
         grossProfit: [1, 2, 3].map(i => parseMoney(document.getElementById(`dd-gp${i}`).value)),
         sga: [1, 2, 3].map(i => parseMoney(document.getElementById(`dd-sga${i}`).value)),
+        balanceSheet,
     };
     // Merge in any pending analysis data from document upload
     const pending = panel.dataset.pendingAnalysis;

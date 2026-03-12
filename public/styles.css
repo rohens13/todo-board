@@ -1609,6 +1609,26 @@ body.light-mode .hs-deals-panel {
     font-weight: 500;
 }
 
+.dd-fin-section-head {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    padding-top: 8px;
+}
+
+.dd-fin-table .dd-row-section-head td {
+    padding-top: 12px;
+    padding-bottom: 3px;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--border-color);
+}
+
 .dd-fin-input {
     text-align: center;
     padding: 7px 6px;
