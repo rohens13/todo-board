@@ -1966,6 +1966,19 @@ async function analyzeAndSaveFile(file) {
             for (const k of cmKeys) {
                 mergedCm[k] = hasValue(newCm[k]) ? newCm[k] : (existingCm[k] ?? null);
             }
+            // Merge balance sheet — prefer new non-null values per field per year
+            const existingBs = existing.balanceSheet || {};
+            const newBs = data.balanceSheet || {};
+            const bsMergeFields = ['cash','accountsReceivable','inventory','totalCurrentAssets','totalAssets',
+                                   'accountsPayable','shortTermDebt','totalCurrentLiabilities','longTermDebt',
+                                   'totalLiabilities','totalEquity'];
+            const mergedBs = {};
+            for (const k of bsMergeFields) {
+                const newArr = newBs[k] || [null, null, null];
+                const oldArr = existingBs[k] || [null, null, null];
+                mergedBs[k] = newArr.map((v, i) => v != null ? v : (oldArr[i] ?? null));
+            }
+
             const merged = {
                 name: existing.name,
                 website: existing.website || data.website || '',
@@ -1981,6 +1994,7 @@ async function analyzeAndSaveFile(file) {
                 keyRisks: data.keyRisks || existing.keyRisks || '',
                 sourceFile: [existing.sourceFile, file.name].filter(Boolean).join(', '),
                 customerMetrics: mergedCm,
+                balanceSheet: mergedBs,
             };
             await fetch(`/api/companies/${ddUploadTargetId}`, {
                 method: 'PUT',
@@ -2007,6 +2021,7 @@ async function analyzeAndSaveFile(file) {
                     keyRisks: data.keyRisks || '',
                     sourceFile: data.sourceFile || file.name,
                     netIncome: data.netIncome || [null, null, null],
+                    balanceSheet: data.balanceSheet || {},
                 })
             });
             updateDDStep(stepEl, 'done', `${data.name || file.name} added to DD Board ✓`);

@@ -992,6 +992,19 @@ const DD_ANALYSIS_PROMPT = `You are an experienced investment analyst performing
     "cohortNRR": [],
     "customerCohortRows": [],
     "cohortTableData": []
+  },
+  "balanceSheet": {
+    "cash": [null, null, null],
+    "accountsReceivable": [null, null, null],
+    "inventory": [null, null, null],
+    "totalCurrentAssets": [null, null, null],
+    "totalAssets": [null, null, null],
+    "accountsPayable": [null, null, null],
+    "shortTermDebt": [null, null, null],
+    "totalCurrentLiabilities": [null, null, null],
+    "longTermDebt": [null, null, null],
+    "totalLiabilities": [null, null, null],
+    "totalEquity": [null, null, null]
   }
 }
 
@@ -1022,7 +1035,22 @@ Rules for customerMetrics — IMPORTANT: actively calculate these from raw data 
 - valueChurnByYear: CALCULATE from multi-year customer data. For each year pair, identify customers present in year N but absent in year N+1, sum their revenue = churned value. Format: [{"year":"FY2023","churned":500000,"churnRatePct":8.5}]. Use actual dollar amounts. Include ALL years where you can calculate this.
 - logoChurnByYear: CALCULATE from multi-year customer lists. Count customers in year N missing from year N+1. Format: [{"year":"FY2023","logosLost":12,"churnRatePct":6.0}]. Include ALL years calculable.
 - cohortNRR: if you have per-customer revenue data across multiple years, calculate NRR for top 10 customers as a cohort: for each period, (their total revenue) / (their first-period revenue) × 100. Format: [{"period":"FY2022","nrr":100},{"period":"FY2023","nrr":108},{"period":"FY2024","nrr":115}]
-- Set to null/[] only if truly not calculable — always try to compute from raw data first`;
+- Set to null/[] only if truly not calculable — always try to compute from raw data first
+
+Rules for balanceSheet — extract from any balance sheet tab or section, aligned to the same year order as the P&L arrays above:
+- cash: cash and cash equivalents (or "cash & short-term investments")
+- accountsReceivable: trade receivables / accounts receivable, net
+- inventory: inventory / stock on hand (null if service business)
+- totalCurrentAssets: total current assets
+- totalAssets: total assets
+- accountsPayable: accounts payable / trade payables
+- shortTermDebt: short-term borrowings, current portion of long-term debt, revolving credit
+- totalCurrentLiabilities: total current liabilities
+- longTermDebt: long-term debt, notes payable, term loans (non-current portion only)
+- totalLiabilities: total liabilities
+- totalEquity: total shareholders' equity / stockholders' equity / net assets
+- All values as raw numbers in the document's native currency. null if not found.
+- If balance sheet covers different periods than the P&L, align to the closest matching year and leave others null`;
 
 app.post('/api/dd/analyze-document', upload.single('file'), async (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
