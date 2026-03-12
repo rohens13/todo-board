@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Board</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="header-top">
+                <h1>Todo Board</h1>
+                <div class="theme-switcher" id="themeSwitcher">
+                    <button class="theme-swatch active" data-theme="dark"   title="Dark"   style="background: #8B5CF6"></button>
+                    <button class="theme-swatch"        data-theme="light"  title="Light"  style="background: linear-gradient(135deg, #E2E8F0 50%, #8B5CF6 50%)"></button>
+                    <button class="theme-swatch"        data-theme="ocean"  title="Ocean"  style="background: #06B6D4"></button>
+                    <button class="theme-swatch"        data-theme="forest" title="Forest" style="background: #10B981"></button>
+                    <button class="theme-swatch"        data-theme="sunset" title="Sunset" style="background: #F97316"></button>
+                </div>
+            </div>
+            <p>Drag tasks between columns to update their status</p>
+        </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="board">Board</button>
+            <button class="tab" data-tab="hubspot">HubSpot</button>
+            <button class="tab" data-tab="dd">DD</button>
+            <button class="tab" data-tab="podcasts">Podcasts</button>
+        </div>
+
+        <!-- Board Tab -->
+        <div id="tab-board" class="tab-content">
+            <div class="add-task-bar">
+                <input type="text" id="newTaskInput" placeholder="Add a new task..." autocomplete="off">
+                <div class="color-picker">
+                    <button class="color-btn active" data-color="#6366f1" style="background: #6366f1"></button>
+                    <button class="color-btn" data-color="#ec4899" style="background: #ec4899"></button>
+                    <button class="color-btn" data-color="#14b8a6" style="background: #14b8a6"></button>
+                    <button class="color-btn" data-color="#f97316" style="background: #f97316"></button>
+                    <button class="color-btn" data-color="#8b5cf6" style="background: #8b5cf6"></button>
+                </div>
+                <button id="addTaskBtn">Add Task</button>
+                <button id="undoBtn" class="undo-btn" title="Undo (Cmd+Z)" disabled>↩ Undo</button>
+            </div>
+
+            <div class="board" id="board">
+                <!-- Columns rendered by JS -->
+            </div>
+        </div>
+
+        <!-- HubSpot Tab -->
+        <div id="tab-hubspot" class="tab-content hidden">
+            <div class="hubspot-header">
+                <h2>HubSpot Metrics</h2>
+                <button id="refreshHubspot" class="refresh-btn">↻ Refresh</button>
+            </div>
+            <div id="hubspot-loading" class="hs-loading">Loading HubSpot data...</div>
+            <div id="hubspot-error" class="hs-error hidden"></div>
+            <div id="hubspot-content" class="hidden">
+
+                <!-- Stat Cards -->
+                <div class="hs-stats-grid">
+                    <div class="hs-stat-card">
+                        <div class="hs-stat-icon" style="background: rgba(99,102,241,0.2)">👤</div>
+                        <div class="hs-stat-info">
+                            <div class="hs-stat-value" id="hs-total-contacts">—</div>
+                            <div class="hs-stat-label">Total Contacts</div>
+                        </div>
+                    </div>
+                    <div class="hs-stat-card">
+                        <div class="hs-stat-icon" style="background: rgba(20,184,166,0.2)">🏢</div>
+                        <div class="hs-stat-info">
+                            <div class="hs-stat-value" id="hs-total-companies">—</div>
+                            <div class="hs-stat-label">Total Companies</div>
+                        </div>
+                    </div>
+                    <div class="hs-stat-card">
+                        <div class="hs-stat-icon" style="background: rgba(245,158,11,0.2)">💼</div>
+                        <div class="hs-stat-info">
+                            <div class="hs-stat-value" id="hs-total-deals">—</div>
+                            <div class="hs-stat-label">Total Deals</div>
+                        </div>
+                    </div>
+                    <div class="hs-stat-card">
+                        <div class="hs-stat-icon" style="background: rgba(16,185,129,0.2)">💰</div>
+                        <div class="hs-stat-info">
+                            <div class="hs-stat-value" id="hs-pipeline-value">—</div>
+                            <div class="hs-stat-label">Pipeline Value</div>
+                        </div>
+                    </div>
+                    <div class="hs-stat-card">
+                        <div class="hs-stat-icon" style="background: rgba(236,72,153,0.2)">🆕</div>
+                        <div class="hs-stat-info">
+                            <div class="hs-stat-value" id="hs-new-contacts">—</div>
+                            <div class="hs-stat-label">New Contacts (30d)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deals by Stage -->
+                <div class="hs-section">
+                    <h3>Deals by Stage</h3>
+                    <div id="hs-deals-by-stage" class="hs-stage-list"></div>
+                </div>
+
+                <!-- Recent Deals -->
+                <div class="hs-section">
+                    <h3>Recent Deals</h3>
+                    <div id="hs-recent-deals" class="hs-deals-list"></div>
+                </div>
+
+                <!-- Deal Funnel -->
+                <div class="hs-section">
+                    <div class="hs-section-header">
+                        <h3>Deal Funnel</h3>
+                        <div class="hs-funnel-controls">
+                            <div class="hs-view-toggle">
+                                <button class="hs-view-btn active" data-view="historical">Historical</button>
+                                <button class="hs-view-btn" data-view="current">Current</button>
+                            </div>
+                            <div class="hs-period-selector">
+                                <button class="hs-period-btn active" data-period="">All time</button>
+                                <button class="hs-period-btn" data-period="week">Week</button>
+                                <button class="hs-period-btn" data-period="month">Month</button>
+                                <button class="hs-period-btn" data-period="ytd">YTD</button>
+                                <button class="hs-period-btn" data-period="year">Year</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hs-funnel-loading" class="hs-funnel-loading">Loading...</div>
+                    <div id="hs-funnel-content"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- DD Tab -->
+        <div id="tab-dd" class="tab-content hidden">
+            <div class="dd-header">
+                <h2>Due Diligence</h2>
+                <div class="dd-header-actions">
+                    <button id="uploadDocBtn" class="yt-import-trigger-btn">↑ Upload &amp; Analyze</button>
+                    <button id="addCompanyBtn" class="dd-add-btn">+ Add Company</button>
+                </div>
+            </div>
+            <div id="dd-loading" class="dd-loading hidden">Loading…</div>
+            <div id="dd-cards" class="dd-cards"></div>
+        </div>
+
+        <!-- Podcasts Tab -->
+        <div id="tab-podcasts" class="tab-content hidden">
+            <div class="pod-header">
+                <h2>Podcasts</h2>
+                <div class="pod-header-actions">
+                    <button id="importYouTubeBtn" class="yt-import-trigger-btn">↓ Import from YouTube</button>
+                    <button id="addPodcastBtn" class="dd-add-btn">+ Add Podcast</button>
+                </div>
+            </div>
+            <div id="pod-loading" class="dd-loading hidden">Loading…</div>
+            <div id="pod-list" class="pod-list"></div>
+        </div>
+
+    </div>
+
+    <!-- Company Editor Panel -->
+    <div id="dd-editor-panel" class="hs-deals-panel">
+        <div class="hs-deals-panel-header">
+            <button id="dd-editor-back" class="hs-deals-back-btn">← Back</button>
+            <div class="hs-deals-panel-title-wrap">
+                <h2 id="dd-editor-title">Add Company</h2>
+            </div>
+        </div>
+        <div class="hs-deals-panel-body" id="dd-editor-body">
+            <form id="dd-editor-form" class="dd-editor-form">
+                <input type="hidden" id="dd-edit-id">
+
+                <div class="dd-form-section">
+                    <label class="dd-label">Company Name</label>
+                    <input type="text" id="dd-edit-name" class="dd-input" placeholder="Acme Corp" required>
+                </div>
+
+                <div class="dd-form-section">
+                    <label class="dd-label">Website</label>
+                    <input type="url" id="dd-edit-website" class="dd-input" placeholder="https://acme.com">
+                </div>
+
+                <div class="dd-form-section">
+                    <label class="dd-label">Business Description</label>
+                    <textarea id="dd-edit-desc" class="dd-input dd-textarea" rows="4" placeholder="What does the business do?"></textarea>
+                </div>
+
+                <div class="dd-form-section">
+                    <label class="dd-label">Financials</label>
+                    <p class="dd-form-hint">Values can be entered as $5M, $800K, or raw numbers.</p>
+                    <div class="dd-fin-grid">
+                        <div class="dd-fin-header"></div>
+                        <div class="dd-fin-header">Year 1</div>
+                        <div class="dd-fin-header">Year 2</div>
+                        <div class="dd-fin-header">Year 3</div>
+
+                        <div class="dd-fin-label">Year Label</div>
+                        <input class="dd-input dd-fin-input" id="dd-y1" placeholder="FY22">
+                        <input class="dd-input dd-fin-input" id="dd-y2" placeholder="FY23">
+                        <input class="dd-input dd-fin-input" id="dd-y3" placeholder="FY24">
+
+                        <div class="dd-fin-label">Revenue</div>
+                        <input class="dd-input dd-fin-input" id="dd-rev1" placeholder="$5M">
+                        <input class="dd-input dd-fin-input" id="dd-rev2" placeholder="$6.2M">
+                        <input class="dd-input dd-fin-input" id="dd-rev3" placeholder="$7.1M">
+
+                        <div class="dd-fin-label">EBITDA</div>
+                        <input class="dd-input dd-fin-input" id="dd-ebitda1" placeholder="$800K">
+                        <input class="dd-input dd-fin-input" id="dd-ebitda2" placeholder="$1.1M">
+                        <input class="dd-input dd-fin-input" id="dd-ebitda3" placeholder="$1.3M">
+
+                        <div class="dd-fin-label">Gross Profit</div>
+                        <input class="dd-input dd-fin-input" id="dd-gp1" placeholder="$2.5M">
+                        <input class="dd-input dd-fin-input" id="dd-gp2" placeholder="$3.1M">
+                        <input class="dd-input dd-fin-input" id="dd-gp3" placeholder="$3.6M">
+
+                        <div class="dd-fin-label">SG&amp;A</div>
+                        <input class="dd-input dd-fin-input" id="dd-sga1" placeholder="$1.2M">
+                        <input class="dd-input dd-fin-input" id="dd-sga2" placeholder="$1.4M">
+                        <input class="dd-input dd-fin-input" id="dd-sga3" placeholder="$1.6M">
+                    </div>
+                </div>
+
+                <div class="dd-form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeDDEditor()">Cancel</button>
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Podcast Editor Panel -->
+    <div id="pod-editor-panel" class="hs-deals-panel">
+        <div class="hs-deals-panel-header">
+            <button id="pod-editor-back" class="hs-deals-back-btn">← Back</button>
+            <div class="hs-deals-panel-title-wrap">
+                <h2 id="pod-editor-title">Add Podcast</h2>
+            </div>
+        </div>
+        <div class="hs-deals-panel-body">
+            <form id="pod-editor-form" class="dd-editor-form">
+                <input type="hidden" id="pod-edit-id">
+                <div class="dd-form-section">
+                    <label class="dd-label">Podcast Name</label>
+                    <input type="text" id="pod-edit-name" class="dd-input" placeholder="Forward Guidance" required>
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Publisher / Network</label>
+                    <input type="text" id="pod-edit-publisher" class="dd-input" placeholder="Blockworks">
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Website / Feed URL</label>
+                    <input type="url" id="pod-edit-website" class="dd-input" placeholder="https://blockworks.co/podcasts/forward-guidance">
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Description</label>
+                    <textarea id="pod-edit-desc" class="dd-input dd-textarea" rows="3" placeholder="What is this podcast about?"></textarea>
+                </div>
+                <div class="dd-form-actions">
+                    <button type="button" class="btn-cancel" onclick="closePodEditor()">Cancel</button>
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Episode Editor Panel -->
+    <div id="ep-editor-panel" class="hs-deals-panel">
+        <div class="hs-deals-panel-header">
+            <button id="ep-editor-back" class="hs-deals-back-btn">← Back</button>
+            <div class="hs-deals-panel-title-wrap">
+                <h2 id="ep-editor-title">Add Episode</h2>
+            </div>
+        </div>
+        <div class="hs-deals-panel-body">
+            <form id="ep-editor-form" class="dd-editor-form">
+                <input type="hidden" id="ep-edit-pod-id">
+                <input type="hidden" id="ep-edit-ep-id">
+                <div class="dd-form-section">
+                    <label class="dd-label">Episode Title</label>
+                    <input type="text" id="ep-edit-title" class="dd-input" placeholder="Episode title..." required>
+                </div>
+                <div class="pod-form-row">
+                    <div class="dd-form-section">
+                        <label class="dd-label">Date</label>
+                        <input type="date" id="ep-edit-date" class="dd-input">
+                    </div>
+                    <div class="dd-form-section">
+                        <label class="dd-label">Guest(s)</label>
+                        <input type="text" id="ep-edit-guests" class="dd-input" placeholder="Name, Name">
+                    </div>
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Episode URL</label>
+                    <input type="url" id="ep-edit-url" class="dd-input" placeholder="https://...">
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Summary</label>
+                    <textarea id="ep-edit-summary" class="dd-input dd-textarea" rows="4" placeholder="What was discussed?"></textarea>
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Key Insights</label>
+                    <textarea id="ep-edit-insights" class="dd-input dd-textarea" rows="5" placeholder="- One insight per line&#10;- Use bullet points or just plain lines"></textarea>
+                </div>
+                <div class="dd-form-section">
+                    <div class="ep-ideas-header">
+                        <label class="dd-label">Investment Ideas</label>
+                        <button type="button" id="addIdeaBtn" class="pod-add-ep-btn ep-add-idea-btn">+ Add Idea</button>
+                    </div>
+                    <div id="ep-ideas-container" class="ep-ideas-form-container"></div>
+                </div>
+                <div class="dd-form-section">
+                    <label class="dd-label">Personal Notes</label>
+                    <textarea id="ep-edit-notes" class="dd-input dd-textarea" rows="3" placeholder="Your own thoughts..."></textarea>
+                </div>
+                <div class="dd-form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeEpEditor()">Cancel</button>
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- YouTube Import Modal -->
+    <!-- DD Document Upload Modal -->
+    <div id="dd-upload-modal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeDDUpload()"></div>
+        <div class="modal-content yt-modal-content">
+            <h2>Upload &amp; Analyze Document</h2>
+            <p class="yt-modal-desc">Upload one or more PDF, DOCX, XLSX, XLS, or TXT files. Claude will extract financial data, investment thesis, and key risks automatically.</p>
+
+            <div id="dd-upload-input-section">
+                <div id="dd-drop-zone" class="dd-drop-zone" ondragover="event.preventDefault()" ondrop="handleDDDrop(event)">
+                    <div class="dd-drop-icon">↑</div>
+                    <div class="dd-drop-label">Drag &amp; drop files here</div>
+                    <div class="dd-drop-sub">PDF, DOCX, XLSX, XLS, or TXT · Max 20MB each</div>
+                    <input type="file" id="dd-file-input" class="dd-file-input" accept=".pdf,.docx,.xlsx,.xls,.txt" multiple onchange="handleDDFileSelect(event)">
+                    <button class="dd-add-btn" onclick="document.getElementById('dd-file-input').click()">Choose Files</button>
+                </div>
+                <div id="dd-file-selected" class="dd-file-selected hidden">
+                    <span id="dd-file-name" class="dd-file-name"></span>
+                    <button class="dd-action-btn" onclick="clearDDFile()">✕</button>
+                </div>
+                <div class="modal-actions">
+                    <button class="dd-add-btn" onclick="startDDUpload()">Analyze</button>
+                    <button class="dd-action-btn" onclick="closeDDUpload()">Cancel</button>
+                </div>
+            </div>
+
+            <div id="dd-upload-progress" class="yt-progress-section hidden">
+                <div id="dd-upload-steps" class="yt-steps"></div>
+                <div id="dd-upload-done-actions" class="modal-actions" style="display:none">
+                    <button class="dd-add-btn" onclick="applyDDAnalysis()">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="yt-import-modal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeYtImport()"></div>
+        <div class="modal-content yt-modal-content">
+            <h2>Import from YouTube</h2>
+            <p class="yt-modal-desc">Paste a YouTube channel URL and we'll fetch the latest 4 episodes, transcripts, and generate summaries + investment ideas automatically.</p>
+            <div id="yt-url-section">
+                <div class="form-group">
+                    <label>YouTube Channel URL</label>
+                    <input type="url" id="yt-import-url" class="dd-input" placeholder="https://www.youtube.com/@ForwardGuidanceShow">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-cancel" onclick="closeYtImport()">Cancel</button>
+                    <button id="yt-import-btn" class="btn-save" onclick="startYtImport()">Import</button>
+                </div>
+            </div>
+            <div id="yt-progress-section" class="yt-progress-section hidden">
+                <div id="yt-steps" class="yt-steps"></div>
+                <div class="modal-actions" id="yt-done-actions" style="display:none">
+                    <button class="btn-cancel" onclick="closeYtImport()">Close</button>
+                    <button class="btn-save" onclick="closeYtImport()">View Podcast</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Edit Modal -->
+    <div id="taskModal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <h2>Edit Task</h2>
+            <input type="hidden" id="editTaskId">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="editTaskTitle" placeholder="Task title...">
+            </div>
+            <div class="form-group">
+                <label>Notes</label>
+                <textarea id="editTaskNotes" placeholder="Add notes, details, or description..." rows="5"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button class="btn-save" onclick="saveTaskEdit()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deal Drilldown Panel -->
+    <div id="hs-deals-panel" class="hs-deals-panel">
+        <div class="hs-deals-panel-header">
+            <button id="hs-deals-back" class="hs-deals-back-btn">← Back</button>
+            <div class="hs-deals-panel-title-wrap">
+                <h2 id="hs-deals-title">Deals</h2>
+                <span id="hs-deals-subtitle" class="hs-deals-subtitle"></span>
+            </div>
+        </div>
+        <div id="hs-deals-panel-body" class="hs-deals-panel-body"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
