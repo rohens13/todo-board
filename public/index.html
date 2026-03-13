@@ -405,57 +405,45 @@
 
     <!-- YouTube Import Modal -->
     <!-- DD Document Upload Modal -->
-    <div id="dd-upload-modal" class="modal hidden">
+    <div id="dd-upload-modal" class="modal" style="display:none">
         <div class="modal-backdrop" onclick="closeDDUpload()"></div>
-        <div class="modal-content yt-modal-content">
-            <h2 id="dd-upload-title">Upload &amp; Analyze Document</h2>
-            <div id="dd-upload-target-banner" class="dd-upload-target-banner hidden">
-                <span id="dd-upload-target-label"></span>
-            </div>
-            <p class="yt-modal-desc" id="dd-upload-desc">Upload a PDF, Word, or Excel file. Claude will extract financial data and create a new company card automatically.</p>
+        <div class="modal-content dd-upload-modal-content">
+            <h2 id="dd-upload-title">Upload &amp; Analyze</h2>
+            <p id="dd-upload-subtitle" class="dd-upload-subtitle"></p>
 
-            <!-- File picker section -->
-            <div id="dd-upload-input-section">
-                <!-- Compact picker (existing company mode) -->
-                <div id="dd-compact-picker" class="dd-compact-picker hidden">
-                    <input type="file" id="dd-file-input-compact" class="dd-file-input" accept=".pdf,.docx,.xlsx,.xls,.txt" multiple onchange="handleDDFileSelect(event)">
-                    <button class="dd-compact-choose-btn" onclick="document.getElementById('dd-file-input-compact').click()">Choose File</button>
-                    <span id="dd-compact-filename" class="dd-compact-filename">No file chosen</span>
-                    <button id="dd-compact-clear" class="dd-action-btn hidden" onclick="clearDDFile()">✕</button>
+            <!-- Step 1: file picker -->
+            <div id="dd-step1">
+                <div id="dd-upload-area" class="dd-upload-area" ondragover="event.preventDefault()" ondrop="handleDDDrop(event)" onclick="document.getElementById('dd-file-input').click()">
+                    <input type="file" id="dd-file-input" style="display:none" accept=".pdf,.docx,.xlsx,.xls,.txt" multiple onchange="handleDDFileSelect(event)">
+                    <div id="dd-area-idle">
+                        <div class="dd-upload-icon">↑</div>
+                        <div class="dd-upload-area-label">Click or drag file here</div>
+                        <div class="dd-upload-area-hint">PDF · Word · Excel · Max 20 MB</div>
+                    </div>
+                    <div id="dd-area-chosen" style="display:none">
+                        <div class="dd-upload-chosen-name-wrap">
+                            <span class="dd-upload-file-icon">📄</span>
+                            <span id="dd-chosen-filename"></span>
+                        </div>
+                        <button class="dd-upload-clear-btn" onclick="event.stopPropagation(); clearDDFile()">✕ Change file</button>
+                    </div>
                 </div>
-                <!-- Full drop zone (new company mode) -->
-                <div id="dd-drop-zone" class="dd-drop-zone" ondragover="event.preventDefault()" ondrop="handleDDDrop(event)">
-                    <div class="dd-drop-icon">↑</div>
-                    <div class="dd-drop-label">Drag &amp; drop files here</div>
-                    <div class="dd-drop-sub">PDF, DOCX, XLSX, XLS, or TXT · Max 20MB each</div>
-                    <input type="file" id="dd-file-input" class="dd-file-input" accept=".pdf,.docx,.xlsx,.xls,.txt" multiple onchange="handleDDFileSelect(event)">
-                    <button class="dd-add-btn" onclick="document.getElementById('dd-file-input').click()">Choose Files</button>
-                </div>
-                <div id="dd-file-selected" class="dd-file-selected hidden">
-                    <span id="dd-file-name" class="dd-file-name"></span>
-                    <button class="dd-action-btn" onclick="clearDDFile()">✕</button>
-                </div>
-                <div class="modal-actions">
-                    <button class="dd-add-btn" onclick="startDDUpload()">Analyze</button>
+                <div class="dd-step1-actions">
+                    <button id="dd-analyze-btn" class="dd-add-btn" onclick="startDDUpload()" disabled>Analyze &amp; Save</button>
                     <button class="dd-action-btn" onclick="closeDDUpload()">Cancel</button>
                 </div>
             </div>
 
-            <!-- Progress + confirm section -->
-            <div id="dd-upload-progress" class="yt-progress-section hidden">
+            <!-- Step 2: progress + optional confirm -->
+            <div id="dd-step2" style="display:none">
                 <div id="dd-upload-steps" class="yt-steps"></div>
-
-                <!-- Confirm panel: only shown for new companies after analysis -->
-                <div id="dd-new-company-confirm" class="dd-new-company-confirm hidden">
-                    <div class="dd-confirm-header">Confirm company name before saving:</div>
+                <div id="dd-new-company-confirm" style="display:none" class="dd-new-company-confirm">
+                    <label class="dd-confirm-label">Confirm company name</label>
                     <input type="text" id="dd-confirm-name" class="dd-input dd-confirm-name-input" placeholder="Company name…">
                     <div id="dd-confirm-financials" class="dd-confirm-financials"></div>
-                    <div class="dd-confirm-actions">
-                        <button class="dd-add-btn" id="dd-confirm-create-btn">Save Company</button>
-                    </div>
+                    <button class="dd-add-btn" id="dd-confirm-create-btn">Save Company</button>
                 </div>
-
-                <div id="dd-upload-done-actions" class="modal-actions" style="display:none">
+                <div id="dd-upload-done-actions" style="display:none" class="dd-step1-actions">
                     <button class="dd-add-btn" onclick="closeDDUpload()">Done</button>
                 </div>
             </div>

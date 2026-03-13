@@ -1899,51 +1899,37 @@ function openDDUpload(companyId = null) {
     _pendingAnalysisData = null;
     _pendingFile = null;
 
-    const banner = document.getElementById('dd-upload-target-banner');
-    const compactPicker = document.getElementById('dd-compact-picker');
-    const dropZone = document.getElementById('dd-drop-zone');
+    // Reset to step 1
+    document.getElementById('dd-step1').style.display = '';
+    document.getElementById('dd-step2').style.display = 'none';
+    document.getElementById('dd-new-company-confirm').style.display = 'none';
+    document.getElementById('dd-upload-done-actions').style.display = 'none';
+    document.getElementById('dd-upload-steps').innerHTML = '';
+    document.getElementById('dd-area-idle').style.display = '';
+    document.getElementById('dd-area-chosen').style.display = 'none';
+    document.getElementById('dd-upload-area').classList.remove('dd-upload-area--chosen');
+    document.getElementById('dd-file-input').value = '';
+    document.getElementById('dd-analyze-btn').disabled = true;
 
     if (companyId) {
         const company = ddCompanies.find(c => c.id === companyId);
         const name = company ? company.name : 'company';
         document.getElementById('dd-upload-title').textContent = 'Add Document';
-        document.getElementById('dd-upload-desc').textContent = 'Upload a file to update financial data for this company.';
-        document.getElementById('dd-upload-target-label').textContent = name;
-        banner.classList.remove('hidden');
-        // Compact mode for existing company
-        compactPicker.classList.remove('hidden');
-        dropZone.classList.add('hidden');
-        document.getElementById('dd-file-selected').classList.add('hidden');
-        document.getElementById('dd-compact-filename').textContent = 'No file chosen';
-        document.getElementById('dd-compact-clear').classList.add('hidden');
-        document.getElementById('dd-file-input-compact').value = '';
+        document.getElementById('dd-upload-subtitle').textContent = `Updating: ${name}`;
     } else {
-        document.getElementById('dd-upload-title').textContent = 'Upload & Analyze Document';
-        document.getElementById('dd-upload-desc').textContent = 'Upload a PDF, Word, or Excel file. Claude will extract financial data and create a new company card automatically.';
-        banner.classList.add('hidden');
-        // Full drop zone for new company
-        compactPicker.classList.add('hidden');
-        dropZone.classList.remove('hidden');
-        document.getElementById('dd-file-selected').classList.add('hidden');
-        document.getElementById('dd-drop-zone').classList.remove('dd-drop-zone-has-file');
-        document.getElementById('dd-file-input').value = '';
+        document.getElementById('dd-upload-title').textContent = 'Upload & Analyze';
+        document.getElementById('dd-upload-subtitle').textContent = 'Claude will extract financials and create a new company card.';
     }
 
-    document.getElementById('dd-upload-input-section').classList.remove('hidden');
-    document.getElementById('dd-upload-progress').classList.add('hidden');
-    document.getElementById('dd-new-company-confirm').classList.add('hidden');
-    document.getElementById('dd-upload-done-actions').style.display = 'none';
-    document.getElementById('dd-upload-modal').classList.remove('hidden');
+    document.getElementById('dd-upload-modal').style.display = '';
 }
 
 function closeDDUpload() {
-    document.getElementById('dd-upload-modal').classList.add('hidden');
+    document.getElementById('dd-upload-modal').style.display = 'none';
     ddUploadFiles = [];
     ddUploadTargetId = null;
     _pendingAnalysisData = null;
     _pendingFile = null;
-    document.getElementById('dd-file-input').value = '';
-    document.getElementById('dd-file-input-compact').value = '';
 }
 
 function handleDDDrop(e) {
@@ -1960,29 +1946,20 @@ function handleDDFileSelect(e) {
 function setDDFiles(files) {
     ddUploadFiles = files;
     const label = files.length === 1 ? files[0].name : `${files.length} files selected`;
-    if (ddUploadTargetId) {
-        // Compact mode
-        document.getElementById('dd-compact-filename').textContent = label;
-        document.getElementById('dd-compact-clear').classList.remove('hidden');
-    } else {
-        // Drop zone mode
-        document.getElementById('dd-file-name').textContent = label;
-        document.getElementById('dd-file-selected').classList.remove('hidden');
-        document.getElementById('dd-drop-zone').classList.add('dd-drop-zone-has-file');
-    }
+    document.getElementById('dd-chosen-filename').textContent = label;
+    document.getElementById('dd-area-idle').style.display = 'none';
+    document.getElementById('dd-area-chosen').style.display = '';
+    document.getElementById('dd-upload-area').classList.add('dd-upload-area--chosen');
+    document.getElementById('dd-analyze-btn').disabled = false;
 }
 
 function clearDDFile() {
     ddUploadFiles = [];
-    if (ddUploadTargetId) {
-        document.getElementById('dd-file-input-compact').value = '';
-        document.getElementById('dd-compact-filename').textContent = 'No file chosen';
-        document.getElementById('dd-compact-clear').classList.add('hidden');
-    } else {
-        document.getElementById('dd-file-input').value = '';
-        document.getElementById('dd-file-selected').classList.add('hidden');
-        document.getElementById('dd-drop-zone').classList.remove('dd-drop-zone-has-file');
-    }
+    document.getElementById('dd-file-input').value = '';
+    document.getElementById('dd-area-idle').style.display = '';
+    document.getElementById('dd-area-chosen').style.display = 'none';
+    document.getElementById('dd-upload-area').classList.remove('dd-upload-area--chosen');
+    document.getElementById('dd-analyze-btn').disabled = true;
 }
 
 function addDDStep(msg, status = 'running') {
@@ -2004,21 +1981,19 @@ function updateDDStep(el, status, msg) {
 async function startDDUpload() {
     if (!ddUploadFiles.length) return;
 
-    document.getElementById('dd-upload-input-section').classList.add('hidden');
-    document.getElementById('dd-upload-progress').classList.remove('hidden');
+    document.getElementById('dd-step1').style.display = 'none';
+    document.getElementById('dd-step2').style.display = '';
     document.getElementById('dd-upload-steps').innerHTML = '';
-    document.getElementById('dd-new-company-confirm').classList.add('hidden');
+    document.getElementById('dd-new-company-confirm').style.display = 'none';
     document.getElementById('dd-upload-done-actions').style.display = 'none';
 
     for (const file of ddUploadFiles) {
         await analyzeAndSaveFile(file);
     }
 
-    // For existing company uploads, show Done button immediately after all files processed.
-    // For new company, the confirm panel is shown instead — Done button appears after Save.
     if (ddUploadTargetId) {
         await loadDD();
-        document.getElementById('dd-upload-done-actions').style.display = 'flex';
+        document.getElementById('dd-upload-done-actions').style.display = '';
     }
 }
 
@@ -2103,7 +2078,7 @@ async function mergeIntoExistingCompany(data, file) {
         updateDDStep(saveStep, 'done', `${existing.name} updated`);
     } catch (err) {
         updateDDStep(saveStep, 'error', `Save failed: ${err.message}`);
-        document.getElementById('dd-upload-done-actions').style.display = 'flex';
+        document.getElementById('dd-upload-done-actions').style.display = '';
     }
 }
 
@@ -2117,7 +2092,7 @@ function showNewCompanyConfirm(data, file) {
     const finParts = years.map((y, i) => y && rev[i] != null ? `${y}: $${(rev[i]/1e6).toFixed(1)}M rev` : null).filter(Boolean);
     document.getElementById('dd-confirm-financials').textContent = finParts.join(' · ');
 
-    document.getElementById('dd-new-company-confirm').classList.remove('hidden');
+    document.getElementById('dd-new-company-confirm').style.display = '';
     document.getElementById('dd-confirm-create-btn').onclick = saveNewCompany;
 }
 
@@ -2125,7 +2100,7 @@ async function saveNewCompany() {
     const data = _pendingAnalysisData;
     const file = _pendingFile;
     const name = document.getElementById('dd-confirm-name').value.trim() || data.name || file.name.replace(/\.[^.]+$/, '');
-    document.getElementById('dd-new-company-confirm').classList.add('hidden');
+    document.getElementById('dd-new-company-confirm').style.display = 'none';
     const saveStep = addDDStep(`Saving ${name}…`);
     try {
         await fetch('/api/companies', {

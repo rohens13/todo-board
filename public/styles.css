@@ -2480,98 +2480,110 @@ body.light-mode .hs-deals-panel {
 }
 .dd-cohort-table tfoot td.row-label { text-align: left; color: var(--text-muted); }
 
-/* DD Upload mode banner */
-.dd-upload-target-banner {
+/* ── DD Upload Modal ─────────────────────────────────────────── */
+.dd-upload-modal-content {
+    max-width: 460px !important;
+}
+
+.dd-upload-subtitle {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    margin: -8px 0 20px;
+}
+
+/* Upload area (click or drag) */
+.dd-upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+    margin-bottom: 16px;
+    user-select: none;
+}
+
+.dd-upload-area:hover,
+.dd-upload-area--chosen {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+}
+
+.dd-upload-icon {
+    font-size: 2rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.dd-upload-area-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.dd-upload-area-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* Chosen file state */
+.dd-upload-chosen-name-wrap {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 10px 14px;
-    border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 600;
-    margin-bottom: 8px;
-    background: rgba(245, 158, 11, 0.12);
-    border: 1px solid rgba(245, 158, 11, 0.3);
-    color: #F59E0B;
+    color: var(--text-primary);
+    word-break: break-all;
 }
 
-.dd-upload-target-banner::before {
-    content: '📁';
-    font-size: 1rem;
-}
-
-/* Compact file picker for +Doc mode */
-.dd-compact-picker {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px;
-    background: var(--surface-1, rgba(255,255,255,0.04));
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin-bottom: 16px;
-}
-
-.dd-compact-choose-btn {
+.dd-upload-file-icon {
+    font-size: 1.2rem;
     flex-shrink: 0;
-    padding: 7px 14px;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.84rem;
-    font-weight: 600;
+}
+
+.dd-upload-clear-btn {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 4px 10px;
     cursor: pointer;
 }
 
-.dd-compact-choose-btn:hover {
-    opacity: 0.9;
+.dd-upload-clear-btn:hover {
+    color: var(--text-primary);
 }
 
-.dd-compact-filename {
-    flex: 1;
-    font-size: 0.84rem;
-    color: var(--text-secondary);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+/* Actions row */
+.dd-step1-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
-/* existing amber color preserved */
-.dd-upload-target-banner--existing {
-    background: rgba(245, 158, 11, 0.15);
-    border: 1px solid rgba(245, 158, 11, 0.35);
-    color: #F59E0B;
+#dd-analyze-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
 }
 
-.dd-upload-target-banner--new {
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.25);
-    color: var(--success);
-}
-
-/* New company confirmation panel */
+/* Confirm panel (new company only) */
 .dd-new-company-confirm {
     margin-top: 16px;
     padding: 16px;
     background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-}
-
-.dd-confirm-header {
-    font-size: 0.84rem;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.dd-confirm-row {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    gap: 10px;
 }
 
 .dd-confirm-label {
@@ -2588,11 +2600,6 @@ body.light-mode .hs-deals-panel {
 .dd-confirm-financials {
     font-size: 0.8rem;
     color: var(--text-secondary);
-    min-height: 16px;
-}
-
-.dd-confirm-actions {
-    padding-top: 4px;
 }
 
 /* DD Upload preview in modal */
