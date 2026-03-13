@@ -412,8 +412,9 @@
             <div id="dd-upload-target-banner" class="dd-upload-target-banner hidden">
                 <span id="dd-upload-target-label"></span>
             </div>
-            <p class="yt-modal-desc">Upload one or more PDF, DOCX, XLSX, XLS, or TXT files. Claude will extract financial data, investment thesis, and key risks automatically.</p>
+            <p class="yt-modal-desc" id="dd-upload-desc">Upload a PDF, Word, or Excel file. Claude will extract financial data and create a new company card automatically.</p>
 
+            <!-- File picker section -->
             <div id="dd-upload-input-section">
                 <div id="dd-drop-zone" class="dd-drop-zone" ondragover="event.preventDefault()" ondrop="handleDDDrop(event)">
                     <div class="dd-drop-icon">↑</div>
@@ -432,21 +433,22 @@
                 </div>
             </div>
 
+            <!-- Progress + confirm section -->
             <div id="dd-upload-progress" class="yt-progress-section hidden">
                 <div id="dd-upload-steps" class="yt-steps"></div>
+
+                <!-- Confirm panel: only shown for new companies after analysis -->
                 <div id="dd-new-company-confirm" class="dd-new-company-confirm hidden">
-                    <div class="dd-confirm-header">Review extracted company details before saving:</div>
-                    <div class="dd-confirm-row">
-                        <label class="dd-confirm-label">Company Name</label>
-                        <input type="text" id="dd-confirm-name" class="dd-input dd-confirm-name-input" placeholder="Company name…">
-                    </div>
+                    <div class="dd-confirm-header">Confirm company name before saving:</div>
+                    <input type="text" id="dd-confirm-name" class="dd-input dd-confirm-name-input" placeholder="Company name…">
                     <div id="dd-confirm-financials" class="dd-confirm-financials"></div>
                     <div class="dd-confirm-actions">
-                        <button class="dd-add-btn" id="dd-confirm-create-btn">Create New Company</button>
+                        <button class="dd-add-btn" id="dd-confirm-create-btn">Save Company</button>
                     </div>
                 </div>
+
                 <div id="dd-upload-done-actions" class="modal-actions" style="display:none">
-                    <button class="dd-add-btn" onclick="applyDDAnalysis()">Done</button>
+                    <button class="dd-add-btn" onclick="closeDDUpload()">Done</button>
                 </div>
             </div>
         </div>

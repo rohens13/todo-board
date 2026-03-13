@@ -1889,44 +1889,48 @@ document.getElementById('uploadDocBtn').addEventListener('click', openDDUpload);
 
 // DD Document Upload
 let ddUploadFiles = [];
-let ddAnalysisResult = null;
-let ddUploadTargetId = null; // if set, update existing company instead of creating
+let ddUploadTargetId = null; // null = new company, set = update existing
+let _pendingAnalysisData = null;
+let _pendingFile = null;
 
 function openDDUpload(companyId = null) {
     ddUploadFiles = [];
-    ddAnalysisResult = null;
     ddUploadTargetId = companyId || null;
-    const modal = document.getElementById('dd-upload-modal');
-    const banner = document.getElementById('dd-upload-target-banner');
-    const label = document.getElementById('dd-upload-target-label');
+    _pendingAnalysisData = null;
+    _pendingFile = null;
 
+    // Banner: amber for existing, hidden for new
+    const banner = document.getElementById('dd-upload-target-banner');
     if (companyId) {
         const company = ddCompanies.find(c => c.id === companyId);
         const name = company ? company.name : 'company';
         document.getElementById('dd-upload-title').textContent = 'Add Document to Company';
+        document.getElementById('dd-upload-desc').textContent = `Upload a file to add data to ${name}.`;
+        document.getElementById('dd-upload-target-label').textContent = `Updating: ${name}`;
         banner.className = 'dd-upload-target-banner dd-upload-target-banner--existing';
-        label.textContent = `Updating existing company: ${name}`;
         banner.classList.remove('hidden');
     } else {
         document.getElementById('dd-upload-title').textContent = 'Upload & Analyze Document';
-        banner.className = 'dd-upload-target-banner dd-upload-target-banner--new';
-        label.textContent = 'Will create a new company card';
-        banner.classList.remove('hidden');
+        document.getElementById('dd-upload-desc').textContent = 'Upload a PDF, Word, or Excel file. Claude will extract financial data and create a new company card automatically.';
+        banner.classList.add('hidden');
     }
 
     document.getElementById('dd-upload-input-section').classList.remove('hidden');
     document.getElementById('dd-upload-progress').classList.add('hidden');
     document.getElementById('dd-new-company-confirm').classList.add('hidden');
+    document.getElementById('dd-upload-done-actions').style.display = 'none';
     document.getElementById('dd-file-selected').classList.add('hidden');
+    document.getElementById('dd-drop-zone').classList.remove('dd-drop-zone-has-file');
     document.getElementById('dd-file-input').value = '';
-    modal.classList.remove('hidden');
+    document.getElementById('dd-upload-modal').classList.remove('hidden');
 }
 
 function closeDDUpload() {
     document.getElementById('dd-upload-modal').classList.add('hidden');
     ddUploadFiles = [];
-    ddAnalysisResult = null;
     ddUploadTargetId = null;
+    _pendingAnalysisData = null;
+    _pendingFile = null;
 }
 
 function handleDDDrop(e) {
@@ -1957,14 +1961,38 @@ function clearDDFile() {
 function addDDStep(msg, status = 'running') {
     const el = document.createElement('div');
     el.className = `yt-step yt-step-${status}`;
-    el.textContent = msg;
+    const icon = status === 'done' ? '✓' : status === 'error' ? '✗' : '◌';
+    el.innerHTML = `<span class="yt-step-icon">${icon}</span><span class="yt-step-text">${msg}</span>`;
     document.getElementById('dd-upload-steps').appendChild(el);
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     return el;
 }
 
 function updateDDStep(el, status, msg) {
     el.className = `yt-step yt-step-${status}`;
-    el.textContent = msg;
+    const icon = status === 'done' ? '✓' : status === 'error' ? '✗' : '◌';
+    el.innerHTML = `<span class="yt-step-icon">${icon}</span><span class="yt-step-text">${msg}</span>`;
+}
+
+async function startDDUpload() {
+    if (!ddUploadFiles.length) return;
+
+    document.getElementById('dd-upload-input-section').classList.add('hidden');
+    document.getElementById('dd-upload-progress').classList.remove('hidden');
+    document.getElementById('dd-upload-steps').innerHTML = '';
+    document.getElementById('dd-new-company-confirm').classList.add('hidden');
+    document.getElementById('dd-upload-done-actions').style.display = 'none';
+
+    for (const file of ddUploadFiles) {
+        await analyzeAndSaveFile(file);
+    }
+
+    // For existing company uploads, show Done button immediately after all files processed.
+    // For new company, the confirm panel is shown instead — Done button appears after Save.
+    if (ddUploadTargetId) {
+        await loadDD();
+        document.getElementById('dd-upload-done-actions').style.display = 'flex';
+    }
 }
 
 async function analyzeAndSaveFile(file) {
@@ -1977,151 +2005,117 @@ async function analyzeAndSaveFile(file) {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Analysis failed');
 
-        updateDDStep(uploadStep, 'done', `Uploaded ${file.name} ✓`);
-        updateDDStep(analyzeStep, 'done', `Analysis complete ✓`);
+        updateDDStep(uploadStep, 'done', `Uploaded ${file.name}`);
+        updateDDStep(analyzeStep, 'done', `Analysis complete`);
 
         if (ddUploadTargetId) {
-            await mergeIntoExistingCompany(data, file, null);
+            await mergeIntoExistingCompany(data, file);
         } else {
             showNewCompanyConfirm(data, file);
         }
     } catch (err) {
         updateDDStep(uploadStep, 'error', `Upload failed`);
-        updateDDStep(analyzeStep, 'error', `${err.message}`);
+        updateDDStep(analyzeStep, 'error', err.message);
         document.getElementById('dd-upload-done-actions').style.display = 'flex';
     }
 }
 
-async function mergeIntoExistingCompany(data, file, _unused) {
-    const saveStep = addDDStep(`Saving to ${ddCompanies.find(c => c.id === ddUploadTargetId)?.name || 'company'}…`);
+async function mergeIntoExistingCompany(data, file) {
     const existing = ddCompanies.find(c => c.id === ddUploadTargetId) || {};
-    const existingCm = existing.customerMetrics || {};
-    const newCm = data.customerMetrics || {};
-    const mergedCm = {};
-    const cmKeys = ['nrr','grr','logoChurnRate','revenueChurnRate','top1CustomerPct','top3CustomerPct','top5CustomerPct','top10CustomerPct','customerCount','arpu','ltvCacRatio','cacPaybackMonths','ruleOf40','expansionRevenuePct','cohortInsights','valueChurnByYear','logoChurnByYear','cohortNRR','customerCohortRows','cohortTableData'];
-    const hasValue = v => v != null && v !== '' && !(Array.isArray(v) && v.length === 0);
-    for (const k of cmKeys) {
-        mergedCm[k] = hasValue(newCm[k]) ? newCm[k] : (existingCm[k] ?? null);
-    }
-    const existingBs = existing.balanceSheet || {};
-    const newBs = data.balanceSheet || {};
-    const bsMergeFields = ['cash','accountsReceivable','inventory','totalCurrentAssets','totalAssets',
-                           'accountsPayable','shortTermDebt','totalCurrentLiabilities','longTermDebt',
-                           'totalLiabilities','totalEquity'];
-    const mergedBs = {};
-    for (const k of bsMergeFields) {
-        const newArr = newBs[k] || [null, null, null];
-        const oldArr = existingBs[k] || [null, null, null];
-        mergedBs[k] = newArr.map((v, i) => v != null ? v : (oldArr[i] ?? null));
-    }
-    const merged = {
-        name: existing.name,
-        website: existing.website || data.website || '',
-        description: existing.description || data.description || '',
-        years: data.years?.some(y => y) ? data.years : (existing.years || ['', '', '']),
-        revenue: data.revenue?.some(v => v != null) ? data.revenue : (existing.revenue || [null, null, null]),
-        ebitda: data.ebitda?.some(v => v != null) ? data.ebitda : (existing.ebitda || [null, null, null]),
-        grossProfit: data.grossProfit?.some(v => v != null) ? data.grossProfit : (existing.grossProfit || [null, null, null]),
-        sga: data.sga?.some(v => v != null) ? data.sga : (existing.sga || [null, null, null]),
-        netIncome: data.netIncome?.some(v => v != null) ? data.netIncome : (existing.netIncome || [null, null, null]),
-        documentSummary: data.documentSummary || existing.documentSummary || '',
-        investmentThesis: data.investmentThesis || existing.investmentThesis || '',
-        keyRisks: data.keyRisks || existing.keyRisks || '',
-        sourceFile: [existing.sourceFile, file.name].filter(Boolean).join(', '),
-        customerMetrics: mergedCm,
-        balanceSheet: mergedBs,
-    };
-    await fetch(`/api/companies/${ddUploadTargetId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(merged)
-    });
-    updateDDStep(saveStep, 'done', `${existing.name} updated ✓`);
-}
-
-let _pendingAnalysisData = null;
-let _pendingFile = null;
-
-function showNewCompanyConfirm(data, file) {
-    _pendingAnalysisData = data;
-    _pendingFile = file;
-
-    const confirmEl = document.getElementById('dd-new-company-confirm');
-    document.getElementById('dd-confirm-name').value = data.name || file.name.replace(/\.[^.]+$/, '');
-
-    const finEl = document.getElementById('dd-confirm-financials');
-    const years = data.years || [];
-    const rev = data.revenue || [];
-    const finParts = years.map((y, i) => y && rev[i] != null ? `${y}: $${(rev[i]/1e6).toFixed(1)}M rev` : null).filter(Boolean);
-    finEl.textContent = finParts.length ? finParts.join(' · ') : '';
-
-    confirmEl.classList.remove('hidden');
-
-    document.getElementById('dd-confirm-create-btn').onclick = async () => {
-        await saveAsNewCompany();
-    };
-}
-
-async function saveAsNewCompany() {
-    const data = _pendingAnalysisData;
-    const file = _pendingFile;
-    const nameInput = document.getElementById('dd-confirm-name').value.trim();
-    document.getElementById('dd-new-company-confirm').classList.add('hidden');
-    const saveStep = addDDStep(`Saving ${nameInput}…`);
+    const saveStep = addDDStep(`Saving to ${existing.name || 'company'}…`);
     try {
-        await fetch('/api/companies', {
-            method: 'POST',
+        const existingCm = existing.customerMetrics || {};
+        const newCm = data.customerMetrics || {};
+        const mergedCm = {};
+        const cmKeys = ['nrr','grr','logoChurnRate','revenueChurnRate','top1CustomerPct','top3CustomerPct','top5CustomerPct','top10CustomerPct','customerCount','arpu','ltvCacRatio','cacPaybackMonths','ruleOf40','expansionRevenuePct','cohortInsights','valueChurnByYear','logoChurnByYear','cohortNRR','customerCohortRows','cohortTableData'];
+        const hasValue = v => v != null && v !== '' && !(Array.isArray(v) && v.length === 0);
+        for (const k of cmKeys) mergedCm[k] = hasValue(newCm[k]) ? newCm[k] : (existingCm[k] ?? null);
+
+        const existingBs = existing.balanceSheet || {};
+        const newBs = data.balanceSheet || {};
+        const bsMergeFields = ['cash','accountsReceivable','inventory','totalCurrentAssets','totalAssets','accountsPayable','shortTermDebt','totalCurrentLiabilities','longTermDebt','totalLiabilities','totalEquity'];
+        const mergedBs = {};
+        for (const k of bsMergeFields) {
+            const n = newBs[k] || [null,null,null], o = existingBs[k] || [null,null,null];
+            mergedBs[k] = n.map((v, i) => v != null ? v : (o[i] ?? null));
+        }
+
+        await fetch(`/api/companies/${ddUploadTargetId}`, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name: nameInput || data.name || file.name.replace(/\.[^.]+$/, ''),
-                website: data.website || '',
-                description: data.description || '',
-                years: data.years || ['', '', ''],
-                revenue: data.revenue || [null, null, null],
-                ebitda: data.ebitda || [null, null, null],
-                grossProfit: data.grossProfit || [null, null, null],
-                sga: data.sga || [null, null, null],
-                documentSummary: data.documentSummary || '',
-                investmentThesis: data.investmentThesis || '',
-                keyRisks: data.keyRisks || '',
-                sourceFile: data.sourceFile || file.name,
-                netIncome: data.netIncome || [null, null, null],
-                balanceSheet: data.balanceSheet || {},
+                name: existing.name,
+                website: existing.website || data.website || '',
+                description: existing.description || data.description || '',
+                years: data.years?.some(y => y) ? data.years : (existing.years || ['','','']),
+                revenue: data.revenue?.some(v => v != null) ? data.revenue : (existing.revenue || [null,null,null]),
+                ebitda: data.ebitda?.some(v => v != null) ? data.ebitda : (existing.ebitda || [null,null,null]),
+                grossProfit: data.grossProfit?.some(v => v != null) ? data.grossProfit : (existing.grossProfit || [null,null,null]),
+                sga: data.sga?.some(v => v != null) ? data.sga : (existing.sga || [null,null,null]),
+                netIncome: data.netIncome?.some(v => v != null) ? data.netIncome : (existing.netIncome || [null,null,null]),
+                documentSummary: data.documentSummary || existing.documentSummary || '',
+                investmentThesis: data.investmentThesis || existing.investmentThesis || '',
+                keyRisks: data.keyRisks || existing.keyRisks || '',
+                sourceFile: [existing.sourceFile, file.name].filter(Boolean).join(', '),
+                customerMetrics: mergedCm,
+                balanceSheet: mergedBs,
             })
         });
-        updateDDStep(saveStep, 'done', `${nameInput} added to DD Board ✓`);
-        await loadDD();
-        document.getElementById('dd-upload-done-actions').style.display = 'flex';
+        updateDDStep(saveStep, 'done', `${existing.name} updated`);
     } catch (err) {
         updateDDStep(saveStep, 'error', `Save failed: ${err.message}`);
         document.getElementById('dd-upload-done-actions').style.display = 'flex';
     }
 }
 
-async function startDDUpload() {
-    if (!ddUploadFiles.length) return;
+function showNewCompanyConfirm(data, file) {
+    _pendingAnalysisData = data;
+    _pendingFile = file;
 
-    document.getElementById('dd-upload-input-section').classList.add('hidden');
-    const progressEl = document.getElementById('dd-upload-progress');
-    progressEl.classList.remove('hidden');
-    document.getElementById('dd-upload-steps').innerHTML = '';
-    document.getElementById('dd-new-company-confirm').classList.add('hidden');
-    document.getElementById('dd-upload-done-actions').style.display = 'none';
+    document.getElementById('dd-confirm-name').value = data.name || file.name.replace(/\.[^.]+$/, '');
 
-    for (const file of ddUploadFiles) {
-        await analyzeAndSaveFile(file);
-    }
+    const years = data.years || [], rev = data.revenue || [];
+    const finParts = years.map((y, i) => y && rev[i] != null ? `${y}: $${(rev[i]/1e6).toFixed(1)}M rev` : null).filter(Boolean);
+    document.getElementById('dd-confirm-financials').textContent = finParts.join(' · ');
 
-    // For existing company uploads, show Done immediately.
-    // For new company uploads, the confirm panel handles the Done button.
-    if (ddUploadTargetId) {
-        await loadDD();
-        document.getElementById('dd-upload-done-actions').style.display = 'flex';
-    }
+    document.getElementById('dd-new-company-confirm').classList.remove('hidden');
+    document.getElementById('dd-confirm-create-btn').onclick = saveNewCompany;
 }
 
-function applyDDAnalysis() {
-    closeDDUpload();
+async function saveNewCompany() {
+    const data = _pendingAnalysisData;
+    const file = _pendingFile;
+    const name = document.getElementById('dd-confirm-name').value.trim() || data.name || file.name.replace(/\.[^.]+$/, '');
+    document.getElementById('dd-new-company-confirm').classList.add('hidden');
+    const saveStep = addDDStep(`Saving ${name}…`);
+    try {
+        await fetch('/api/companies', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name,
+                website: data.website || '',
+                description: data.description || '',
+                years: data.years || ['','',''],
+                revenue: data.revenue || [null,null,null],
+                ebitda: data.ebitda || [null,null,null],
+                grossProfit: data.grossProfit || [null,null,null],
+                sga: data.sga || [null,null,null],
+                documentSummary: data.documentSummary || '',
+                investmentThesis: data.investmentThesis || '',
+                keyRisks: data.keyRisks || '',
+                sourceFile: data.sourceFile || file.name,
+                netIncome: data.netIncome || [null,null,null],
+                balanceSheet: data.balanceSheet || {},
+            })
+        });
+        updateDDStep(saveStep, 'done', `${name} added to DD Board`);
+        await loadDD();
+        document.getElementById('dd-upload-done-actions').style.display = 'flex';
+    } catch (err) {
+        updateDDStep(saveStep, 'error', `Save failed: ${err.message}`);
+        document.getElementById('dd-upload-done-actions').style.display = 'flex';
+    }
 }
 
 // HubSpot
