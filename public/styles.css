@@ -2480,6 +2480,95 @@ body.light-mode .hs-deals-panel {
 }
 .dd-cohort-table tfoot td.row-label { text-align: left; color: var(--text-muted); }
 
+/* DD Upload mode banner */
+.dd-upload-target-banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.dd-upload-target-banner--existing {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    color: #F59E0B;
+}
+
+.dd-upload-target-banner--new {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--success);
+}
+
+/* New company confirmation panel */
+.dd-new-company-confirm {
+    margin-top: 16px;
+    padding: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dd-confirm-header {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.dd-confirm-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dd-confirm-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.dd-confirm-name-input {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dd-confirm-financials {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    min-height: 16px;
+}
+
+.dd-confirm-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 4px;
+}
+
+.dd-confirm-or {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.dd-confirm-existing-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.dd-confirm-select {
+    flex: 1;
+    font-size: 0.85rem;
+}
+
 /* DD Upload preview in modal */
 .dd-upload-preview {
     margin-top: 16px;

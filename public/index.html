@@ -408,7 +408,10 @@
     <div id="dd-upload-modal" class="modal hidden">
         <div class="modal-backdrop" onclick="closeDDUpload()"></div>
         <div class="modal-content yt-modal-content">
-            <h2>Upload &amp; Analyze Document</h2>
+            <h2 id="dd-upload-title">Upload &amp; Analyze Document</h2>
+            <div id="dd-upload-target-banner" class="dd-upload-target-banner hidden">
+                <span id="dd-upload-target-label"></span>
+            </div>
             <p class="yt-modal-desc">Upload one or more PDF, DOCX, XLSX, XLS, or TXT files. Claude will extract financial data, investment thesis, and key risks automatically.</p>
 
             <div id="dd-upload-input-section">
@@ -431,6 +434,22 @@
 
             <div id="dd-upload-progress" class="yt-progress-section hidden">
                 <div id="dd-upload-steps" class="yt-steps"></div>
+                <div id="dd-new-company-confirm" class="dd-new-company-confirm hidden">
+                    <div class="dd-confirm-header">Review extracted company details before saving:</div>
+                    <div class="dd-confirm-row">
+                        <label class="dd-confirm-label">Company Name</label>
+                        <input type="text" id="dd-confirm-name" class="dd-input dd-confirm-name-input" placeholder="Company name…">
+                    </div>
+                    <div id="dd-confirm-financials" class="dd-confirm-financials"></div>
+                    <div class="dd-confirm-actions">
+                        <button class="dd-add-btn" id="dd-confirm-create-btn">Create New Company</button>
+                        <div class="dd-confirm-or">or add to existing:</div>
+                        <div class="dd-confirm-existing-row">
+                            <select id="dd-confirm-existing-select" class="dd-input dd-confirm-select"></select>
+                            <button class="dd-action-btn" id="dd-confirm-merge-btn">Add to Existing →</button>
+                        </div>
+                    </div>
+                </div>
                 <div id="dd-upload-done-actions" class="modal-actions" style="display:none">
                     <button class="dd-add-btn" onclick="applyDDAnalysis()">Done</button>
                 </div>
