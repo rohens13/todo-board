@@ -416,6 +416,14 @@
 
             <!-- File picker section -->
             <div id="dd-upload-input-section">
+                <!-- Compact picker (existing company mode) -->
+                <div id="dd-compact-picker" class="dd-compact-picker hidden">
+                    <input type="file" id="dd-file-input-compact" class="dd-file-input" accept=".pdf,.docx,.xlsx,.xls,.txt" multiple onchange="handleDDFileSelect(event)">
+                    <button class="dd-compact-choose-btn" onclick="document.getElementById('dd-file-input-compact').click()">Choose File</button>
+                    <span id="dd-compact-filename" class="dd-compact-filename">No file chosen</span>
+                    <button id="dd-compact-clear" class="dd-action-btn hidden" onclick="clearDDFile()">✕</button>
+                </div>
+                <!-- Full drop zone (new company mode) -->
                 <div id="dd-drop-zone" class="dd-drop-zone" ondragover="event.preventDefault()" ondrop="handleDDDrop(event)">
                     <div class="dd-drop-icon">↑</div>
                     <div class="dd-drop-label">Drag &amp; drop files here</div>

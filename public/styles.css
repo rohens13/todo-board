@@ -2485,13 +2485,59 @@ body.light-mode .hs-deals-panel {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 14px;
+    padding: 10px 14px;
     border-radius: 8px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    margin-bottom: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #F59E0B;
 }
 
+.dd-upload-target-banner::before {
+    content: '📁';
+    font-size: 1rem;
+}
+
+/* Compact file picker for +Doc mode */
+.dd-compact-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    background: var(--surface-1, rgba(255,255,255,0.04));
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.dd-compact-choose-btn {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dd-compact-choose-btn:hover {
+    opacity: 0.9;
+}
+
+.dd-compact-filename {
+    flex: 1;
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* existing amber color preserved */
 .dd-upload-target-banner--existing {
     background: rgba(245, 158, 11, 0.15);
     border: 1px solid rgba(245, 158, 11, 0.35);
