@@ -1968,29 +1968,32 @@ function updateDDStep(el, status, msg) {
 }
 
 async function analyzeAndSaveFile(file) {
-    const stepEl = addDDStep(`Uploading ${file.name}…`);
+    const uploadStep = addDDStep(`Uploading ${file.name}…`);
+    const analyzeStep = addDDStep(`Analyzing with Claude…`);
     const formData = new FormData();
     formData.append('file', file);
     try {
-        updateDDStep(stepEl, 'running', `Analyzing ${file.name} with Claude…`);
         const res = await fetch('/api/dd/analyze-document', { method: 'POST', body: formData });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Analysis failed');
 
+        updateDDStep(uploadStep, 'done', `Uploaded ${file.name} ✓`);
+        updateDDStep(analyzeStep, 'done', `Analysis complete ✓`);
+
         if (ddUploadTargetId) {
-            await mergeIntoExistingCompany(data, file, stepEl);
+            await mergeIntoExistingCompany(data, file, null);
         } else {
-            // New company — show confirmation panel instead of saving immediately
-            updateDDStep(stepEl, 'done', `Analysis complete. Review details below before saving.`);
             showNewCompanyConfirm(data, file);
         }
     } catch (err) {
-        updateDDStep(stepEl, 'error', `${file.name}: ${err.message}`);
+        updateDDStep(uploadStep, 'error', `Upload failed`);
+        updateDDStep(analyzeStep, 'error', `${err.message}`);
         document.getElementById('dd-upload-done-actions').style.display = 'flex';
     }
 }
 
-async function mergeIntoExistingCompany(data, file, stepEl) {
+async function mergeIntoExistingCompany(data, file, _unused) {
+    const saveStep = addDDStep(`Saving to ${ddCompanies.find(c => c.id === ddUploadTargetId)?.name || 'company'}…`);
     const existing = ddCompanies.find(c => c.id === ddUploadTargetId) || {};
     const existingCm = existing.customerMetrics || {};
     const newCm = data.customerMetrics || {};
@@ -2033,7 +2036,7 @@ async function mergeIntoExistingCompany(data, file, stepEl) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(merged)
     });
-    if (stepEl) updateDDStep(stepEl, 'done', `${existing.name} updated with ${file.name} ✓`);
+    updateDDStep(saveStep, 'done', `${existing.name} updated ✓`);
 }
 
 let _pendingAnalysisData = null;
@@ -2046,33 +2049,16 @@ function showNewCompanyConfirm(data, file) {
     const confirmEl = document.getElementById('dd-new-company-confirm');
     document.getElementById('dd-confirm-name').value = data.name || file.name.replace(/\.[^.]+$/, '');
 
-    // Show first revenue figure as a hint
     const finEl = document.getElementById('dd-confirm-financials');
     const years = data.years || [];
     const rev = data.revenue || [];
     const finParts = years.map((y, i) => y && rev[i] != null ? `${y}: $${(rev[i]/1e6).toFixed(1)}M rev` : null).filter(Boolean);
     finEl.textContent = finParts.length ? finParts.join(' · ') : '';
 
-    // Populate existing companies dropdown
-    const sel = document.getElementById('dd-confirm-existing-select');
-    sel.innerHTML = ddCompanies.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-
     confirmEl.classList.remove('hidden');
 
     document.getElementById('dd-confirm-create-btn').onclick = async () => {
         await saveAsNewCompany();
-    };
-    document.getElementById('dd-confirm-merge-btn').onclick = async () => {
-        const selectedId = sel.value;
-        if (!selectedId) return;
-        ddUploadTargetId = selectedId;
-        const mergeStep = addDDStep(`Merging into ${ddCompanies.find(c => c.id === selectedId)?.name}…`);
-        confirmEl.classList.add('hidden');
-        // Use the confirmed name as the data name for merge
-        _pendingAnalysisData.name = document.getElementById('dd-confirm-name').value;
-        await mergeIntoExistingCompany(_pendingAnalysisData, _pendingFile, mergeStep);
-        await loadDD();
-        document.getElementById('dd-upload-done-actions').style.display = 'flex';
     };
 }
 
