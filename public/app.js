@@ -1885,7 +1885,7 @@ document.getElementById('dd-editor-form').addEventListener('submit', async e => 
 
 document.getElementById('addCompanyBtn').addEventListener('click', () => openDDEditor());
 document.getElementById('dd-editor-back').addEventListener('click', closeDDEditor);
-document.getElementById('uploadDocBtn').addEventListener('click', openDDUpload);
+document.getElementById('uploadDocBtn').addEventListener('click', () => openDDUpload());
 
 // DD Document Upload
 let ddUploadFiles = [];
