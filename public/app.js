@@ -2450,6 +2450,15 @@ document.getElementById('crm-list').addEventListener('change', async (e) => {
 });
 
 document.getElementById('addContactBtn').addEventListener('click', () => openCRMEditor(null));
+
+document.getElementById('downloadCrmBtn').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = '/api/crm/contacts/export';
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+});
 document.getElementById('crm-editor-back').addEventListener('click', closeCRMEditor);
 
 // Type filter pills

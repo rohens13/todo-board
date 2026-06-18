@@ -2982,6 +2982,7 @@ body.light-mode .hs-deals-panel {
     margin-bottom: 20px;
 }
 .crm-header h2 { margin: 0; font-size: 1.4rem; }
+.crm-header-actions { display: flex; gap: 8px; }
 
 .crm-stats {
     display: grid;

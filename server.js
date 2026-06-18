@@ -1159,6 +1159,38 @@ app.get('/api/crm/contacts', (req, res) => {
     res.json(data.contacts || []);
 });
 
+app.get('/api/crm/contacts/export', (req, res) => {
+    const data = loadData();
+    const contacts = data.contacts || [];
+    const header = ['Name', 'Company', 'Role', 'Email', 'Phone', 'Type', 'Status', 'Last Contact', 'Owner', 'Notes', 'Created At'];
+    const rows = contacts.map(c => ({
+        'Name':         c.name || '',
+        'Company':      c.company || '',
+        'Role':         c.role || '',
+        'Email':        c.email || '',
+        'Phone':        c.phone || '',
+        'Type':         c.type || '',
+        'Status':       c.status || '',
+        'Last Contact': c.lastContact || '',
+        'Owner':        c.owner || '',
+        'Notes':        c.notes || '',
+        'Created At':   c.createdAt || ''
+    }));
+    const ws = XLSX.utils.json_to_sheet(rows, { header });
+    ws['!cols'] = [
+        { wch: 24 }, { wch: 28 }, { wch: 22 }, { wch: 28 },
+        { wch: 16 }, { wch: 14 }, { wch: 12 }, { wch: 14 },
+        { wch: 12 }, { wch: 40 }, { wch: 22 }
+    ];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'CRM Contacts');
+    const buf = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+    const date = new Date().toISOString().slice(0, 10);
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="crm-contacts-${date}.xlsx"`);
+    res.send(buf);
+});
+
 app.post('/api/crm/contacts', (req, res) => {
     const data = loadData();
     if (!data.contacts) data.contacts = [];
