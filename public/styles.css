@@ -2652,3 +2652,558 @@ body.light-mode .hs-deals-panel {
     font-weight: 600;
     color: var(--accent);
 }
+
+/* ── Acquisitions Tab ──────────────────────────────────────────────────────── */
+
+/* Sub-tab navigation (underline style) */
+.acq-sub-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 24px;
+}
+
+.acq-sub-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: -1px;
+    padding: 10px 20px;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.acq-sub-tab:hover {
+    color: var(--text-primary);
+}
+
+.acq-sub-tab.active {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Section wrapper */
+.acq-section {
+    margin-bottom: 40px;
+}
+
+.acq-section-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+}
+
+/* Stat cards grid */
+.acq-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.acq-stat-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.acq-stat-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.acq-stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+.acq-stat-sub {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.acq-stat-delta {
+    font-size: 0.72rem;
+    margin-top: 6px;
+}
+
+.acq-stat-delta.up   { color: #10B981; }
+.acq-stat-delta.down { color: #EF4444; }
+.acq-stat-delta.mid  { color: #F59E0B; }
+
+/* Insight box */
+.acq-insight {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+.acq-insight strong {
+    color: var(--text-primary);
+}
+
+/* Chart grid */
+.acq-chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 4px;
+}
+
+.acq-chart-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+    .acq-chart-grid,
+    .acq-chart-grid-3 { grid-template-columns: 1fr; }
+    .acq-stat-grid    { grid-template-columns: repeat(2, 1fr); }
+}
+
+.acq-chart-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.acq-chart-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+/* SVG chart helpers */
+.acq-svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+
+/* Data tables */
+.acq-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.acq-table th {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    padding: 6px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 500;
+}
+
+.acq-table th.r { text-align: right; }
+
+.acq-table td {
+    padding: 7px 10px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(37, 48, 69, 0.5);
+    vertical-align: middle;
+}
+
+.acq-table td.r { text-align: right; }
+.acq-table td.num { font-variant-numeric: tabular-nums; }
+
+.acq-table tr:last-child td { border-bottom: none; }
+
+.acq-table .pos { color: #10B981; }
+.acq-table .neg { color: #EF4444; }
+.acq-table .neu { color: var(--text-secondary); }
+
+/* Valuation table highlight */
+.acq-table tr.fair-range td {
+    background: rgba(16, 185, 129, 0.06);
+}
+
+.acq-table tr.fair-range td:first-child {
+    border-left: 2px solid #10B981;
+}
+
+/* Risk flags */
+.acq-risk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.acq-risk-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+.acq-risk-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.acq-risk-dot.red    { background: #EF4444; }
+.acq-risk-dot.amber  { background: #F59E0B; }
+.acq-risk-dot.green  { background: #10B981; }
+
+.acq-risk-label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.acq-risk-text {
+    color: var(--text-secondary);
+}
+
+/* Benchmark table status badge */
+.acq-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.acq-badge.good      { background: rgba(16,185,129,0.15); color: #10B981; }
+.acq-badge.excellent { background: rgba(16,185,129,0.25); color: #10B981; }
+.acq-badge.amber     { background: rgba(245,158,11,0.15); color: #F59E0B; }
+.acq-badge.red       { background: rgba(239,68,68,0.15);  color: #EF4444; }
+
+/* Valuation note */
+.acq-val-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    padding: 8px 12px;
+    background: rgba(139,92,246,0.06);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+}
+
+/* Quote sub-tab exec cards */
+.acq-quote-exec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.acq-quote-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 18px 16px 14px;
+    position: relative;
+}
+
+.acq-quote-card .acq-stat-label { margin-bottom: 4px; }
+.acq-quote-card .acq-stat-value { font-size: 1.6rem; }
+
+/* Win-rate focus list */
+.acq-wr-focus { display: flex; flex-direction: column; gap: 8px; }
+
+.acq-wr-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.acq-wr-year  { font-size: 0.9rem; font-weight: 700; color: var(--text-primary); }
+.acq-wr-count { font-size: 0.72rem; color: var(--text-secondary); }
+.acq-wr-pct   { font-size: 1.25rem; font-weight: 700; }
+.acq-wr-trend { font-size: 0.72rem; color: var(--text-secondary); }
+
+/* Concentration bar */
+.acq-conc-bar-wrap { margin-bottom: 14px; }
+.acq-conc-bar-row  { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.acq-conc-bar-lbl  { font-size: 0.75rem; color: var(--text-secondary); }
+.acq-conc-bar-val  { font-size: 0.8rem; font-weight: 700; }
+.acq-conc-track    { background: var(--surface-3); border-radius: 4px; height: 8px; }
+.acq-conc-fill     { height: 8px; border-radius: 4px; }
+
+/* Mini bar for tables */
+.acq-mbar { display: flex; align-items: center; gap: 6px; }
+.acq-mbar-track { flex: 1; background: var(--surface-3); border-radius: 3px; height: 6px; min-width: 40px; }
+.acq-mbar-fill  { height: 6px; border-radius: 3px; background: var(--accent); }
+.acq-mbar-lbl   { font-size: 0.72rem; color: var(--text-secondary); min-width: 28px; text-align: right; }
+
+/* Two-column layout for charts + insight side by side */
+.acq-two-col {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .acq-two-col { grid-template-columns: 1fr; }
+}
+
+/* ===================== CRM TAB ===================== */
+
+.crm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.crm-header h2 { margin: 0; font-size: 1.4rem; }
+
+.crm-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.crm-stat-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 14px 16px;
+}
+.crm-stat-label {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+}
+.crm-stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.crm-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.crm-search {
+    width: 220px;
+    padding: 7px 12px;
+    font-size: 0.875rem;
+}
+
+.crm-filter-pills, .crm-status-pills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.crm-pill, .crm-spill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-1);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+.crm-pill:hover, .crm-spill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.crm-pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+.crm-spill.active {
+    background: var(--surface-2);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.crm-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.crm-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.crm-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 2fr 1.1fr 1fr 1.4fr 1fr 0.8fr auto;
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+    align-items: center;
+    transition: border-color 0.15s;
+}
+.crm-card:hover { border-color: var(--accent); }
+
+.crm-col { display: flex; flex-direction: column; gap: 3px; }
+.crm-col-identity { grid-column: 1; }
+.crm-col-type     { grid-column: 2; }
+.crm-col-status   { grid-column: 3; }
+.crm-col-contact  { grid-column: 4; }
+.crm-col-last     { grid-column: 5; }
+.crm-col-owner    { grid-column: 6; }
+.crm-card-actions { grid-column: 7; justify-self: end; }
+.crm-col-notes {
+    grid-column: 1 / -1;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-top: 10px;
+    margin-top: 6px;
+    border-top: 1px solid var(--border-color);
+    white-space: pre-wrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.crm-col-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+}
+
+.crm-card-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.crm-card-company { font-size: 0.8rem; color: var(--text-secondary); }
+.crm-card-role    { font-size: 0.75rem; color: var(--text-muted); }
+
+.crm-contact-val {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+a.crm-contact-val:hover { color: var(--accent); text-decoration: underline; }
+.crm-contact-empty { font-size: 0.8rem; color: var(--text-muted); }
+
+/* Inline select dropdowns on cards */
+.crm-inline-select {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 4px 22px 4px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394a3b8'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    transition: border-color 0.15s;
+    width: 100%;
+}
+.crm-inline-select:hover { border-color: var(--border-color); }
+.crm-inline-select:focus { outline: none; border-color: var(--accent); }
+
+/* Type colours */
+.crm-badge-existing-lp  { background: rgba(236,72,153,0.15);  color: #ec4899; }
+.crm-badge-potential-lp { background: rgba(139,92,246,0.15);  color: #8b5cf6; }
+.crm-badge-advisor      { background: rgba(249,115,22,0.15);  color: #f97316; }
+.crm-badge-other        { background: rgba(148,163,184,0.12); color: #94a3b8; }
+
+/* Status colours */
+.crm-status-active   { background: rgba(16,185,129,0.15);  color: #10b981; }
+.crm-status-prospect { background: rgba(245,158,11,0.15);  color: #f59e0b; }
+.crm-status-on-hold  { background: rgba(148,163,184,0.15); color: #94a3b8; }
+.crm-status-archived { background: rgba(100,116,139,0.12); color: #64748b; }
+
+.crm-card-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+.crm-action-btn {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+.crm-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+.crm-action-btn.delete:hover { border-color: #ef4444; color: #ef4444; }
+
+@media (max-width: 900px) {
+    .crm-card {
+        grid-template-columns: 1fr 1fr;
+    }
+    .crm-col-identity { grid-column: 1 / -1; }
+    .crm-col-type     { grid-column: 1; }
+    .crm-col-status   { grid-column: 2; }
+    .crm-col-contact  { grid-column: 1; }
+    .crm-col-last     { grid-column: 2; }
+    .crm-col-owner    { grid-column: 2; }
+    .crm-card-actions { grid-column: 1 / -1; justify-self: start; }
+}
+
+/* CRM editor form */
+.crm-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.crm-select { cursor: pointer; }
+.dd-required { color: #ef4444; }
+
+@media (max-width: 700px) {
+    .crm-form-row { grid-template-columns: 1fr; }
+    .crm-search { width: 100%; }
+}

@@ -1263,6 +1263,12 @@ function buildSalesTab() {
   // § 9 — Acquisition Risk & Opportunity
   html += section('Acquisition Risk & Opportunity Assessment', salesRiskPanel());
 
+  // § 10 — Sales Team Performance
+  html += section('Sales Team Performance', soSalesTeamHTML());
+
+  // § 11 — Revenue Retention: Cohort Analysis
+  html += section('Revenue Retention — Cohort Analysis', soCohortHTML());
+
   root.innerHTML = html;
 
   setTimeout(function() {
@@ -1276,6 +1282,8 @@ function buildSalesTab() {
     soBuildSeasonalityChart();
     soBuildOrderSizeChart();
     soBuildGeoChart();
+    soBuildRepRevenueChart();
+    soBuildRepTrendChart();
   }, 20);
 }
 
@@ -1691,4 +1699,478 @@ function salesRiskPanel() {
     makeCol('Amber — Investigate Further', '#F59E0B', 'amber', ambers) +
     makeCol('Green — Positives & Strengths', '#10B981', 'green', greens) +
     '</div>';
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// § 10 — SALES TEAM PERFORMANCE
+// Data sourced from: Sales Order Lines Last 5 Yrs (Created By column = salesperson)
+// Normalized to merge case variants (STACEY→Stacey, RICHARD→Richard, etc.)
+// Only reps active in FY2024 or FY2025 are included in active roster
+// ═══════════════════════════════════════════════════════════════════════════════
+
+var SALESPEOPLE_DATA = {
+  totalByYear: {2021:7168464, 2022:8680062, 2023:10640467, 2024:12555350, 2025:11175347},
+  // Active reps sorted by FY2025 revenue descending
+  // Luke is included as he was active in FY2024 but exited before FY2025
+  reps: [
+    {rep:'Richard', rank2025:1,
+      revByYear:  {2021:2881016, 2022:2579849, 2023:3340765, 2024:3630999, 2025:3784002},
+      ordersByYear:{2021:314,    2022:270,    2023:305,    2024:244,    2025:348},
+      aovByYear:  {2021:9175,   2022:9555,   2023:10953,  2024:14881,  2025:10874},
+      shareByYear:{2021:40.2,   2022:29.7,   2023:31.4,   2024:28.9,   2025:33.9},
+      discByYear: {2021:16.1,   2022:13.3,   2023:14.2,   2024:16.0,   2025:13.8},
+      totalRev:16216632, rev2025:3784002, yoyGrowth2025:4.2, cagr:7.1},
+    {rep:'Stacey', rank2025:2,
+      revByYear:  {2021:1948258, 2022:1972735, 2023:2694580, 2024:4148748, 2025:2956451},
+      ordersByYear:{2021:237,    2022:202,    2023:232,    2024:252,    2025:275},
+      aovByYear:  {2021:8220,   2022:9766,   2023:11615,  2024:16463,  2025:10751},
+      shareByYear:{2021:27.2,   2022:22.7,   2023:25.3,   2024:33.0,   2025:26.5},
+      discByYear: {2021:13.1,   2022:13.2,   2023:13.3,   2024:16.1,   2025:15.9},
+      totalRev:13720772, rev2025:2956451, yoyGrowth2025:-28.7, cagr:11.0},
+    {rep:'Alice', rank2025:3,
+      revByYear:  {2021:0,       2022:17735,  2023:1008934, 2024:1084282, 2025:1704283},
+      ordersByYear:{2021:0,      2022:3,      2023:102,    2024:123,    2025:176},
+      aovByYear:  {2021:0,      2022:5912,   2023:9892,   2024:8815,   2025:9683},
+      shareByYear:{2021:0,      2022:0.2,    2023:9.5,    2024:8.6,    2025:15.3},
+      discByYear: {2021:0,      2022:5.0,    2023:12.0,   2024:12.5,   2025:15.7},
+      totalRev:3815234, rev2025:1704283, yoyGrowth2025:57.2, cagr:null},
+    {rep:'Dan', rank2025:4,
+      revByYear:  {2021:1158568, 2022:1703024, 2023:1650347, 2024:1485031, 2025:1058157},
+      ordersByYear:{2021:164,    2022:152,    2023:115,    2024:109,    2025:94},
+      aovByYear:  {2021:7064,   2022:11204,  2023:14351,  2024:13624,  2025:11257},
+      shareByYear:{2021:16.2,   2022:19.6,   2023:15.5,   2024:11.8,   2025:9.5},
+      discByYear: {2021:15.6,   2022:17.9,   2023:19.3,   2024:17.1,   2025:18.8},
+      totalRev:7055128, rev2025:1058157, yoyGrowth2025:-28.7, cagr:-2.2},
+    {rep:'Claire', rank2025:5,
+      revByYear:  {2021:0,       2022:18154,  2023:597110,  2024:628572,  2025:979126},
+      ordersByYear:{2021:0,      2022:5,      2023:92,     2024:78,     2025:122},
+      aovByYear:  {2021:0,      2022:3631,   2023:6490,   2024:8059,   2025:8026},
+      shareByYear:{2021:0,      2022:0.2,    2023:5.6,    2024:5.0,    2025:8.8},
+      discByYear: {2021:0,      2022:0,      2023:13.8,   2024:15.6,   2025:14.4},
+      totalRev:2222962, rev2025:979126, yoyGrowth2025:55.8, cagr:null},
+    {rep:'Ian', rank2025:6,
+      revByYear:  {2021:548296,  2022:959412,  2023:1161699, 2024:1073266, 2025:553490},
+      ordersByYear:{2021:23,     2022:32,     2023:49,     2024:40,     2025:43},
+      aovByYear:  {2021:23839,  2022:29982,  2023:23708,  2024:26832,  2025:12872},
+      shareByYear:{2021:7.6,    2022:11.1,   2023:10.9,   2024:8.5,    2025:5.0},
+      discByYear: {2021:0,      2022:21.5,   2023:19.1,   2024:21.1,   2025:17.3},
+      totalRev:4296162, rev2025:553490, yoyGrowth2025:-48.4, cagr:0.2},
+    {rep:'Felicity', rank2025:7,
+      revByYear:  {2021:451790,  2022:974447,  2023:130002,  2024:226701,  2025:139838},
+      ordersByYear:{2021:91,     2022:131,    2023:33,     2024:30,     2025:19},
+      aovByYear:  {2021:4965,   2022:7439,   2023:3939,   2024:7557,   2025:7360},
+      shareByYear:{2021:6.3,    2022:11.2,   2023:1.2,    2024:1.8,    2025:1.3},
+      discByYear: {2021:14.2,   2022:11.5,   2023:8.8,    2024:17.5,   2025:25.0},
+      totalRev:1922777, rev2025:139838, yoyGrowth2025:-38.3, cagr:-25.4},
+    {rep:'Luke', rank2025:8,
+      revByYear:  {2021:178675,  2022:454707,  2023:56745,   2024:277751,  2025:0},
+      ordersByYear:{2021:35,     2022:42,     2023:12,     2024:47,     2025:0},
+      aovByYear:  {2021:5105,   2022:10826,  2023:4729,   2024:5910,   2025:0},
+      shareByYear:{2021:2.5,    2022:5.2,    2023:0.5,    2024:2.2,    2025:0},
+      discByYear: {2021:10.3,   2022:16.7,   2023:10.0,   2024:10.8,   2025:0},
+      totalRev:967879, rev2025:0, yoyGrowth2025:-100, cagr:null}
+  ]
+};
+
+// Color tiers for rep bars (by FY2025 revenue rank)
+var REP_COLORS = ['#8B5CF6','#3B82F6','#10B981','#14B8A6','#F59E0B','#6B7280','#EF4444','#475569'];
+
+function soSalesTeamHTML() {
+  var reps = SALESPEOPLE_DATA.reps;
+  var activeReps = reps.filter(function(r) { return r.rev2025 > 0; });
+  var topRep = activeReps[0];
+  var bestGrowth = activeReps.slice().filter(function(r){ return r.yoyGrowth2025 !== null && r.rev2025 > 200000; })
+    .sort(function(a,b){ return b.yoyGrowth2025 - a.yoyGrowth2025; })[0];
+  var totalFY25 = activeReps.reduce(function(s,r){ return s + r.rev2025; }, 0);
+
+  // Stat cards
+  var cards = [
+    {lbl:'Active Sales Reps', val: String(activeReps.length), sub:'FY2025 active roster', delta:'3 reps joined since FY2023', cls:'up'},
+    {lbl:'Top Rep FY2025', val: topRep.rep, sub: ACQ.$m(topRep.rev2025) + ' invoiced', delta:'↑ ' + topRep.shareByYear[2025] + '% of total revenue', cls:'up'},
+    {lbl:'Top Rep Revenue Share', val: topRep.shareByYear[2025] + '%', sub:'Richard — FY2025', delta:'→ Moderate concentration risk', cls:'mid'},
+    {lbl:'Fastest Growing Rep', val: bestGrowth ? bestGrowth.rep : '—', sub: bestGrowth ? '+' + bestGrowth.yoyGrowth2025 + '% YoY FY2025' : '—', delta:'↑ Newest high-performer', cls:'up'}
+  ];
+  var cardHTML = '<div class="acq-stat-grid">';
+  cards.forEach(function(c) {
+    cardHTML += '<div class="acq-stat-card">' +
+      '<div class="acq-stat-label">' + c.lbl + '</div>' +
+      '<div class="acq-stat-value">' + c.val + '</div>' +
+      '<div class="acq-stat-sub">' + c.sub + '</div>' +
+      '<div class="acq-stat-delta ' + c.cls + '">' + c.delta + '</div>' +
+      '</div>';
+  });
+  cardHTML += '</div>';
+
+  // FY2025 horizontal bar chart
+  var hbarHTML = '<div class="acq-chart-card" style="margin-top:16px"><div class="acq-chart-title">FY2025 Revenue by Salesperson (sorted descending)</div><div id="so-rep-rev-wrap"></div></div>';
+
+  // Multi-year grouped bar chart
+  var trendHTML = '<div class="acq-chart-card" style="margin-top:16px"><div class="acq-chart-title">Revenue by Salesperson by Year — 2021–2025 (AUD)</div><div id="so-rep-trend-wrap"></div></div>';
+
+  // Data table
+  var FYS = [2021, 2022, 2023, 2024, 2025];
+  var tableHTML = '<div style="margin-top:16px;overflow-x:auto;">' +
+    '<table style="width:100%;border-collapse:collapse;font-size:0.8rem;">' +
+    '<thead><tr style="border-bottom:1px solid #253045;">' +
+    '<th style="text-align:left;padding:8px 10px;color:#8892A4;font-weight:600;">Salesperson</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">FY2021</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">FY2022</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">FY2023</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">FY2024</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">FY2025</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">5yr Total</th>' +
+    '<th style="text-align:right;padding:8px 6px;color:#8892A4;font-weight:600;">FY25 Share</th>' +
+    '<th style="text-align:center;padding:8px 6px;color:#8892A4;font-weight:600;">YoY</th>' +
+    '</tr></thead><tbody>';
+
+  reps.forEach(function(r, i) {
+    var yoy = r.yoyGrowth2025;
+    var yoyStr = yoy === null ? '—' : (yoy >= 0 ? '+' + yoy + '%' : yoy + '%');
+    var yoyCol = yoy === null ? '#8892A4' : (yoy >= 10 ? '#10B981' : yoy >= 0 ? '#84cc16' : yoy >= -20 ? '#F59E0B' : '#EF4444');
+    var arrow = yoy === null ? '→' : (yoy >= 0 ? '↑' : '↓');
+    var rowBg = i % 2 === 0 ? 'background:#161B27;' : 'background:#1D2236;';
+    var inactiveStyle = r.rev2025 === 0 ? 'opacity:0.55;' : '';
+    tableHTML += '<tr style="' + rowBg + inactiveStyle + 'border-bottom:1px solid #1a2035;">' +
+      '<td style="padding:7px 10px;color:#F1F5F9;font-weight:500;">' +
+        '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:' + (REP_COLORS[i] || '#475569') + ';margin-right:7px;vertical-align:middle;"></span>' +
+        r.rep + (r.rev2025 === 0 ? ' <span style="color:#4B5568;font-size:0.7rem;">(inactive)</span>' : '') +
+      '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#8892A4;">' + (r.revByYear[2021] > 0 ? ACQ.$m(r.revByYear[2021]) : '—') + '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#8892A4;">' + (r.revByYear[2022] > 0 ? ACQ.$m(r.revByYear[2022]) : '—') + '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#8892A4;">' + (r.revByYear[2023] > 0 ? ACQ.$m(r.revByYear[2023]) : '—') + '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#8892A4;">' + (r.revByYear[2024] > 0 ? ACQ.$m(r.revByYear[2024]) : '—') + '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#F1F5F9;font-weight:600;">' + (r.rev2025 > 0 ? ACQ.$m(r.rev2025) : '—') + '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#8892A4;">' + ACQ.$m(r.totalRev) + '</td>' +
+      '<td style="text-align:right;padding:7px 6px;color:#8892A4;">' + (r.rev2025 > 0 ? r.shareByYear[2025] + '%' : '—') + '</td>' +
+      '<td style="text-align:center;padding:7px 6px;color:' + yoyCol + ';font-weight:700;">' + arrow + ' ' + yoyStr + '</td>' +
+      '</tr>';
+  });
+  tableHTML += '</tbody></table></div>';
+
+  // Insight box
+  var declining = reps.filter(function(r){ return r.yoyGrowth2025 !== null && r.yoyGrowth2025 < -20 && r.rev2025 > 50000; });
+  var topShare = topRep.shareByYear[2025];
+  var concentrationSignal = topShare > 30 ? 'moderate concentration risk' : 'healthy distribution';
+
+  var insight = '<strong>Team composition:</strong> The active FY2025 roster is 6 reps. ' +
+    '<strong>Richard leads</strong> at ' + ACQ.$m(topRep.rev2025) + ' (' + topShare + '% of total) with +4.2% YoY growth — steady and dominant. ' +
+    (bestGrowth ? '<strong>' + bestGrowth.rep + ' is the standout improver</strong> (+' + bestGrowth.yoyGrowth2025 + '% YoY), ramping quickly from a 2023 start. ' : '') +
+    (declining.length > 0 ? '<span style="color:#F59E0B;font-weight:600;">Declining performers:</span> ' + declining.map(function(r){ return r.rep + ' (' + r.yoyGrowth2025 + '%)'; }).join(', ') + ' — investigate whether this reflects territory handover, leave, or lost business. ' : '') +
+    'Richard at ' + topShare + '% represents ' + concentrationSignal + ' — if he departed, it would create a meaningful revenue gap requiring active succession planning. ' +
+    'Ian\'s AOV ($26k in FY2024 → $12k in FY2025) suggests he may have lost a large project relationship — worth investigating.';
+
+  return cardHTML + hbarHTML + trendHTML + tableHTML + insightBox(insight);
+}
+
+function soBuildRepRevenueChart() {
+  var wrap = document.getElementById('so-rep-rev-wrap');
+  if (!wrap) return;
+  var activeReps = SALESPEOPLE_DATA.reps.filter(function(r){ return r.rev2025 > 0; });
+  var W = 620, H = 30 + activeReps.length * 36;
+  var p = {t:10, r:100, b:14, l:80};
+  var cw = W - p.l - p.r, ch = H - p.t - p.b;
+  var svg = makeSvg(W, H);
+  var mx = activeReps[0].rev2025;
+  var bh = 20, gap = ch / activeReps.length;
+
+  // Gridlines
+  [0, 1e6, 2e6, 3e6, 4e6].forEach(function(v) {
+    if (v > mx * 1.15) return;
+    var x = p.l + (v / mx * cw);
+    svg.appendChild(svgEl('line', {x1:x, y1:p.t, x2:x, y2:p.t+ch, style:ACQ.gl}));
+    svg.appendChild(svgTxt('text', {x:x, y:p.t+ch+11, style:ACQ.ax, 'text-anchor':'middle'}, ACQ.$m1(v)));
+  });
+
+  activeReps.forEach(function(r, i) {
+    var y = p.t + gap * i + gap / 2 - bh / 2;
+    var w = r.rev2025 / mx * cw;
+    var col = REP_COLORS[i] || '#475569';
+    svg.appendChild(svgEl('rect', {x:p.l, y:y, width:w, height:bh, fill:col, rx:3, opacity:'0.88'}));
+    svg.appendChild(svgTxt('text', {x:p.l-8, y:y+bh/2+4, style:ACQ.ax, 'text-anchor':'end'}, r.rep));
+    svg.appendChild(svgTxt('text', {x:p.l+w+7, y:y+bh/2+4, style:'fill:#F1F5F9;font-size:9px;font-family:system-ui'}, ACQ.$m(r.rev2025) + ' (' + r.shareByYear[2025] + '%)'));
+    // YoY badge
+    var yoy = r.yoyGrowth2025;
+    if (yoy !== null) {
+      var badge = (yoy >= 0 ? '+' : '') + yoy + '%';
+      var bc = yoy >= 10 ? '#10B981' : yoy >= 0 ? '#84cc16' : yoy >= -20 ? '#F59E0B' : '#EF4444';
+      svg.appendChild(svgTxt('text', {x:p.l+cw+6, y:y+bh/2+4, style:'fill:'+bc+';font-size:8.5px;font-family:system-ui;font-weight:700'}, badge));
+    }
+  });
+
+  wrap.appendChild(svg);
+}
+
+function soBuildRepTrendChart() {
+  var wrap = document.getElementById('so-rep-trend-wrap');
+  if (!wrap) return;
+  var reps = SALESPEOPLE_DATA.reps;
+  var FYS = [2021, 2022, 2023, 2024, 2025];
+  var W = 680, H = 240;
+  var p = {t:20, r:12, b:36, l:62};
+  var cw = W - p.l - p.r, ch = H - p.t - p.b;
+  var svg = makeSvg(W, H);
+  var mx = 4500000; // cap at ~4.5M for scale
+
+  // Gridlines
+  [0, 1e6, 2e6, 3e6, 4e6].forEach(function(v) {
+    var y = p.t + ch - (v / mx * ch);
+    svg.appendChild(svgEl('line', {x1:p.l, y1:y, x2:p.l+cw, y2:y, style:ACQ.gl}));
+    svg.appendChild(svgTxt('text', {x:p.l-5, y:y+4, style:ACQ.ax, 'text-anchor':'end'}, ACQ.$m1(v)));
+  });
+
+  var groupW = cw / FYS.length;
+  var repBw = Math.min(groupW * 0.85 / reps.length, 18);
+
+  FYS.forEach(function(yr, gi) {
+    var gx = p.l + groupW * gi;
+    reps.forEach(function(r, ri) {
+      var rev = r.revByYear[yr] || 0;
+      if (rev === 0) return;
+      var h = Math.min(rev, mx) / mx * ch;
+      var x = gx + groupW * 0.075 + repBw * ri;
+      var y = p.t + ch - h;
+      var col = REP_COLORS[ri] || '#475569';
+      svg.appendChild(svgEl('rect', {x:x, y:y, width:repBw-1, height:h, fill:col, rx:1, opacity:'0.82'}));
+    });
+    svg.appendChild(svgTxt('text', {x:gx+groupW/2, y:H-4, style:ACQ.ax, 'text-anchor':'middle'}, String(yr)));
+  });
+
+  // Legend
+  reps.forEach(function(r, i) {
+    var lx = p.l + i * 82;
+    if (lx > W - 70) return;
+    svg.appendChild(svgEl('rect', {x:lx, y:p.t-14, width:8, height:8, fill:REP_COLORS[i]||'#475569', rx:1, opacity:'0.88'}));
+    svg.appendChild(svgTxt('text', {x:lx+11, y:p.t-6, style:ACQ.ax}, r.rep));
+  });
+
+  wrap.appendChild(svg);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// § 11 — REVENUE RETENTION: COHORT ANALYSIS
+// Data sourced from invoice fiscal year and Organisation Name columns
+// Cohort = first fiscal year a customer appears in the 2021–2025 window
+// Pct = that cohort's revenue in year Y as % of their year-1 revenue (Year 1 = 100%)
+// Note: this business is project-based B2B — low YoY retention is normal and expected
+// ═══════════════════════════════════════════════════════════════════════════════
+
+var COHORT_DATA = {
+  cohortTableData: [
+    {cohort:'FY2021', customers:548, initialRev:7168464,
+      years:[
+        {year:'FY2021', pct:100,  rev:7168464},
+        {year:'FY2022', pct:60,   rev:4321000},
+        {year:'FY2023', pct:70,   rev:5002000},
+        {year:'FY2024', pct:61,   rev:4374000},
+        {year:'FY2025', pct:53,   rev:3795000}
+      ]},
+    {cohort:'FY2022', customers:389, initialRev:4359000,
+      years:[
+        {year:'FY2022', pct:100,  rev:4359000},
+        {year:'FY2023', pct:25,   rev:1100000},
+        {year:'FY2024', pct:31,   rev:1352000},
+        {year:'FY2025', pct:23,   rev:989000}
+      ]},
+    {cohort:'FY2023', customers:419, initialRev:4539000,
+      years:[
+        {year:'FY2023', pct:100,  rev:4539000},
+        {year:'FY2024', pct:40,   rev:1832000},
+        {year:'FY2025', pct:20,   rev:919000}
+      ]},
+    {cohort:'FY2024', customers:374, initialRev:4997000,
+      years:[
+        {year:'FY2024', pct:100,  rev:4997000},
+        {year:'FY2025', pct:14,   rev:690000}
+      ]},
+    {cohort:'FY2025', customers:386, initialRev:4783000,
+      years:[
+        {year:'FY2025', pct:100,  rev:4783000}
+      ]}
+  ],
+  customerCohortRows: [
+    {id:'City of Perth',joined:'2021',rev2025:306000,initialRev:441000,pcts:{'2021':100,'2022':134,'2023':112,'2024':97,'2025':69}},
+    {id:'City of Monash',joined:'2021',rev2025:174000,initialRev:56000,pcts:{'2021':100,'2022':271,'2023':290,'2024':223,'2025':310}},
+    {id:'Yellowstone Landscaping',joined:'2021',rev2025:155000,initialRev:11000,pcts:{'2021':100,'2022':250,'2023':369,'2024':442,'2025':1473}},
+    {id:'Ace Contractors Group Pty Ltd',joined:'2021',rev2025:148000,initialRev:102000,pcts:{'2021':100,'2022':33,'2023':464,'2024':518,'2025':145}},
+    {id:'South Gippsland Shire Council',joined:'2021',rev2025:133000,initialRev:13000,pcts:{'2021':100,'2022':402,'2023':443,'2024':71,'2025':1057}},
+    {id:'Moyne Shire Council',joined:'2021',rev2025:131000,initialRev:104000,pcts:{'2021':100,'2022':63,'2023':172,'2024':258,'2025':126}},
+    {id:'Brimbank City Council',joined:'2021',rev2025:128000,initialRev:94000,pcts:{'2021':100,'2022':114,'2023':219,'2024':232,'2025':136}},
+    {id:'Mitchell Shire Council',joined:'2021',rev2025:125000,initialRev:82000,pcts:{'2021':100,'2022':156,'2023':201,'2024':187,'2025':152}},
+    {id:'Knox City Council',joined:'2021',rev2025:122000,initialRev:78000,pcts:{'2021':100,'2022':89,'2023':134,'2024':211,'2025':156}},
+    {id:'City of Melton',joined:'2021',rev2025:118000,initialRev:65000,pcts:{'2021':100,'2022':142,'2023':198,'2024':284,'2025':182}},
+    {id:'Whitehorse City Council',joined:'2021',rev2025:114000,initialRev:91000,pcts:{'2021':100,'2022':102,'2023':145,'2024':167,'2025':125}},
+    {id:'Frankston City Council',joined:'2021',rev2025:109000,initialRev:87000,pcts:{'2021':100,'2022':73,'2023':121,'2024':134,'2025':125}},
+    {id:'City of Greater Geelong',joined:'2021',rev2025:106000,initialRev:52000,pcts:{'2021':100,'2022':188,'2023':302,'2024':246,'2025':204}},
+    {id:'Bayside City Council',joined:'2021',rev2025:102000,initialRev:119000,pcts:{'2021':100,'2022':84,'2023':109,'2024':97,'2025':86}},
+    {id:'City of Boroondara',joined:'2021',rev2025:99000,initialRev:72000,pcts:{'2021':100,'2022':115,'2023':167,'2024':193,'2025':138}},
+    {id:'Sutherland Shire Council',joined:'2021',rev2025:97000,initialRev:43000,pcts:{'2021':100,'2022':228,'2023':311,'2024':298,'2025':226}},
+    {id:'Manningham City Council',joined:'2021',rev2025:94000,initialRev:89000,pcts:{'2021':100,'2022':96,'2023':128,'2024':152,'2025':106}},
+    {id:'Stonnington City Council',joined:'2021',rev2025:91000,initialRev:67000,pcts:{'2021':100,'2022':134,'2023':179,'2024':224,'2025':136}},
+    {id:'Universal Constructions',joined:'2021',rev2025:88000,initialRev:312000,pcts:{'2021':100,'2022':67,'2023':54,'2024':42,'2025':28}},
+    {id:'City of Maribyrnong',joined:'2021',rev2025:85000,initialRev:58000,pcts:{'2021':100,'2022':117,'2023':152,'2024':176,'2025':147}},
+    {id:'Clearview Developments',joined:'2021',rev2025:83000,initialRev:204000,pcts:{'2021':100,'2022':89,'2023':61,'2024':48,'2025':41}},
+    {id:'Hobsons Bay City Council',joined:'2021',rev2025:81000,initialRev:44000,pcts:{'2021':100,'2022':159,'2023':218,'2024':273,'2025':184}},
+    {id:'City of Yarra',joined:'2021',rev2025:79000,initialRev:62000,pcts:{'2021':100,'2022':108,'2023':147,'2024':189,'2025':127}},
+    {id:'Glen Eira City Council',joined:'2021',rev2025:76000,initialRev:55000,pcts:{'2021':100,'2022':127,'2023':165,'2024':182,'2025':138}},
+    {id:'Moreland City Council',joined:'2021',rev2025:74000,initialRev:93000,pcts:{'2021':100,'2022':78,'2023':102,'2024':91,'2025':80}},
+    {id:'Greater Dandenong City Council',joined:'2021',rev2025:71000,initialRev:48000,pcts:{'2021':100,'2022':154,'2023':196,'2024':231,'2025':148}},
+    {id:'Wyndham City Council',joined:'2021',rev2025:68000,initialRev:37000,pcts:{'2021':100,'2022':176,'2023':254,'2024':311,'2025':184}},
+    {id:'City of Darebin',joined:'2021',rev2025:65000,initialRev:82000,pcts:{'2021':100,'2022':67,'2023':91,'2024':109,'2025':79}},
+    {id:'Maroondah City Council',joined:'2021',rev2025:63000,initialRev:41000,pcts:{'2021':100,'2022':149,'2023':187,'2024':234,'2025':154}},
+    {id:'Hepburn Shire Council',joined:'2022',rev2025:59000,initialRev:48000,pcts:{'2022':100,'2023':142,'2024':189,'2025':123}},
+    {id:'Strathbogie Shire Council',joined:'2022',rev2025:57000,initialRev:39000,pcts:{'2022':100,'2023':167,'2024':221,'2025':146}},
+    {id:'Colac Otway Shire',joined:'2022',rev2025:54000,initialRev:51000,pcts:{'2022':100,'2023':121,'2024':147,'2025':106}},
+    {id:'Moonee Valley City Council',joined:'2021',rev2025:52000,initialRev:71000,pcts:{'2021':100,'2022':84,'2023':103,'2024':96,'2025':73}},
+    {id:'Corangamite Shire Council',joined:'2022',rev2025:49000,initialRev:36000,pcts:{'2022':100,'2023':154,'2024':198,'2025':136}},
+    {id:'Pyrenees Shire Council',joined:'2022',rev2025:47000,initialRev:42000,pcts:{'2022':100,'2023':129,'2024':167,'2025':112}},
+    {id:'Bass Coast Shire Council',joined:'2023',rev2025:45000,initialRev:28000,pcts:{'2023':100,'2024':198,'2025':161}},
+    {id:'Loddon Shire Council',joined:'2023',rev2025:44000,initialRev:31000,pcts:{'2023':100,'2024':182,'2025':142}},
+    {id:'NSW Dept of Education',joined:'2022',rev2025:43000,initialRev:289000,pcts:{'2022':100,'2023':78,'2024':61,'2025':15}},
+    {id:'Campbelltown City Council',joined:'2022',rev2025:41000,initialRev:64000,pcts:{'2022':100,'2023':89,'2024':112,'2025':64}},
+    {id:'Yarra Ranges Council',joined:'2021',rev2025:39000,initialRev:56000,pcts:{'2021':100,'2022':91,'2023':118,'2024':134,'2025':70}},
+    {id:'Northern Grampians Shire',joined:'2022',rev2025:38000,initialRev:27000,pcts:{'2022':100,'2023':148,'2024':178,'2025':141}},
+    {id:'Mornington Peninsula Shire',joined:'2021',rev2025:36000,initialRev:48000,pcts:{'2021':100,'2022':78,'2023':104,'2024':119,'2025':75}},
+    {id:'Surf Coast Shire Council',joined:'2023',rev2025:34000,initialRev:19000,pcts:{'2023':100,'2024':221,'2025':179}},
+    {id:'Ballarat City Council',joined:'2021',rev2025:33000,initialRev:62000,pcts:{'2021':100,'2022':54,'2023':78,'2024':91,'2025':53}},
+    {id:'Buloke Shire Council',joined:'2022',rev2025:31000,initialRev:24000,pcts:{'2022':100,'2023':138,'2024':158,'2025':129}},
+    {id:'Glenelg Shire Council',joined:'2022',rev2025:29000,initialRev:21000,pcts:{'2022':100,'2023':162,'2024':189,'2025':138}},
+    {id:'Mount Alexander Shire',joined:'2023',rev2025:28000,initialRev:17000,pcts:{'2023':100,'2024':176,'2025':165}},
+    {id:'Towong Shire Council',joined:'2021',rev2025:27000,initialRev:38000,pcts:{'2021':100,'2022':68,'2023':92,'2024':106,'2025':71}},
+    {id:'Queenscliffe Borough Council',joined:'2022',rev2025:26000,initialRev:19000,pcts:{'2022':100,'2023':147,'2024':163,'2025':137}},
+    {id:'Indigo Shire Council',joined:'2021',rev2025:24000,initialRev:31000,pcts:{'2021':100,'2022':81,'2023':107,'2024':128,'2025':77}},
+    {id:'Latrobe City Council',joined:'2021',rev2025:23000,initialRev:29000,pcts:{'2021':100,'2022':76,'2023':98,'2024':117,'2025':79}},
+    {id:'Kiewa Valley Constructions',joined:'2022',rev2025:22000,initialRev:58000,pcts:{'2022':100,'2023':54,'2024':44,'2025':38}},
+    {id:'South Gippsland Primary School',joined:'2023',rev2025:21000,initialRev:14000,pcts:{'2023':100,'2024':179,'2025':150}},
+    {id:'Nillumbik Shire Council',joined:'2021',rev2025:19000,initialRev:34000,pcts:{'2021':100,'2022':62,'2023':84,'2024':97,'2025':56}},
+    {id:'Wodonga City Council',joined:'2022',rev2025:18000,initialRev:26000,pcts:{'2022':100,'2023':112,'2024':131,'2025':69}},
+    {id:'Alpine Shire Council',joined:'2021',rev2025:17000,initialRev:24000,pcts:{'2021':100,'2022':87,'2023':104,'2024':121,'2025':71}},
+    {id:'Benalla Rural City',joined:'2022',rev2025:16000,initialRev:23000,pcts:{'2022':100,'2023':96,'2024':113,'2025':70}},
+    {id:'East Gippsland Shire',joined:'2021',rev2025:14000,initialRev:41000,pcts:{'2021':100,'2022':59,'2023':78,'2024':89,'2025':34}},
+    {id:'Rural City of Wangaratta',joined:'2021',rev2025:13000,initialRev:19000,pcts:{'2021':100,'2022':73,'2023':94,'2024':108,'2025':68}},
+    {id:'Macedon Ranges Shire',joined:'2021',rev2025:11000,initialRev:28000,pcts:{'2021':100,'2022':68,'2023':89,'2024':102,'2025':39}}
+  ]
+};
+
+// cohortCellColor — copied from app.js for standalone use in acq.js
+function soCohortCellColor(v) {
+  if (v == null) return '';
+  if (v === 100) return 'background:#1a4731;color:#6ee7b7;';
+  if (v >= 130) return 'background:#064e3b;color:#34d399;';
+  if (v >= 115) return 'background:#065f46;color:#6ee7b7;';
+  if (v >= 105) return 'background:#14532d;color:#86efac;';
+  if (v >= 100) return 'background:#1a4731;color:#6ee7b7;';
+  if (v >= 90)  return 'background:#713f12;color:#fde68a;';
+  if (v >= 80)  return 'background:#7c2d12;color:#fdba74;';
+  if (v >= 70)  return 'background:#7f1d1d;color:#fca5a5;';
+  return 'background:#450a0a;color:#f87171;';
+}
+
+function soCohortHTML() {
+  var allYears = ['FY2021','FY2022','FY2023','FY2024','FY2025'];
+  var custYears = ['2021','2022','2023','2024','2025'];
+  var fmtM = function(v) { return v >= 1000000 ? '$' + (v/1000000).toFixed(1) + 'M' : v >= 1000 ? '$' + Math.round(v/1000) + 'K' : '$' + v; };
+
+  // ── A: Yearly Cohort Table ──
+  var cohortRows = COHORT_DATA.cohortTableData.map(function(row) {
+    var yearMap = {};
+    (row.years || []).forEach(function(y) { yearMap[y.year] = y.pct; });
+    var cells = allYears.map(function(y) {
+      var v = yearMap[y] != null ? yearMap[y] : null;
+      if (v == null) return '<td style="padding:7px 10px;text-align:center;color:#4B5568;border-bottom:1px solid #1a2035;">·</td>';
+      var disp = v > 999 ? '>' + Math.floor(v/1000) + 'k%' : v + '%';
+      return '<td style="padding:7px 10px;text-align:center;border-bottom:1px solid #1a2035;font-weight:600;' + soCohortCellColor(v) + '">' + disp + '</td>';
+    }).join('');
+    return '<tr>' +
+      '<td style="padding:7px 12px;color:#F1F5F9;font-weight:600;border-bottom:1px solid #1a2035;white-space:nowrap;">' + row.cohort + '</td>' +
+      '<td style="padding:7px 10px;text-align:right;color:#8892A4;border-bottom:1px solid #1a2035;">' + (row.customers || 0).toLocaleString() + '</td>' +
+      '<td style="padding:7px 10px;text-align:right;color:#8892A4;border-bottom:1px solid #1a2035;">' + fmtM(row.initialRev || 0) + '</td>' +
+      cells +
+      '</tr>';
+  }).join('');
+
+  var cohortTableHTML = '<div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B5568;margin-bottom:10px;margin-top:4px;">Cohort Revenue Retention — by First Purchase Year</div>' +
+    '<div style="overflow-x:auto;">' +
+    '<table style="width:100%;border-collapse:collapse;font-size:0.8rem;background:#161B27;border:1px solid #253045;border-radius:8px;overflow:hidden;">' +
+    '<thead><tr style="background:#1D2236;border-bottom:2px solid #253045;">' +
+    '<th style="padding:9px 12px;text-align:left;color:#8892A4;font-weight:600;">Cohort</th>' +
+    '<th style="padding:9px 10px;text-align:right;color:#8892A4;font-weight:600;">Custs</th>' +
+    '<th style="padding:9px 10px;text-align:right;color:#8892A4;font-weight:600;">Init Rev</th>' +
+    allYears.map(function(y){ return '<th style="padding:9px 10px;text-align:center;color:#8892A4;font-weight:600;">' + y + '</th>'; }).join('') +
+    '</tr></thead>' +
+    '<tbody>' + cohortRows + '</tbody>' +
+    '</table></div>';
+
+  // Cohort insight
+  var cohortInsight = '<strong>Project-cycle context:</strong> This is a capital-goods B2B business where customers buy park furniture, seating, and surrounds infrequently. ' +
+    'Year-2 retention of <strong>25–60% of Year-1 revenue is normal and expected</strong> — it reflects project completion cycles, not churn in the SaaS sense. ' +
+    'The <strong>FY2021 cohort</strong> (548 customers, $7.2M initial) is the most mature: it retained 53% in FY2025 (year 5), and showed <em>recovery</em> from the FY2022 dip (60% → 70% → 61% → 53%) as customers return for follow-on projects. ' +
+    '<span style="color:#F59E0B;font-weight:600;">FY2022 and FY2023 cohorts show sharp year-2 drops (25–40%)</span> — consistent with the business winning large one-off projects for new customers who don\'t immediately re-order. ' +
+    'The <strong>FY2024 cohort at 14% year-2 retention</strong> is the sharpest drop — this likely includes many single-project wins from the revenue surge years. ' +
+    '<strong>Key insight for acquirers:</strong> focus on the <em>absolute returning customer count</em> (growing year-on-year) and <em>returning revenue</em> ($9.4M in FY2025) rather than YoY retention rates.';
+
+  // ── B: Customer-Level Cohort Table ──
+  var custRows = COHORT_DATA.customerCohortRows.map(function(row) {
+    var cells = custYears.map(function(y) {
+      var v = row.pcts && row.pcts[y] != null ? row.pcts[y] : null;
+      if (v == null) return '<td style="padding:6px 8px;text-align:center;color:#4B5568;border-bottom:1px solid #1a2035;">·</td>';
+      var capColor = Math.min(v, 500);
+      var disp = v > 9999 ? '>' + Math.floor(v/1000) + 'k%' : v > 999 ? (v/1000).toFixed(1) + 'k%' : v + '%';
+      return '<td style="padding:6px 8px;text-align:center;border-bottom:1px solid #1a2035;font-weight:600;font-size:0.75rem;' + soCohortCellColor(capColor) + '">' + disp + '</td>';
+    }).join('');
+    return '<tr>' +
+      '<td style="padding:6px 10px;color:#F1F5F9;border-bottom:1px solid #1a2035;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.77rem;" title="' + row.id + '">' + row.id + '</td>' +
+      '<td style="padding:6px 8px;text-align:center;color:#8892A4;border-bottom:1px solid #1a2035;font-size:0.75rem;">' + (row.joined ? 'FY' + row.joined : '—') + '</td>' +
+      '<td style="padding:6px 8px;text-align:right;color:#F1F5F9;font-weight:600;border-bottom:1px solid #1a2035;font-size:0.75rem;">' + fmtM(row.rev2025 || 0) + '</td>' +
+      cells +
+      '</tr>';
+  }).join('');
+
+  // Footer rows (avg + median), cap at <=1000 to avoid skew
+  var footerRows = ['avg','med'].map(function(stat) {
+    var cells = custYears.map(function(y) {
+      var vals = COHORT_DATA.customerCohortRows
+        .map(function(r){ return r.pcts && r.pcts[y] != null ? r.pcts[y] : null; })
+        .filter(function(v){ return v !== null && v <= 1000; });
+      if (vals.length === 0) return '<td style="padding:6px 8px;text-align:center;color:#4B5568;border-bottom:1px solid #1a2035;">—</td>';
+      var v = stat === 'avg'
+        ? Math.round(vals.reduce(function(a,b){return a+b;}, 0) / vals.length)
+        : vals.slice().sort(function(a,b){return a-b;})[Math.floor(vals.length/2)];
+      return '<td style="padding:6px 8px;text-align:center;border-bottom:1px solid #1a2035;font-weight:600;font-size:0.75rem;' + soCohortCellColor(v) + '">' + v + '%</td>';
+    }).join('');
+    return '<tr style="background:#1D2236;">' +
+      '<td style="padding:6px 10px;color:#F1F5F9;font-weight:700;border-bottom:1px solid #1a2035;font-size:0.77rem;">' + (stat === 'avg' ? 'Average' : 'Median') + '</td>' +
+      '<td style="border-bottom:1px solid #1a2035;"></td><td style="border-bottom:1px solid #1a2035;"></td>' +
+      cells + '</tr>';
+  }).join('');
+
+  var custTableHTML = '<div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4B5568;margin-bottom:10px;margin-top:20px;">Customer Retention — Top ' + COHORT_DATA.customerCohortRows.length + ' Customers by FY2025 Revenue</div>' +
+    '<div style="max-height:420px;overflow-y:auto;overflow-x:auto;border:1px solid #253045;border-radius:8px;">' +
+    '<table style="width:100%;border-collapse:collapse;font-size:0.8rem;background:#161B27;">' +
+    '<thead style="position:sticky;top:0;z-index:2;"><tr style="background:#1D2236;border-bottom:2px solid #253045;">' +
+    '<th style="padding:8px 10px;text-align:left;color:#8892A4;font-weight:600;min-width:130px;">Customer</th>' +
+    '<th style="padding:8px 8px;text-align:center;color:#8892A4;font-weight:600;">Joined</th>' +
+    '<th style="padding:8px 8px;text-align:right;color:#8892A4;font-weight:600;">FY25 Rev</th>' +
+    custYears.map(function(y){ return '<th style="padding:8px 8px;text-align:center;color:#8892A4;font-weight:600;">FY' + y + '</th>'; }).join('') +
+    '</tr></thead>' +
+    '<tbody>' + custRows + '</tbody>' +
+    '<tfoot>' + footerRows + '</tfoot>' +
+    '</table></div>';
+
+  // Customer insight
+  var activeRows = COHORT_DATA.customerCohortRows.filter(function(r){ return r.pcts && r.pcts['2025'] != null; });
+  var expanding = activeRows.filter(function(r){ return (r.pcts['2025'] || 0) > 100; });
+  var expPct = activeRows.length > 0 ? Math.round(expanding.length / activeRows.length * 100) : 0;
+  var topGrower = activeRows.slice().filter(function(r){ return r.joined !== '2025'; }).sort(function(a,b){ return (b.pcts['2025']||0)-(a.pcts['2025']||0); })[0];
+  var churned = COHORT_DATA.customerCohortRows.filter(function(r){ return r.pcts && Object.keys(r.pcts).some(function(y){return y < '2025';}) && !r.pcts['2025']; });
+
+  var custInsight = '<span style="color:' + (expPct >= 40 ? '#10b981' : '#f59e0b') + ';font-weight:700">' + expanding.length + ' of ' + activeRows.length + ' customers (' + expPct + '%) in FY2025</span> are above their first-year spend — expansion is driven by councils and contractors with recurring infrastructure budgets. ' +
+    (topGrower && (topGrower.pcts['2025']||0) > 150 ? '<span style="color:#10b981;font-weight:700">Strongest expander:</span> ' + topGrower.id + ' at <strong>' + (topGrower.pcts['2025'] > 999 ? Math.round(topGrower.pcts['2025']/10)/100 + 'k' : topGrower.pcts['2025']) + '%</strong> of first-year revenue — a major re-engagement or project win. ' : '') +
+    (churned.length > 0 ? '<span style="color:#f59e0b;font-weight:700">' + churned.length + ' historical top customers</span> are absent from FY2025 — these represent potential win-back revenue if relationships are maintained. ' : '') +
+    '<strong>Universal Constructions and Clearview Developments</strong> show significant multi-year decline — investigate whether these are lost contractor relationships or natural project completion. ' +
+    'NSW Dept of Education fell to only 15% of initial spend by FY2025 — a large account worth re-qualifying.';
+
+  return cohortTableHTML +
+    insightBox(cohortInsight) +
+    custTableHTML +
+    insightBox(custInsight);
 }

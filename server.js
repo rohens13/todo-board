@@ -11,14 +11,54 @@ const XLSX = require('xlsx');
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 20 * 1024 * 1024 } });
 
 const app = express();
-const PORT = 3001;
-const DATA_FILE = path.join(__dirname, 'data.json');
+const PORT = process.env.PORT || 3001;
+const DATA_FILE = process.env.DATA_FILE || path.join(__dirname, 'data.json');
+const SEED_FILE = path.join(__dirname, 'data.json');
+
+// Public health check (no auth) so Render's probe works
+app.get('/healthz', (req, res) => res.send('ok'));
+
+// --- Basic auth ---
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+const VIEWER_PASSWORD = process.env.VIEWER_PASSWORD || '';
+const AUTH_DISABLED = !ADMIN_PASSWORD && !VIEWER_PASSWORD;
+
+app.use((req, res, next) => {
+    if (AUTH_DISABLED) { req.role = 'admin'; return next(); }
+    const header = req.headers.authorization || '';
+    const [scheme, encoded] = header.split(' ');
+    if (scheme !== 'Basic' || !encoded) {
+        res.set('WWW-Authenticate', 'Basic realm="Todo Board"');
+        return res.status(401).send('Authentication required');
+    }
+    const decoded = Buffer.from(encoded, 'base64').toString();
+    const idx = decoded.indexOf(':');
+    const password = idx === -1 ? decoded : decoded.slice(idx + 1);
+    if (ADMIN_PASSWORD && password === ADMIN_PASSWORD) { req.role = 'admin'; return next(); }
+    if (VIEWER_PASSWORD && password === VIEWER_PASSWORD) { req.role = 'viewer'; return next(); }
+    res.set('WWW-Authenticate', 'Basic realm="Todo Board"');
+    return res.status(401).send('Invalid credentials');
+});
+
+// Viewer restriction: only static files, /api/me, and /api/crm/* allowed
+app.use((req, res, next) => {
+    if (req.role === 'admin') return next();
+    if (!req.url.startsWith('/api/')) return next();
+    if (req.url === '/api/me' || req.url.startsWith('/api/crm/')) return next();
+    return res.status(403).json({ error: 'forbidden' });
+});
+
+app.get('/api/me', (req, res) => res.json({ role: req.role }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // Load data
 function loadData() {
+    // On first run with a remote DATA_FILE, seed from the bundled data.json
+    if (!fs.existsSync(DATA_FILE) && DATA_FILE !== SEED_FILE && fs.existsSync(SEED_FILE)) {
+        try { fs.copyFileSync(SEED_FILE, DATA_FILE); } catch (e) {}
+    }
     try {
         if (fs.existsSync(DATA_FILE)) {
             return JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
@@ -1103,12 +1143,60 @@ app.post('/api/dd/analyze-document', upload.single('file'), async (req, res) => 
         const raw = await callClaudeWithContent(contentArray);
         const clean = raw.replace(/^```(?:json)?\s*/, '').replace(/\s*```$/, '').trim();
         const analysis = JSON.parse(clean);
+        console.log('[DD analysis] balanceSheet extracted:', JSON.stringify(analysis.balanceSheet));
         analysis.sourceFile = originalname;
         res.json(analysis);
     } catch (err) {
         console.error('DD analyze-document error:', err);
         res.status(500).json({ error: err.message || 'Analysis failed' });
     }
+});
+
+// --- CRM Contacts ---
+
+app.get('/api/crm/contacts', (req, res) => {
+    const data = loadData();
+    res.json(data.contacts || []);
+});
+
+app.post('/api/crm/contacts', (req, res) => {
+    const data = loadData();
+    if (!data.contacts) data.contacts = [];
+    const contact = {
+        id: Date.now().toString(),
+        name: req.body.name || '',
+        company: req.body.company || '',
+        role: req.body.role || '',
+        email: req.body.email || '',
+        phone: req.body.phone || '',
+        type: req.body.type || 'Other',
+        status: req.body.status || 'Prospect',
+        lastContact: req.body.lastContact || '',
+        owner: req.body.owner || 'Rohen',
+        notes: req.body.notes || '',
+        createdAt: new Date().toISOString()
+    };
+    data.contacts.push(contact);
+    saveData(data);
+    res.json(contact);
+});
+
+app.put('/api/crm/contacts/:id', (req, res) => {
+    const data = loadData();
+    if (!data.contacts) data.contacts = [];
+    const contact = data.contacts.find(c => c.id === req.params.id);
+    if (!contact) return res.status(404).json({ error: 'Contact not found' });
+    Object.assign(contact, req.body);
+    saveData(data);
+    res.json(contact);
+});
+
+app.delete('/api/crm/contacts/:id', (req, res) => {
+    const data = loadData();
+    if (!data.contacts) data.contacts = [];
+    data.contacts = data.contacts.filter(c => c.id !== req.params.id);
+    saveData(data);
+    res.json({ success: true });
 });
 
 app.listen(PORT, () => {

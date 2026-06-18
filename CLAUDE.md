@@ -13,9 +13,17 @@ There is no build step, no bundler, no transpilation, and no test suite. The ser
 
 ## Architecture
 
-**Stack:** Node.js + Express 5 backend, vanilla JS frontend — no frameworks, no build tools.
+**Stack:** Node.js + Express backend, vanilla JS frontend — no frameworks, no build tools.
 
-**Single data file:** All state (tasks, columns, companies, podcasts) is stored in `data.json`. `server.js` reads this file on every request via `loadData()` and writes it on every mutation via `saveData()`. There is no database.
+**Files:**
+- `server.js` — all API routes and server logic (~1100 lines)
+- `public/app.js` — all frontend logic for Board, HubSpot, DD, and Podcasts tabs (~2200 lines)
+- `public/acq.js` — Acquisitions tab only; self-contained with embedded data and SVG chart rendering; no server calls
+- `public/styles.css` — all styles
+- `public/index.html` — single HTML file; all tab content lives here
+- `data.json` — sole persistence layer (tasks, columns, companies, podcasts)
+
+**Single data file:** All state is stored in `data.json`. `server.js` reads on every request via `loadData()` and writes on every mutation via `saveData()`. No database.
 
 **Frontend state pattern (`public/app.js`):** A single global `data` object mirrors the server state. Mutations follow this flow:
 1. Call `saveStateForUndo()` to snapshot `data` before the change
@@ -27,23 +35,34 @@ Undo works by storing deep-cloned snapshots of `data` in `undoStack` (max 20), t
 
 **IDs:** All records use `Date.now().toString()` as their primary key.
 
-**Tabs and rendering:** Each tab (Board, HubSpot, DD, Podcasts) has its own render functions in `app.js`. Tabs are shown/hidden by toggling a `hidden` class — they are not separate pages or routes.
+**Tabs and rendering:** Each tab (Board, HubSpot, DD, Podcasts, Acquisitions) has its own render functions. Tabs are shown/hidden by toggling a `hidden` class — not separate pages. Tab switch triggers `loadHubspot()`, `loadDD()`, `loadPodcasts()`, or `initAcqTab()` on first activation.
 
-**Theming:** CSS custom properties defined in `:root` (dark, default). Additional themes are applied by adding a class to `body` (`theme-light`, `theme-ocean`, `theme-forest`, `theme-sunset`). Theme is persisted in `localStorage` under the key `theme`. The legacy `light-mode` class still works for backwards compatibility.
+**Theming:** CSS custom properties defined in `:root` (dark, default). Additional themes applied by adding a class to `body` (`theme-light`, `theme-ocean`, `theme-forest`, `theme-sunset`). Persisted in `localStorage` under key `theme`. The legacy `light-mode` class still works for backwards compatibility.
 
-**YouTube import (Podcasts tab):** Uses Server-Sent Events (`/api/podcasts/import-youtube`) to stream progress to the client. The server fetches the YouTube channel RSS feed, scrapes auto-captions via the `timedtext` API, then calls Claude (`claude-sonnet-4-6`) to extract investment ideas and a structured JSON summary.
+**Claude API calls:** Two separate functions in `server.js`:
+- `callClaude(prompt)` — text-only, used for podcast episode analysis
+- `callClaudeWithContent(contentArray)` — multimodal content array, used for DD document analysis (supports native PDF via base64 `document` block)
 
-**HubSpot integration:** All HubSpot API calls are proxied through the server using `HUBSPOT_API_KEY` from `.env`. The `/api/hubspot/funnel` endpoint supports period filters and per-owner breakdowns. Clicking a funnel stage row opens a slide-in deals panel populated by `/api/hubspot/funnel/deals`.
+Both make raw HTTPS requests to `api.anthropic.com` — no Anthropic SDK. Model: `claude-sonnet-4-6`.
 
-**Claude API calls:** Made directly via raw HTTPS requests in `server.js` (`callClaude()`) — no Anthropic SDK. Uses `ANTHROPIC_API_KEY` from `.env`.
+**YouTube import (Podcasts tab):** Uses Server-Sent Events (`GET /api/podcasts/import-youtube`). Flow: resolve channel ID → fetch RSS feed → scrape auto-captions via `timedtext` API → call Claude to extract investment ideas as structured JSON. Progress events stream to client in real time.
 
-**File uploads:** `multer` with memory storage. DOCX files parsed with `mammoth`, Excel files with `xlsx`. 20 MB file size limit.
+**DD tab document analysis:** `POST /api/dd/analyze-document` accepts file upload via `multer`. PDFs use Claude's native document support; DOCX uses `mammoth`; Excel uses `xlsx` (all sheets converted to CSV). Response is structured JSON with financials, customer metrics, and balance sheet extracted by Claude using `DD_ANALYSIS_PROMPT` (defined inline in `server.js`).
+
+**HubSpot integration:** All HubSpot API calls proxied through server using `HUBSPOT_API_KEY`. Key endpoints:
+- `GET /api/hubspot/funnel` — aggregate + per-owner funnel with period filters (`week/month/ytd/year`) and `view=historical|current`. Historical mode uses `hs_v2_date_entered_<stageId>` properties to count deals that have ever reached each stage. Stages after the first `isClosed=true` stage are treated as "parked" (side-track).
+- `GET /api/hubspot/funnel/deals` — deal drilldown for a clicked funnel stage row
+- `GET /api/hubspot/owner-funnel` — per-owner deal breakdown
+
+**Acquisitions tab (`public/acq.js`):** Entirely self-contained. Data is hardcoded/embedded in the file — no API calls. Renders three sub-panels (Quotes, Financials, Sales Orders) with SVG charts built manually using `document.createElementNS`. Initialises once on first tab activation via `initAcqTab()` guard flag.
+
+**File uploads:** `multer` with memory storage, 20 MB limit. Supported: PDF, DOCX, XLSX/XLS, plain text.
 
 ## Environment
 
 Required `.env` variables:
 - `HUBSPOT_API_KEY` — HubSpot private app token
-- `ANTHROPIC_API_KEY` — Anthropic API key (used for podcast episode analysis)
+- `ANTHROPIC_API_KEY` — Anthropic API key (podcast analysis + DD document analysis)
 
 ## Git workflow
 

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: todo-board
+    runtime: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_FILE
+        value: /var/data/data.json
+      - key: NODE_VERSION
+        value: "20"
+      - key: HUBSPOT_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: VIEWER_PASSWORD
+        sync: false

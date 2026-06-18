@@ -326,6 +326,8 @@ document.querySelectorAll('.tab').forEach(tab => {
         if (tab.dataset.tab === 'hubspot') loadHubspot();
         if (tab.dataset.tab === 'dd') loadDD();
         if (tab.dataset.tab === 'podcasts') loadPodcasts();
+        if (tab.dataset.tab === 'acq') initAcqTab();
+        if (tab.dataset.tab === 'crm') loadCRM();
     });
 });
 
@@ -2199,6 +2201,308 @@ async function loadHubspot() {
 
 document.getElementById('refreshHubspot').addEventListener('click', loadHubspot);
 
+// ===================== CRM =====================
+
+let crmContacts = [];
+let crmTypeFilter = '';
+let crmStatusFilter = '';
+let crmSearchQuery = '';
+let crmLoaded = false;
+
+async function loadCRM() {
+    if (crmLoaded) { renderCRM(); return; }
+    try {
+        const res = await fetch('/api/crm/contacts');
+        crmContacts = await res.json();
+        crmLoaded = true;
+        renderCRM();
+    } catch (e) {
+        console.error('CRM load error', e);
+    }
+}
+
+const CRM_TYPES    = ['Existing LP', 'Potential LP', 'Advisor', 'Other'];
+const CRM_STATUSES = ['Prospect', 'Active', 'On Hold', 'Archived'];
+const CRM_OWNERS   = ['Rohen', 'Joel', 'Other'];
+
+function crmTypeCls(type) {
+    const map = {
+        'Existing LP':  'crm-badge-existing-lp',
+        'Potential LP': 'crm-badge-potential-lp',
+        'Advisor':      'crm-badge-advisor',
+        'Other':        'crm-badge-other'
+    };
+    return map[type] || 'crm-badge-other';
+}
+
+function crmStatusEl(status) {
+    const map = {
+        'Active': 'crm-status-active',
+        'Prospect': 'crm-status-prospect',
+        'On Hold': 'crm-status-onhold',
+        'Archived': 'crm-status-archived'
+    };
+    return `<span class="crm-status ${map[status] || ''}">${status}</span>`;
+}
+
+function renderCRM() {
+    // Stats
+    const statsEl = document.getElementById('crm-stats');
+    const typeCounts = {};
+    CRM_TYPES.forEach(t => typeCounts[t] = crmContacts.filter(c => c.type === t).length);
+    statsEl.innerHTML = `
+        <div class="crm-stat-card">
+            <div class="crm-stat-label">Total</div>
+            <div class="crm-stat-value">${crmContacts.length}</div>
+        </div>
+        ${CRM_TYPES.map(t => `
+        <div class="crm-stat-card">
+            <div class="crm-stat-label">${t}</div>
+            <div class="crm-stat-value">${typeCounts[t]}</div>
+        </div>`).join('')}
+    `;
+
+    // Filter + search
+    let filtered = crmContacts;
+    if (crmTypeFilter) filtered = filtered.filter(c => c.type === crmTypeFilter);
+    if (crmStatusFilter) filtered = filtered.filter(c => c.status === crmStatusFilter);
+    if (crmSearchQuery) {
+        const q = crmSearchQuery.toLowerCase();
+        filtered = filtered.filter(c =>
+            c.name.toLowerCase().includes(q) ||
+            (c.company || '').toLowerCase().includes(q) ||
+            (c.email || '').toLowerCase().includes(q) ||
+            (c.notes || '').toLowerCase().includes(q)
+        );
+    }
+
+    // Sort: Active first, then Prospect, then others; within each by name
+    const statusOrder = { 'Active': 0, 'Prospect': 1, 'On Hold': 2, 'Archived': 3 };
+    filtered.sort((a, b) => {
+        const sd = (statusOrder[a.status] ?? 4) - (statusOrder[b.status] ?? 4);
+        if (sd !== 0) return sd;
+        return a.name.localeCompare(b.name);
+    });
+
+    const listEl = document.getElementById('crm-list');
+    if (filtered.length === 0) {
+        listEl.innerHTML = `<div class="crm-empty">${crmContacts.length === 0 ? 'No contacts yet — add your first one.' : 'No contacts match your filters.'}</div>`;
+        return;
+    }
+
+    const typeOpts = CRM_TYPES.map(t => `<option value="${t}">${t}</option>`).join('');
+    const statusOpts = CRM_STATUSES.map(s => `<option value="${s}">${s}</option>`).join('');
+
+    listEl.innerHTML = filtered.map(c => `
+        <div class="crm-card" data-id="${c.id}">
+            <div class="crm-col crm-col-identity">
+                <span class="crm-card-name">${c.name}</span>
+                ${c.company ? `<span class="crm-card-company">${c.company}</span>` : ''}
+                ${c.role    ? `<span class="crm-card-role">${c.role}</span>` : ''}
+            </div>
+            <div class="crm-col crm-col-type">
+                <div class="crm-col-label">Type</div>
+                <select class="crm-inline-select crm-inline-type ${crmTypeCls(c.type)}" data-field="type">
+                    ${CRM_TYPES.map(t => `<option value="${t}" ${c.type === t ? 'selected' : ''}>${t}</option>`).join('')}
+                </select>
+            </div>
+            <div class="crm-col crm-col-status">
+                <div class="crm-col-label">Status</div>
+                <select class="crm-inline-select crm-inline-status crm-status-${(c.status||'').toLowerCase().replace(' ','-')}" data-field="status">
+                    ${CRM_STATUSES.map(s => `<option value="${s}" ${c.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+                </select>
+            </div>
+            <div class="crm-col crm-col-contact">
+                <div class="crm-col-label">Contact</div>
+                ${c.email ? `<a class="crm-contact-val" href="mailto:${c.email}">${c.email}</a>` : '<span class="crm-contact-empty">—</span>'}
+                ${c.phone ? `<span class="crm-contact-val">${c.phone}</span>` : ''}
+            </div>
+            <div class="crm-col crm-col-last">
+                <div class="crm-col-label">Last Contact</div>
+                <span class="crm-contact-val">${c.lastContact || '—'}</span>
+            </div>
+            <div class="crm-col crm-col-owner">
+                <div class="crm-col-label">Owner</div>
+                <select class="crm-inline-select crm-inline-owner" data-field="owner">
+                    ${CRM_OWNERS.map(o => `<option value="${o}" ${(c.owner||'Rohen') === o ? 'selected' : ''}>${o}</option>`).join('')}
+                </select>
+            </div>
+            ${c.notes ? `<div class="crm-col-notes">${c.notes}</div>` : ''}
+            <div class="crm-card-actions">
+                <button class="crm-action-btn" onclick="openCRMEditor('${c.id}')">Edit</button>
+                <button class="crm-action-btn delete" onclick="deleteCRMContact('${c.id}')">✕</button>
+            </div>
+        </div>`
+    ).join('');
+}
+
+function openCRMEditor(id) {
+    const panel = document.getElementById('crm-editor-panel');
+    const title = document.getElementById('crm-editor-title');
+
+    if (id) {
+        const c = crmContacts.find(c => c.id === id);
+        if (!c) return;
+        title.textContent = 'Edit Contact';
+        document.getElementById('crm-edit-id').value = c.id;
+        document.getElementById('crm-edit-name').value = c.name || '';
+        document.getElementById('crm-edit-company').value = c.company || '';
+        document.getElementById('crm-edit-role').value = c.role || '';
+        document.getElementById('crm-edit-email').value = c.email || '';
+        document.getElementById('crm-edit-phone').value = c.phone || '';
+        document.getElementById('crm-edit-type').value = c.type || 'Other';
+        document.getElementById('crm-edit-status').value = c.status || 'Prospect';
+        document.getElementById('crm-edit-last-contact').value = c.lastContact || '';
+        document.getElementById('crm-edit-owner').value = c.owner || 'Rohen';
+        document.getElementById('crm-edit-notes').value = c.notes || '';
+    } else {
+        title.textContent = 'Add Contact';
+        document.getElementById('crm-editor-form').reset();
+        document.getElementById('crm-edit-id').value = '';
+    }
+
+    panel.classList.add('open');
+}
+
+function closeCRMEditor() {
+    document.getElementById('crm-editor-panel').classList.remove('open');
+}
+
+async function deleteCRMContact(id) {
+    if (!confirm('Delete this contact?')) return;
+    await fetch(`/api/crm/contacts/${id}`, { method: 'DELETE' });
+    crmContacts = crmContacts.filter(c => c.id !== id);
+    renderCRM();
+}
+
+document.getElementById('crm-editor-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('crm-edit-id').value;
+    const payload = {
+        name: document.getElementById('crm-edit-name').value.trim(),
+        company: document.getElementById('crm-edit-company').value.trim(),
+        role: document.getElementById('crm-edit-role').value.trim(),
+        email: document.getElementById('crm-edit-email').value.trim(),
+        phone: document.getElementById('crm-edit-phone').value.trim(),
+        type: document.getElementById('crm-edit-type').value,
+        status: document.getElementById('crm-edit-status').value,
+        lastContact: document.getElementById('crm-edit-last-contact').value,
+        owner: document.getElementById('crm-edit-owner').value,
+        notes: document.getElementById('crm-edit-notes').value.trim()
+    };
+
+    if (id) {
+        const res = await fetch(`/api/crm/contacts/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const updated = await res.json();
+        const idx = crmContacts.findIndex(c => c.id === id);
+        if (idx !== -1) crmContacts[idx] = updated;
+    } else {
+        const res = await fetch('/api/crm/contacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const created = await res.json();
+        crmContacts.push(created);
+    }
+
+    closeCRMEditor();
+    renderCRM();
+});
+
+// Inline field edits (type / status dropdowns on cards)
+document.getElementById('crm-list').addEventListener('change', async (e) => {
+    const sel = e.target.closest('.crm-inline-select');
+    if (!sel) return;
+    const card = sel.closest('.crm-card');
+    const id = card.dataset.id;
+    const field = sel.dataset.field;
+    const value = sel.value;
+
+    // Update local state immediately
+    const contact = crmContacts.find(c => c.id === id);
+    if (contact) contact[field] = value;
+
+    // Update select styling
+    if (field === 'type') {
+        sel.className = `crm-inline-select crm-inline-type ${crmTypeCls(value)}`;
+    } else if (field === 'status') {
+        sel.className = `crm-inline-select crm-inline-status crm-status-${value.toLowerCase().replace(' ', '-')}`;
+    }
+
+    await fetch(`/api/crm/contacts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ [field]: value })
+    });
+
+    // Re-render stats only (avoids losing focus mid-edit)
+    const typeCounts = {};
+    CRM_TYPES.forEach(t => typeCounts[t] = crmContacts.filter(c => c.type === t).length);
+    document.getElementById('crm-stats').innerHTML = `
+        <div class="crm-stat-card"><div class="crm-stat-label">Total</div><div class="crm-stat-value">${crmContacts.length}</div></div>
+        ${CRM_TYPES.map(t => `<div class="crm-stat-card"><div class="crm-stat-label">${t}</div><div class="crm-stat-value">${typeCounts[t]}</div></div>`).join('')}
+    `;
+});
+
+document.getElementById('addContactBtn').addEventListener('click', () => openCRMEditor(null));
+document.getElementById('crm-editor-back').addEventListener('click', closeCRMEditor);
+
+// Type filter pills
+document.getElementById('crm-type-filters').addEventListener('click', (e) => {
+    const btn = e.target.closest('.crm-pill');
+    if (!btn) return;
+    document.querySelectorAll('.crm-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    crmTypeFilter = btn.dataset.type;
+    renderCRM();
+});
+
+// Status filter pills
+document.getElementById('crm-status-filters').addEventListener('click', (e) => {
+    const btn = e.target.closest('.crm-spill');
+    if (!btn) return;
+    document.querySelectorAll('.crm-spill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    crmStatusFilter = btn.dataset.status;
+    renderCRM();
+});
+
+// Search
+document.getElementById('crm-search').addEventListener('input', (e) => {
+    crmSearchQuery = e.target.value;
+    renderCRM();
+});
+
 // Initialize
 initDarkMode();
-loadData();
+initApp();
+
+async function initApp() {
+    let role = 'admin';
+    try {
+        const r = await fetch('/api/me');
+        if (r.ok) role = (await r.json()).role || 'admin';
+    } catch (e) {}
+    if (role !== 'viewer') {
+        loadData();
+        return;
+    }
+    // Viewer: lock UI to the CRM tab and skip /api/data (which is forbidden)
+    document.querySelectorAll('.tab').forEach(t => {
+        if (t.dataset.tab !== 'crm') t.style.display = 'none';
+        t.classList.remove('active');
+    });
+    const crmTab = document.querySelector('.tab[data-tab="crm"]');
+    if (crmTab) crmTab.classList.add('active');
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    const crmContent = document.getElementById('tab-crm');
+    if (crmContent) crmContent.classList.remove('hidden');
+    const headerSub = document.querySelector('header p');
+    if (headerSub) headerSub.textContent = 'LP & advisor contacts';
+    loadCRM();
+}

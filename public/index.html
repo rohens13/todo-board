@@ -29,6 +29,8 @@
             <button class="tab" data-tab="hubspot">HubSpot</button>
             <button class="tab" data-tab="dd">DD</button>
             <button class="tab" data-tab="podcasts">Podcasts</button>
+            <button class="tab" data-tab="acq">Acquisitions</button>
+            <button class="tab" data-tab="crm">CRM</button>
         </div>
 
         <!-- Board Tab -->
@@ -148,6 +150,11 @@
             </div>
             <div id="dd-loading" class="dd-loading hidden">Loading…</div>
             <div id="dd-cards" class="dd-cards"></div>
+        </div>
+
+        <!-- Acquisitions Tab -->
+        <div id="tab-acq" class="tab-content hidden">
+            <div id="acq-tab"></div>
         </div>
 
         <!-- Podcasts Tab -->
@@ -508,6 +515,130 @@
         <div id="hs-deals-panel-body" class="hs-deals-panel-body"></div>
     </div>
 
+    <!-- CRM Tab -->
+    <div id="tab-crm" class="tab-content hidden">
+        <div class="crm-header">
+            <h2>CRM</h2>
+            <button id="addContactBtn" class="dd-add-btn">+ Add Contact</button>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="crm-stats" id="crm-stats"></div>
+
+        <!-- Filter bar -->
+        <div class="crm-filters">
+            <input type="text" id="crm-search" class="dd-input crm-search" placeholder="Search contacts…">
+            <div class="crm-filter-pills" id="crm-type-filters">
+                <button class="crm-pill active" data-type="">All</button>
+                <button class="crm-pill" data-type="Existing LP">Existing LP</button>
+                <button class="crm-pill" data-type="Potential LP">Potential LP</button>
+                <button class="crm-pill" data-type="Advisor">Advisor</button>
+                <button class="crm-pill" data-type="Other">Other</button>
+            </div>
+            <div class="crm-filter-pills" id="crm-status-filters">
+                <button class="crm-spill active" data-status="">All status</button>
+                <button class="crm-spill" data-status="Prospect">Prospect</button>
+                <button class="crm-spill" data-status="Active">Active</button>
+                <button class="crm-spill" data-status="On Hold">On Hold</button>
+                <button class="crm-spill" data-status="Archived">Archived</button>
+            </div>
+        </div>
+
+        <div id="crm-list" class="crm-list"></div>
+    </div>
+
+    <!-- CRM Contact Editor Panel -->
+    <div id="crm-editor-panel" class="hs-deals-panel">
+        <div class="hs-deals-panel-header">
+            <button id="crm-editor-back" class="hs-deals-back-btn">← Back</button>
+            <div class="hs-deals-panel-title-wrap">
+                <h2 id="crm-editor-title">Add Contact</h2>
+            </div>
+        </div>
+        <div class="hs-deals-panel-body">
+            <form id="crm-editor-form" class="dd-editor-form">
+                <input type="hidden" id="crm-edit-id">
+
+                <div class="crm-form-row">
+                    <div class="dd-form-section">
+                        <label class="dd-label">Name <span class="dd-required">*</span></label>
+                        <input type="text" id="crm-edit-name" class="dd-input" placeholder="Jane Smith" required>
+                    </div>
+                    <div class="dd-form-section">
+                        <label class="dd-label">Company</label>
+                        <input type="text" id="crm-edit-company" class="dd-input" placeholder="Acme Corp">
+                    </div>
+                </div>
+
+                <div class="crm-form-row">
+                    <div class="dd-form-section">
+                        <label class="dd-label">Role / Title</label>
+                        <input type="text" id="crm-edit-role" class="dd-input" placeholder="Managing Director">
+                    </div>
+                    <div class="dd-form-section">
+                        <label class="dd-label">Type</label>
+                        <select id="crm-edit-type" class="dd-input crm-select">
+                            <option value="Existing LP">Existing LP</option>
+                            <option value="Potential LP">Potential LP</option>
+                            <option value="Advisor">Advisor</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="crm-form-row">
+                    <div class="dd-form-section">
+                        <label class="dd-label">Email</label>
+                        <input type="email" id="crm-edit-email" class="dd-input" placeholder="jane@acme.com">
+                    </div>
+                    <div class="dd-form-section">
+                        <label class="dd-label">Phone</label>
+                        <input type="text" id="crm-edit-phone" class="dd-input" placeholder="+61 400 000 000">
+                    </div>
+                </div>
+
+                <div class="crm-form-row">
+                    <div class="dd-form-section">
+                        <label class="dd-label">Status</label>
+                        <select id="crm-edit-status" class="dd-input crm-select">
+                            <option value="Prospect">Prospect</option>
+                            <option value="Active">Active</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Archived">Archived</option>
+                        </select>
+                    </div>
+                    <div class="dd-form-section">
+                        <label class="dd-label">Last Contact</label>
+                        <input type="date" id="crm-edit-last-contact" class="dd-input">
+                    </div>
+                </div>
+
+                <div class="crm-form-row">
+                    <div class="dd-form-section">
+                        <label class="dd-label">Owner</label>
+                        <select id="crm-edit-owner" class="dd-input crm-select">
+                            <option value="Rohen">Rohen</option>
+                            <option value="Joel">Joel</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div></div>
+                </div>
+
+                <div class="dd-form-section">
+                    <label class="dd-label">Notes</label>
+                    <textarea id="crm-edit-notes" class="dd-input dd-textarea" rows="5" placeholder="Context, next steps, background…"></textarea>
+                </div>
+
+                <div class="dd-form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeCRMEditor()">Cancel</button>
+                    <button type="submit" class="btn-save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="app.js"></script>
+    <script src="acq.js"></script>
 </body>
 </html>

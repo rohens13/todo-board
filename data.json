@@ -1,0 +1,2472 @@
+{
+  "columns": [
+    {
+      "id": "todo",
+      "title": "To Do",
+      "color": "#8b5cf6"
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress",
+      "color": "#f59e0b"
+    },
+    {
+      "id": "done",
+      "title": "Done",
+      "color": "#10b981"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1772429351385",
+      "title": "Detect Damage",
+      "notes": "Meeting scheduled",
+      "column": "inprogress",
+      "color": "#6366f1",
+      "createdAt": "2026-03-02T05:29:11.385Z"
+    },
+    {
+      "id": "1772436094873",
+      "title": "Reach out to Tom",
+      "notes": "",
+      "column": "done",
+      "color": "#6366f1",
+      "createdAt": "2026-03-02T07:21:34.874Z"
+    },
+    {
+      "id": "1772502446190",
+      "title": "Deck 2 - Review Carry Trust",
+      "notes": "",
+      "column": "todo",
+      "color": "#f97316",
+      "createdAt": "2026-03-03T01:47:26.191Z"
+    },
+    {
+      "id": "1773401357893",
+      "title": "Show blake",
+      "notes": "",
+      "column": "inprogress",
+      "color": "#6366f1",
+      "createdAt": "2026-03-13T11:29:17.893Z"
+    }
+  ],
+  "companies": [
+    {
+      "id": "1773286503325",
+      "name": "FireWatch Safety Results Group Pty Ltd",
+      "website": "",
+      "description": "Firewatch Safety Results Group Pty Ltd is an Australian fire safety and occupational health & safety services company operating across multiple branches including Melbourne, Mildura, Shepparton, Bendigo, and Wodonga. The company provides fire safety services, height safety systems, hire, sales, training, and consulting divisions. Its business model is primarily service-based with recurring inspection and compliance work supplemented by product sales and training programs.",
+      "years": [
+        "FY2023",
+        "FY2024",
+        "FY2025"
+      ],
+      "revenue": [
+        11933091.92,
+        14665566.91,
+        17130779.32
+      ],
+      "ebitda": [
+        2044414.29,
+        2245963.69,
+        2814466.14
+      ],
+      "grossProfit": [
+        5345218.68,
+        6425573.25,
+        7759782.51
+      ],
+      "sga": [
+        3443289.38,
+        4280971.79,
+        5007665.17
+      ],
+      "documentSummary": "The company has demonstrated strong revenue growth from $7.51M in FY2021 to $17.13M in FY2025, representing a compound annual growth rate of approximately 23%. Gross profit improved from $2.91M to $7.76M over the same period, with the FY2025 EBITDA reaching $2.81M. The balance sheet shows total assets of $7.42M as at 30 June 2025 with retained earnings of $3.99M. The company has been expanding geographically, adding a Wodonga branch in FY2025, and has significant non-current assets in property, plant, equipment, and goodwill from acquisitions. Dividends of $774,500 were paid in FY2025 and $440,400 in FY2024, reflecting strong cash generation.",
+      "investmentThesis": "Firewatch Safety Results Group has delivered consistent double-digit revenue growth across five years, driven by regulatory tailwinds in workplace and fire safety compliance, geographic expansion, and a diversified multi-division service model. The service division dominates revenue (over 90%) providing recurring compliance-based income, and branch-level profitability across all four operating branches in FY2025 suggests a scalable hub-and-spoke model. With EBITDA margins improving and retained earnings of nearly $4M, the business has demonstrated an ability to self-fund growth while returning capital to shareholders.",
+      "keyRisks": "- High customer concentration risk unknown: the document does not disclose individual customer revenue, making it impossible to assess reliance on key accounts\n- Labour cost pressure: wages and superannuation represent the largest cost category and have grown rapidly, with total COS wages rising from $2.33M in FY2021 to $4.67M in FY2025\n- Admin cost opacity: related-party admin costs (Consulting 4 Design Pty Ltd and MillArch Pty Ltd) total $747,754 in FY2025 and represent potential conflicts of interest requiring scrutiny\n- Geographic concentration: the majority of revenue is generated in Victoria, leaving the business exposed to state-specific regulatory or economic changes\n- Acquisition goodwill: $713,916 of goodwill from prior acquisitions (Safety Results, Firewatch Shepparton, Link Fire & Safety) is carried at cost with no impairment disclosed\n- Advances to shareholders: $935,566 in shareholder loan advances outstanding creates related-party risk and potential liquidity concerns if recalled",
+      "sourceFile": "Customer Sales Data.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx, Firewatch Safety Results Group Pty Ltd - P & L and Balance Sheet for 5 years.xlsx",
+      "netIncome": [
+        1345937.62,
+        1253100.7,
+        1643206.77
+      ],
+      "createdAt": "2026-03-12T03:35:03.325Z",
+      "customerMetrics": {
+        "nrr": 90.8,
+        "grr": 85.8,
+        "logoChurnRate": 17.5,
+        "revenueChurnRate": 14.2,
+        "top1CustomerPct": 4.1,
+        "top3CustomerPct": 10.45,
+        "top5CustomerPct": 15.28,
+        "top10CustomerPct": 22.76,
+        "customerCount": 2909,
+        "arpu": 6140,
+        "ltvCacRatio": null,
+        "cacPaybackMonths": null,
+        "ruleOf40": 33,
+        "expansionRevenuePct": null,
+        "cohortInsights": "No individual customer-level revenue data is available in this document. The company operates across service, height safety, hire, sales, and training divisions with branch-level reporting only. Revenue has grown consistently year-over-year across all divisions, with the Service Division being the dominant contributor (90%+ of total revenue). The Training Division shows healthy organic growth from $538,808 in FY2021 to $1,215,854 in FY2025. Without customer-level data, NRR, GRR, churn rates, and concentration metrics cannot be calculated.",
+        "valueChurnByYear": [
+          {
+            "period": "FY2022",
+            "churned": 1386022,
+            "rate": 16.7
+          },
+          {
+            "period": "FY2023",
+            "churned": 915372,
+            "rate": 9.9
+          },
+          {
+            "period": "FY2024",
+            "churned": 1252883,
+            "rate": 10.1
+          },
+          {
+            "period": "FY2025",
+            "churned": 2200855,
+            "rate": 14.2
+          }
+        ],
+        "logoChurnByYear": [
+          {
+            "period": "FY2022",
+            "rate": 17.6
+          },
+          {
+            "period": "FY2023",
+            "rate": 15.4
+          },
+          {
+            "period": "FY2024",
+            "rate": 14.9
+          },
+          {
+            "period": "FY2025",
+            "rate": 17.5
+          }
+        ],
+        "cohortNRR": [
+          {
+            "period": "FY2022",
+            "nrr": 89.2,
+            "grr": 83.3
+          },
+          {
+            "period": "FY2023",
+            "nrr": 101.9,
+            "grr": 90.1
+          },
+          {
+            "period": "FY2024",
+            "nrr": 104.5,
+            "grr": 89.9
+          },
+          {
+            "period": "FY2025",
+            "nrr": 90.8,
+            "grr": 85.8
+          }
+        ],
+        "customerCohortRows": [
+          {
+            "id": "Customer 1429",
+            "joined": "2021",
+            "rev2025": 732410,
+            "initialRev": 4549,
+            "pcts": {
+              "2021": 100,
+              "2022": 83,
+              "2023": 248,
+              "2024": 4237,
+              "2025": 16101
+            }
+          },
+          {
+            "id": "Customer 3532",
+            "joined": "2021",
+            "rev2025": 585511,
+            "initialRev": 261897,
+            "pcts": {
+              "2021": 100,
+              "2022": 68,
+              "2023": 173,
+              "2024": 231,
+              "2025": 224
+            }
+          },
+          {
+            "id": "Customer 764",
+            "joined": "2025",
+            "rev2025": 548483,
+            "initialRev": 548483,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 1053",
+            "joined": "2021",
+            "rev2025": 510839,
+            "initialRev": 17468,
+            "pcts": {
+              "2021": 100,
+              "2022": 25,
+              "2023": 129,
+              "2024": 584,
+              "2025": 2925
+            }
+          },
+          {
+            "id": "Customer 4208",
+            "joined": "2022",
+            "rev2025": 351450,
+            "initialRev": 106105,
+            "pcts": {
+              "2022": 100,
+              "2023": 34,
+              "2025": 331
+            }
+          },
+          {
+            "id": "Customer 2546",
+            "joined": "2021",
+            "rev2025": 326916,
+            "initialRev": 113547,
+            "pcts": {
+              "2021": 100,
+              "2022": 141,
+              "2023": 189,
+              "2024": 273,
+              "2025": 288
+            }
+          },
+          {
+            "id": "Customer 1930",
+            "joined": "2022",
+            "rev2025": 276103,
+            "initialRev": 25833,
+            "pcts": {
+              "2022": 100,
+              "2023": 575,
+              "2024": 668,
+              "2025": 1069
+            }
+          },
+          {
+            "id": "Customer 1336",
+            "joined": "2024",
+            "rev2025": 271647,
+            "initialRev": 17950,
+            "pcts": {
+              "2024": 100,
+              "2025": 1513
+            }
+          },
+          {
+            "id": "Customer 1402",
+            "joined": "2025",
+            "rev2025": 250000,
+            "initialRev": 250000,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 2511",
+            "joined": "2023",
+            "rev2025": 211928,
+            "initialRev": 21761,
+            "pcts": {
+              "2023": 100,
+              "2024": 559,
+              "2025": 974
+            }
+          },
+          {
+            "id": "Customer 1703",
+            "joined": "2021",
+            "rev2025": 184741,
+            "initialRev": 61773,
+            "pcts": {
+              "2021": 100,
+              "2022": 143,
+              "2023": 169,
+              "2024": 300,
+              "2025": 299
+            }
+          },
+          {
+            "id": "Customer 329",
+            "joined": "2022",
+            "rev2025": 182061,
+            "initialRev": 1750,
+            "pcts": {
+              "2022": 100,
+              "2024": 5589,
+              "2025": 10403
+            }
+          },
+          {
+            "id": "Customer 1067",
+            "joined": "2021",
+            "rev2025": 161591,
+            "initialRev": 280,
+            "pcts": {
+              "2021": 100,
+              "2022": 62534,
+              "2023": 15395,
+              "2024": 59739,
+              "2025": 57711
+            }
+          },
+          {
+            "id": "Customer 2699",
+            "joined": "2025",
+            "rev2025": 158158,
+            "initialRev": 158158,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 1195",
+            "joined": "2021",
+            "rev2025": 157953,
+            "initialRev": 64371,
+            "pcts": {
+              "2021": 100,
+              "2022": 104,
+              "2023": 224,
+              "2024": 325,
+              "2025": 245
+            }
+          },
+          {
+            "id": "Customer 3686",
+            "joined": "2021",
+            "rev2025": 155054,
+            "initialRev": 17128,
+            "pcts": {
+              "2021": 100,
+              "2022": 526,
+              "2023": 468,
+              "2024": 590,
+              "2025": 905
+            }
+          },
+          {
+            "id": "Customer 3353",
+            "joined": "2024",
+            "rev2025": 153779,
+            "initialRev": 63451,
+            "pcts": {
+              "2024": 100,
+              "2025": 242
+            }
+          },
+          {
+            "id": "Customer 2861",
+            "joined": "2023",
+            "rev2025": 143504,
+            "initialRev": 62050,
+            "pcts": {
+              "2023": 100,
+              "2024": 68,
+              "2025": 231
+            }
+          },
+          {
+            "id": "Customer 1329",
+            "joined": "2024",
+            "rev2025": 142728,
+            "initialRev": 53431,
+            "pcts": {
+              "2024": 100,
+              "2025": 267
+            }
+          },
+          {
+            "id": "Customer 1948",
+            "joined": "2025",
+            "rev2025": 133609,
+            "initialRev": 133609,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 1494",
+            "joined": "2021",
+            "rev2025": 123034,
+            "initialRev": 32262,
+            "pcts": {
+              "2021": 100,
+              "2022": 198,
+              "2023": 228,
+              "2024": 445,
+              "2025": 381
+            }
+          },
+          {
+            "id": "Customer 4329",
+            "joined": "2021",
+            "rev2025": 120820,
+            "initialRev": 1000,
+            "pcts": {
+              "2021": 100,
+              "2022": 1799,
+              "2023": 16123,
+              "2024": 12615,
+              "2025": 12082
+            }
+          },
+          {
+            "id": "Customer 3465",
+            "joined": "2021",
+            "rev2025": 120578,
+            "initialRev": 251899,
+            "pcts": {
+              "2021": 100,
+              "2022": 78,
+              "2023": 70,
+              "2024": 74,
+              "2025": 48
+            }
+          },
+          {
+            "id": "Customer 4063",
+            "joined": "2023",
+            "rev2025": 106161,
+            "initialRev": 21408,
+            "pcts": {
+              "2023": 100,
+              "2024": 211,
+              "2025": 496
+            }
+          },
+          {
+            "id": "Customer 2320",
+            "joined": "2025",
+            "rev2025": 100000,
+            "initialRev": 100000,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 1470",
+            "joined": "2021",
+            "rev2025": 99849,
+            "initialRev": 31830,
+            "pcts": {
+              "2021": 100,
+              "2022": 287,
+              "2023": 249,
+              "2024": 252,
+              "2025": 314
+            }
+          },
+          {
+            "id": "Customer 4077",
+            "joined": "2021",
+            "rev2025": 93801,
+            "initialRev": 100031,
+            "pcts": {
+              "2021": 100,
+              "2022": 39,
+              "2023": 97,
+              "2024": 442,
+              "2025": 94
+            }
+          },
+          {
+            "id": "Customer 3658",
+            "joined": "2021",
+            "rev2025": 93616,
+            "initialRev": 80242,
+            "pcts": {
+              "2021": 100,
+              "2022": 49,
+              "2023": 197,
+              "2024": 92,
+              "2025": 117
+            }
+          },
+          {
+            "id": "Customer 2341",
+            "joined": "2021",
+            "rev2025": 91447,
+            "initialRev": 42686,
+            "pcts": {
+              "2021": 100,
+              "2022": 69,
+              "2023": 162,
+              "2024": 169,
+              "2025": 214
+            }
+          },
+          {
+            "id": "Customer 2628",
+            "joined": "2021",
+            "rev2025": 88830,
+            "initialRev": 31266,
+            "pcts": {
+              "2021": 100,
+              "2022": 93,
+              "2023": 121,
+              "2024": 148,
+              "2025": 284
+            }
+          },
+          {
+            "id": "Customer 328",
+            "joined": "2021",
+            "rev2025": 83320,
+            "initialRev": 2100,
+            "pcts": {
+              "2021": 100,
+              "2022": 1128,
+              "2023": 983,
+              "2024": 15119,
+              "2025": 3968
+            }
+          },
+          {
+            "id": "Customer 1722",
+            "joined": "2021",
+            "rev2025": 82500,
+            "initialRev": 2372,
+            "pcts": {
+              "2021": 100,
+              "2022": 180,
+              "2023": 56,
+              "2025": 3478
+            }
+          },
+          {
+            "id": "Customer 4493",
+            "joined": "2021",
+            "rev2025": 82073,
+            "initialRev": 4985,
+            "pcts": {
+              "2021": 100,
+              "2022": 1362,
+              "2023": 1816,
+              "2024": 1961,
+              "2025": 1646
+            }
+          },
+          {
+            "id": "Customer 3151",
+            "joined": "2022",
+            "rev2025": 81883,
+            "initialRev": 5880,
+            "pcts": {
+              "2022": 100,
+              "2023": 933,
+              "2024": 1060,
+              "2025": 1393
+            }
+          },
+          {
+            "id": "Customer 3479",
+            "joined": "2021",
+            "rev2025": 81806,
+            "initialRev": 35527,
+            "pcts": {
+              "2021": 100,
+              "2022": 103,
+              "2023": 159,
+              "2024": 163,
+              "2025": 230
+            }
+          },
+          {
+            "id": "Customer 4082",
+            "joined": "2025",
+            "rev2025": 77820,
+            "initialRev": 77820,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 1238",
+            "joined": "2021",
+            "rev2025": 71939,
+            "initialRev": 286980,
+            "pcts": {
+              "2021": 100,
+              "2022": 7,
+              "2023": 7,
+              "2024": 44,
+              "2025": 25
+            }
+          },
+          {
+            "id": "Customer 1460",
+            "joined": "2024",
+            "rev2025": 71450,
+            "initialRev": 31220,
+            "pcts": {
+              "2024": 100,
+              "2025": 229
+            }
+          },
+          {
+            "id": "Customer 2532",
+            "joined": "2021",
+            "rev2025": 71400,
+            "initialRev": 83937,
+            "pcts": {
+              "2021": 100,
+              "2022": 104,
+              "2023": 76,
+              "2024": 120,
+              "2025": 85
+            }
+          },
+          {
+            "id": "Customer 1644",
+            "joined": "2023",
+            "rev2025": 71219,
+            "initialRev": 375,
+            "pcts": {
+              "2023": 100,
+              "2024": 18894,
+              "2025": 18992
+            }
+          },
+          {
+            "id": "Customer 3416",
+            "joined": "2021",
+            "rev2025": 70686,
+            "initialRev": 5837,
+            "pcts": {
+              "2021": 100,
+              "2022": 474,
+              "2023": 341,
+              "2024": 633,
+              "2025": 1211
+            }
+          },
+          {
+            "id": "Customer 3095",
+            "joined": "2025",
+            "rev2025": 70500,
+            "initialRev": 70500,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 1720",
+            "joined": "2025",
+            "rev2025": 69917,
+            "initialRev": 69917,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 4050",
+            "joined": "2022",
+            "rev2025": 68969,
+            "initialRev": 35829,
+            "pcts": {
+              "2022": 100,
+              "2023": 165,
+              "2024": 189,
+              "2025": 192
+            }
+          },
+          {
+            "id": "Customer 2462",
+            "joined": "2023",
+            "rev2025": 68808,
+            "initialRev": 40782,
+            "pcts": {
+              "2023": 100,
+              "2024": 146,
+              "2025": 169
+            }
+          },
+          {
+            "id": "Customer 3898",
+            "joined": "2021",
+            "rev2025": 67812,
+            "initialRev": 1866,
+            "pcts": {
+              "2021": 100,
+              "2022": 201,
+              "2023": 322,
+              "2024": 1528,
+              "2025": 3634
+            }
+          },
+          {
+            "id": "Customer 2101",
+            "joined": "2021",
+            "rev2025": 67027,
+            "initialRev": 63787,
+            "pcts": {
+              "2021": 100,
+              "2022": 103,
+              "2023": 163,
+              "2024": 119,
+              "2025": 105
+            }
+          },
+          {
+            "id": "Customer 1938",
+            "joined": "2025",
+            "rev2025": 66300,
+            "initialRev": 66300,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 4266",
+            "joined": "2021",
+            "rev2025": 65994,
+            "initialRev": 210582,
+            "pcts": {
+              "2021": 100,
+              "2022": 34,
+              "2023": 34,
+              "2024": 23,
+              "2025": 31
+            }
+          },
+          {
+            "id": "Customer 97",
+            "joined": "2021",
+            "rev2025": 62866,
+            "initialRev": 1017,
+            "pcts": {
+              "2021": 100,
+              "2022": 219,
+              "2023": 334,
+              "2024": 390,
+              "2025": 6181
+            }
+          },
+          {
+            "id": "Customer 4371",
+            "joined": "2021",
+            "rev2025": 62840,
+            "initialRev": 56199,
+            "pcts": {
+              "2021": 100,
+              "2022": 19,
+              "2023": 16,
+              "2024": 25,
+              "2025": 112
+            }
+          },
+          {
+            "id": "Customer 3972",
+            "joined": "2021",
+            "rev2025": 59568,
+            "initialRev": 109744,
+            "pcts": {
+              "2021": 100,
+              "2022": 104,
+              "2023": 105,
+              "2024": 78,
+              "2025": 54
+            }
+          },
+          {
+            "id": "Customer 1667",
+            "joined": "2021",
+            "rev2025": 59534,
+            "initialRev": 4825,
+            "pcts": {
+              "2021": 100,
+              "2022": 125,
+              "2023": 189,
+              "2024": 272,
+              "2025": 1234
+            }
+          },
+          {
+            "id": "Customer 3243",
+            "joined": "2025",
+            "rev2025": 59178,
+            "initialRev": 59178,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 4246",
+            "joined": "2021",
+            "rev2025": 56824,
+            "initialRev": 2646,
+            "pcts": {
+              "2021": 100,
+              "2022": 501,
+              "2023": 567,
+              "2024": 1096,
+              "2025": 2147
+            }
+          },
+          {
+            "id": "Customer 1688",
+            "joined": "2021",
+            "rev2025": 54680,
+            "initialRev": 38192,
+            "pcts": {
+              "2021": 100,
+              "2022": 76,
+              "2023": 130,
+              "2024": 228,
+              "2025": 143
+            }
+          },
+          {
+            "id": "Customer 3902",
+            "joined": "2021",
+            "rev2025": 54147,
+            "initialRev": 23967,
+            "pcts": {
+              "2021": 100,
+              "2022": 291,
+              "2023": 347,
+              "2024": 156,
+              "2025": 226
+            }
+          },
+          {
+            "id": "Customer 3476",
+            "joined": "2021",
+            "rev2025": 53319,
+            "initialRev": 7524,
+            "pcts": {
+              "2021": 100,
+              "2022": 114,
+              "2023": 77,
+              "2024": 147,
+              "2025": 709
+            }
+          },
+          {
+            "id": "Customer 3228",
+            "joined": "2024",
+            "rev2025": 52461,
+            "initialRev": 16104,
+            "pcts": {
+              "2024": 100,
+              "2025": 326
+            }
+          },
+          {
+            "id": "Customer 341",
+            "joined": "2021",
+            "rev2025": 52051,
+            "initialRev": 37488,
+            "pcts": {
+              "2021": 100,
+              "2022": 109,
+              "2023": 200,
+              "2024": 143,
+              "2025": 139
+            }
+          },
+          {
+            "id": "Customer 2816",
+            "joined": "2021",
+            "rev2025": 51907,
+            "initialRev": 44545,
+            "pcts": {
+              "2021": 100,
+              "2022": 146,
+              "2023": 146,
+              "2024": 95,
+              "2025": 117
+            }
+          },
+          {
+            "id": "Customer 743",
+            "joined": "2021",
+            "rev2025": 51761,
+            "initialRev": 17806,
+            "pcts": {
+              "2021": 100,
+              "2022": 118,
+              "2023": 160,
+              "2024": 307,
+              "2025": 291
+            }
+          },
+          {
+            "id": "Customer 1355",
+            "joined": "2021",
+            "rev2025": 50905,
+            "initialRev": 4291,
+            "pcts": {
+              "2021": 100,
+              "2022": 215,
+              "2023": 184,
+              "2024": 273,
+              "2025": 1186
+            }
+          },
+          {
+            "id": "Customer 822",
+            "joined": "2023",
+            "rev2025": 49618,
+            "initialRev": 15264,
+            "pcts": {
+              "2023": 100,
+              "2024": 411,
+              "2025": 325
+            }
+          },
+          {
+            "id": "Customer 713",
+            "joined": "2021",
+            "rev2025": 49559,
+            "initialRev": 39230,
+            "pcts": {
+              "2021": 100,
+              "2022": 51,
+              "2023": 134,
+              "2024": 166,
+              "2025": 126
+            }
+          },
+          {
+            "id": "Customer 1753",
+            "joined": "2021",
+            "rev2025": 49466,
+            "initialRev": 19631,
+            "pcts": {
+              "2021": 100,
+              "2022": 62,
+              "2023": 162,
+              "2024": 638,
+              "2025": 252
+            }
+          },
+          {
+            "id": "Customer 1349",
+            "joined": "2024",
+            "rev2025": 49154,
+            "initialRev": 46979,
+            "pcts": {
+              "2024": 100,
+              "2025": 105
+            }
+          },
+          {
+            "id": "Customer 3131",
+            "joined": "2025",
+            "rev2025": 48333,
+            "initialRev": 48333,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 3877",
+            "joined": "2025",
+            "rev2025": 47600,
+            "initialRev": 47600,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 2352",
+            "joined": "2021",
+            "rev2025": 46322,
+            "initialRev": 812,
+            "pcts": {
+              "2021": 100,
+              "2022": 176,
+              "2023": 1481,
+              "2024": 4431,
+              "2025": 5705
+            }
+          },
+          {
+            "id": "Customer 2943",
+            "joined": "2021",
+            "rev2025": 45626,
+            "initialRev": 15405,
+            "pcts": {
+              "2021": 100,
+              "2022": 178,
+              "2023": 197,
+              "2024": 259,
+              "2025": 296
+            }
+          },
+          {
+            "id": "Customer 1943",
+            "joined": "2021",
+            "rev2025": 45600,
+            "initialRev": 118142,
+            "pcts": {
+              "2021": 100,
+              "2022": 25,
+              "2023": 4,
+              "2024": 80,
+              "2025": 39
+            }
+          },
+          {
+            "id": "Customer 1755",
+            "joined": "2021",
+            "rev2025": 45402,
+            "initialRev": 4379,
+            "pcts": {
+              "2021": 100,
+              "2022": 310,
+              "2023": 106,
+              "2024": 26,
+              "2025": 1037
+            }
+          },
+          {
+            "id": "Customer 2107",
+            "joined": "2025",
+            "rev2025": 44110,
+            "initialRev": 44110,
+            "pcts": {
+              "2025": 100
+            }
+          },
+          {
+            "id": "Customer 2815",
+            "joined": "2021",
+            "rev2025": 43854,
+            "initialRev": 10729,
+            "pcts": {
+              "2021": 100,
+              "2022": 188,
+              "2023": 248,
+              "2024": 161,
+              "2025": 409
+            }
+          }
+        ],
+        "cohortTableData": [
+          {
+            "cohort": "FY2021",
+            "customers": 2717,
+            "initialRev": 8320008,
+            "years": [
+              {
+                "year": "FY2021",
+                "pct": 100
+              },
+              {
+                "year": "FY2022",
+                "pct": 89
+              },
+              {
+                "year": "FY2023",
+                "pct": 98
+              },
+              {
+                "year": "FY2024",
+                "pct": 119
+              },
+              {
+                "year": "FY2025",
+                "pct": 115
+              }
+            ]
+          },
+          {
+            "cohort": "FY2022",
+            "customers": 469,
+            "initialRev": 1868575,
+            "years": [
+              {
+                "year": "FY2022",
+                "pct": 100
+              },
+              {
+                "year": "FY2023",
+                "pct": 76
+              },
+              {
+                "year": "FY2024",
+                "pct": 71
+              },
+              {
+                "year": "FY2025",
+                "pct": 93
+              }
+            ]
+          },
+          {
+            "cohort": "FY2023",
+            "customers": 448,
+            "initialRev": 2778821,
+            "years": [
+              {
+                "year": "FY2023",
+                "pct": 100
+              },
+              {
+                "year": "FY2024",
+                "pct": 72
+              },
+              {
+                "year": "FY2025",
+                "pct": 62
+              }
+            ]
+          },
+          {
+            "cohort": "FY2024",
+            "customers": 415,
+            "initialRev": 2295955,
+            "years": [
+              {
+                "year": "FY2024",
+                "pct": 100
+              },
+              {
+                "year": "FY2025",
+                "pct": 77
+              }
+            ]
+          },
+          {
+            "cohort": "FY2025",
+            "customers": 464,
+            "initialRev": 3060666,
+            "years": [
+              {
+                "year": "FY2025",
+                "pct": 100
+              }
+            ]
+          }
+        ]
+      },
+      "balanceSheet": {
+        "cash": [
+          815631.67,
+          622153.61,
+          1413570.71
+        ],
+        "accountsReceivable": [
+          1477614.41,
+          1993891.57,
+          1836586.32
+        ],
+        "inventory": [
+          131250.2,
+          118500,
+          45000
+        ],
+        "totalCurrentAssets": [
+          2545325.73,
+          2748817.4,
+          3320281.54
+        ],
+        "totalAssets": [
+          5487638.31,
+          6225316.13,
+          7422974.89
+        ],
+        "accountsPayable": [
+          529613.62,
+          764943.08,
+          738349.62
+        ],
+        "shortTermDebt": [
+          null,
+          null,
+          null
+        ],
+        "totalCurrentLiabilities": [
+          1151888.9,
+          1787459.34,
+          1772638.68
+        ],
+        "longTermDebt": [
+          1014548.53,
+          0,
+          24166.67
+        ],
+        "totalLiabilities": [
+          null,
+          null,
+          null
+        ],
+        "totalEquity": [
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    {
+      "id": "1773363869494",
+      "name": "Draffin",
+      "website": "",
+      "description": "E. P. Draffin Manufacturing Pty Ltd is an Australian manufacturing company engaged in metal fabrication and processing, including laser cutting, polishing, and related manufacturing services. The company sells manufactured goods alongside buy-in products and generates additional revenue from freight charges and scrap metal sales. It operates from a leased facility and employs both direct manufacturing and administrative staff.",
+      "years": [
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "revenue": [
+        9894438.49,
+        11626197.24,
+        11560877.7
+      ],
+      "ebitda": [
+        null,
+        null,
+        null
+      ],
+      "grossProfit": [
+        5970450.35,
+        6985671.8,
+        7107516.45
+      ],
+      "sga": [
+        null,
+        null,
+        null
+      ],
+      "balanceSheet": {
+        "cash": [
+          1329422.82,
+          1731567.09,
+          1828119.39
+        ],
+        "accountsReceivable": [
+          303965.89,
+          643414.21,
+          316456.84
+        ],
+        "inventory": [
+          1116464,
+          1207869,
+          1158542
+        ],
+        "totalCurrentAssets": [
+          null,
+          null,
+          null
+        ],
+        "totalAssets": [
+          null,
+          null,
+          null
+        ],
+        "accountsPayable": [
+          526781.53,
+          608707.06,
+          463855.8
+        ],
+        "shortTermDebt": [
+          null,
+          null,
+          null
+        ],
+        "totalCurrentLiabilities": [
+          null,
+          null,
+          null
+        ],
+        "longTermDebt": [
+          null,
+          null,
+          null
+        ],
+        "totalLiabilities": [
+          null,
+          null,
+          null
+        ],
+        "totalEquity": [
+          null,
+          null,
+          null
+        ]
+      },
+      "createdAt": "2026-03-13T01:04:29.494Z",
+      "netIncome": [
+        -279998.57,
+        403086.21,
+        906942.94
+      ],
+      "documentSummary": "The document is a detailed sales breakdown by customer, showing all sales ex-GST and ex-freight across approximately 15+ years of trading history. The top customer PCCPER/COUNC accounts for approximately $3.69M in total sales, followed by BCCCAM/COUNC at $3.21M and MCCMEL/COUNC at $1.75M. The customer base is highly diversified across councils, contractors, schools, and other segments, with hundreds of unique customers. Revenue appears to span from 2010 to 2026 (including projections), with significant variation by customer and year.",
+      "investmentThesis": "The business has a long-established and diversified customer base spanning government councils, contractors, schools, and private entities, providing revenue stability. The multi-decade trading history with repeat customers across council and contractor segments suggests strong relationships and recurring demand. Exposure to government and education sectors provides relatively predictable procurement cycles.",
+      "keyRisks": "- High customer concentration risk: the top 3 customers (PCCPER, BCCCAM, MCCMEL) represent a disproportionate share of total revenue\n- Revenue volatility is evident across many customers, with significant year-on-year swings suggesting lumpy or project-based sales rather than recurring subscription revenue\n- Many customers appear to be inactive in recent years, suggesting potential churn or loss of accounts\n- Limited financial transparency: no P&L, balance sheet, or margin data is available — only top-line sales figures\n- Dependence on government/council procurement cycles which may be subject to budget cuts or tender losses\n- No information on pricing power, margins, or cost structure to assess true profitability",
+      "sourceFile": "Consolidated_Financial_Statements_draffin.xlsx, sales anon (1).xlsx",
+      "customerMetrics": {
+        "nrr": null,
+        "grr": null,
+        "logoChurnRate": null,
+        "revenueChurnRate": null,
+        "top1CustomerPct": 5.42,
+        "top3CustomerPct": 12.74,
+        "top5CustomerPct": 18.3,
+        "top10CustomerPct": 27.85,
+        "customerCount": 487,
+        "arpu": null,
+        "ltvCacRatio": null,
+        "cacPaybackMonths": null,
+        "ruleOf40": null,
+        "expansionRevenuePct": null,
+        "cohortInsights": "The data shows a large and diversified customer base of approximately 487 unique customers across councils, contractors, schools, and other segments. The top customer (PCCPER) represents roughly 5.4% of total identified sales (~$68M total across all customers). Many customers show highly irregular purchase patterns with gaps of multiple years, indicating project-based or tender-driven purchasing rather than recurring revenue. A number of long-standing council customers (BCCCAM, MCCMEL, MCCMON) show multi-year activity dating back to 2010-2011, suggesting strong retention in the government segment. However, several customers show activity only in one or two years, indicating significant one-off or transactional business. The OSVNEW customer shows a very large spike in 2023 ($1.16M of its $1.21M total), suggesting a major one-off contract. Concentration risk is moderate with the top 10 customers accounting for approximately 28% of total revenue.",
+        "valueChurnByYear": null,
+        "logoChurnByYear": null,
+        "cohortNRR": null,
+        "customerCohortRows": null,
+        "cohortTableData": null
+      }
+    }
+  ],
+  "podcasts": [
+    {
+      "id": "1773141569485",
+      "episodes": [
+        {
+          "id": "1773141569678",
+          "title": "The Silver Trade & Breakdown of Globalism",
+          "date": "2026-01-14",
+          "guests": "Alex Campbell",
+          "url": "https://blockworks.co/podcast/forwardguidance",
+          "summary": "Alex Campbell lays out a structural bull thesis for silver driven by supply-demand imbalances, the AI CapEx electricity demand surge, and the broader breakdown of the globalised supply chain era. He argues the metals trade is not a tactical position but a generational structural shift.",
+          "insights": "- Silver has a structural supply deficit: mining supply is declining while industrial demand (solar, EVs, AI data centres) is accelerating\n- AI data centres require massive electricity infrastructure — silver is a key component in photovoltaic cells and electrical connections\n- The breakdown of globalism means supply chains that relied on cheap Chinese manufacturing are structurally repricing\n- Silver has lagged gold significantly — historical gold:silver ratio suggests silver has significant catch-up potential\n- CapEx mismatch in AI: the electricity grid is not being built fast enough to support AI compute growth — energy infrastructure is the bottleneck",
+          "opportunities": "- Long silver (physical, ETFs, or silver miners) — structural supply-demand thesis\n- Long energy infrastructure / utilities exposed to data centre power demand\n- Long gold miners as leveraged play on gold price (lagged the metal significantly)\n- Commodities broadly as deglobalisation reprices supply chains",
+          "createdAt": "2026-03-10T11:19:29.678Z",
+          "investmentIdeas": [
+            {
+              "asset": "Silver",
+              "tickers": "SLV, SIVR, PAAS, AG",
+              "direction": "Long",
+              "timestamp": "08:15",
+              "thesis": "Sixth consecutive annual supply deficit forecast for 2026 (67M oz). Gold:silver ratio at ~74:1 vs. 60-65 historical average — catch-up implies $103-129/oz at current gold prices. Industrial demand from solar PV, EVs, and AI data centre electrical infrastructure provides structural floor while mining supply is in secular decline.",
+              "podConviction": 5,
+              "myConviction": 3,
+              "myAnalysis": "The macro case is sound but silver hit an ATH of $121 in Jan 2026 before crashing 44% to $67 within days — illustrating razor-thin liquidity and speculative excess. Now recovering to $84-88. Supply deficit and GSR catch-up thesis remain intact, but the easy money from $30 is gone. YoY still +169%. Size for volatility; this is a multi-year hold, not a momentum trade."
+            },
+            {
+              "asset": "Energy Infrastructure",
+              "tickers": "VST, CEG, NEE",
+              "direction": "Long",
+              "timestamp": "31:40",
+              "thesis": "AI data centres are the fastest-growing electricity consumer in history. Morgan Stanley projects 74 GW of US data centre demand by 2028, with a 49 GW projected shortfall. Utilities signing 10-20 year PPAs with hyperscalers are being re-rated from bond proxies to tech enablers — VST, CEG, NEE all making record highs.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "Highest-conviction structural long in this list. The 49 GW shortfall by 2028 cannot be solved quickly — permitting and grid construction take years. Constellation's $16.4B Calpine acquisition (60 GW combined) and Vistra's $4.7B Cogentrix deal confirm institutional validation. Primary risk: these stocks have already re-rated to 30x+ PE vs. historical 15x. Buy dips; the earnings growth justification is genuine and multi-year."
+            },
+            {
+              "asset": "Gold Miners",
+              "tickers": "GDX, GDXJ, WPM, RGLD",
+              "direction": "Long",
+              "timestamp": "42:10",
+              "thesis": "Gold miners have significantly lagged the gold price rally (gold at $5,170 ATH). Miner FCF expands dramatically at $4,500+ gold due to operating leverage — hedges rolled off, costs fixed, incremental ounces near pure profit. Royalty cos (WPM, RGLD) offer leverage without operational risk.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "Miner underperformance vs. spot gold has been a decade-long frustration. Miners carry operational, political, and cost overrun risk on top of gold price exposure. Prefer royalty companies (WPM, RGLD) over pure miners for gold leverage — same upside without the equity dilution risk. Size as a smaller complement to direct gold (IAU/GLD) rather than the primary position."
+            }
+          ]
+        },
+        {
+          "id": "1773141569672",
+          "title": "The Three-Bubble Thesis for 2026",
+          "date": "2026-02-11",
+          "guests": "Vincent Deluard (StoneX, Director of Global Macro)",
+          "url": "https://blockworks.co/podcast/forwardguidance",
+          "summary": "Vincent Deluard argues that 2026 will be defined by the collision of three simultaneous bubbles. He warns of a second inflation wave driven by fiscal stimulus, discusses what a Kevin Warsh Fed chairmanship means for policy, and identifies where the next forced deleveraging event is most likely to originate.",
+          "insights": "- Three bubbles thesis: AI/tech valuations, private credit, and government debt all simultaneously stretched\n- Fiscal stimulus is re-igniting inflation — the 2024-2025 disinflation window may be closing\n- Kevin Warsh as Fed Chair = hawkish lean, balance sheet restraint, higher-for-longer posture\n- Market is pricing in too-smooth a policy transition; inflation surprise risk is underpriced\n- Passive investing creates fragility — when all correlations converge, the unwinding is violent\n- Global macro dispersion is at historic highs: different countries/sectors in very different regimes",
+          "opportunities": "- Short long-duration bonds (Treasuries and credit spreads too tight given inflation re-acceleration risk)\n- Long gold and commodities as second inflation wave hedge\n- Underweight U.S. mega-cap tech relative to international / value\n- Long volatility — event risk around Fed Chair transition and inflation data is underpriced",
+          "createdAt": "2026-03-10T11:19:29.672Z",
+          "investmentIdeas": [
+            {
+              "asset": "Long-Duration Treasuries",
+              "tickers": "TBT, TMV, PFIX (short TLT)",
+              "direction": "Short",
+              "timestamp": "14:25",
+              "thesis": "Three simultaneous bubbles (AI/tech, private credit, government debt) + fiscal stimulus re-igniting inflation. US deficit at 7%+ of GDP, $601B borrowed in first 3 months of FY2026. Tariffs adding ~1% to inflation through mid-2026 (Goldman Sachs). A Kevin Warsh Fed = hawkish, balance sheet restraint, removing the long-bond price floor.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "The thesis is directionally correct but this is a crowded 'widow-maker' trade that has frustrated bears for years. 10-year yield stuck in 3.75%-4.50% range with no clean breakout. Recession risk (which would spike bonds) is rising due to tariff drag. Best expressed via TBT or a curve steepener (short 30yr, long 2yr) rather than outright TLT short. Will add conviction on yield breakout above 4.50%."
+            },
+            {
+              "asset": "US Mega-Cap Tech / Mag 7",
+              "tickers": "QQQ (underweight), SQQQ (tactical)",
+              "direction": "Short",
+              "timestamp": "26:55",
+              "thesis": "Passive investing flows created extreme concentration in Mag7. AI agents causing 'seat compression' in enterprise software, disrupting per-seat SaaS revenue models. Five of Mag7 underperformed S&P 500 in 2025. MSCI Software Index -21% YTD Feb 2026. Kevin Warsh as likely next Fed chair removes the rate-cut tailwind that inflated growth multiples.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "The rotation is well underway — easy money already made on the early short. Mag7 still generates extraordinary FCF and has global pricing power. This is better expressed as a pairs trade (short QQQ/IGV vs. long XLE/XME/COPX) rather than an outright short. The MSCI Software Index at -21% YTD suggests significant de-rating has already occurred at the sector level."
+            },
+            {
+              "asset": "Gold (Second Inflation Wave)",
+              "tickers": "GLD, IAU, SGOL",
+              "direction": "Long",
+              "timestamp": "35:10",
+              "thesis": "Second inflation wave + three bubble collision = debasement accelerates. Goldman Sachs year-end target $5,400. Central banks buying 60 tonnes/month with 95% expecting to grow reserves — this is price-inelastic buying. Fed independence under political threat means real rates stay suppressed even as inflation re-accelerates.",
+              "podConviction": 5,
+              "myConviction": 4,
+              "myAnalysis": "This is the clearest and most multi-pillar thesis in the current environment. Fiscal dominance is structural, not personality-driven. The main caution: gold is already at sell-side year-end targets in Q1 — much thesis has been expressed in price. Core long warranted; avoid chasing breakouts. Already at $5,170 ATH with Goldman target of $5,400 — upside is ~4.5% to target from here."
+            },
+            {
+              "asset": "Volatility (Tail Hedge)",
+              "tickers": "UVXY, VIX calls, SPY puts",
+              "direction": "Watch",
+              "timestamp": "44:30",
+              "thesis": "Three bubble collision thesis implies low-probability, high-severity unwind event. Three potential catalysts: Fed Chair transition with Warsh hawkish surprise, inflation print above 4%, or private credit dislocation. Passive investing has compressed volatility but created structural fragility — when correlations converge, unwinding is violent.",
+              "podConviction": 3,
+              "myConviction": 2,
+              "myAnalysis": "Vol is expensive to hold and bleeds out constantly via theta decay. The tail risk is real but impossible to time. Better expressed as periodic VIX calls or put spreads on QQQ timed around key risk events (inflation prints, FOMC meetings, credit events) rather than continuous long vol positioning. UVXY is a drag to hold as a core position."
+            }
+          ]
+        },
+        {
+          "id": "1773141569664",
+          "title": "We're Entering The Final Phase Of Fiscal Dominance",
+          "date": "2026-03-05",
+          "guests": "David Beckworth (Mercatus Center, host of Macro Musings)",
+          "url": "https://blockworks.co/podcast/forwardguidance",
+          "summary": "David Beckworth, one of the foremost monetary economists on fiscal-monetary interaction, argues that the US is entering Stage 3 of fiscal dominance — where the Fed has no practical choice but to accommodate Treasury borrowing needs, sacrificing price stability to keep the government solvent. This is structural, not personality-driven.",
+          "insights": "- Fiscal dominance = when growing interest payments and political gridlock on deficits leave the Fed with no choice but to accommodate Treasury needs\n- This is structural, not personality-driven — the fiscal constraints predate and will outlast any single administration\n- Stage 3 fiscal dominance means the Fed actively suppresses yields or monetizes debt to keep government solvent, sacrificing price stability\n- Stablecoin issuers are emerging as significant buyers of short-term Treasuries — this is a new and underappreciated structural dynamic\n- The GENIUS Act normalises stablecoin regulation, potentially creating a new $500B+ structural T-bill buyer",
+          "opportunities": "- Gold and hard assets as long-term hedge against fiscal dominance / debt monetisation scenario\n- Short long-duration Treasuries (yields structurally higher if Fed loses credibility)\n- Bitcoin as a potential beneficiary of the debasement trade\n- Watch stablecoin regulation — stablecoin issuers as structural T-bill buyers could be a significant policy lever\n- TIPS / inflation-linked bonds if Stage 3 fiscal dominance materialises",
+          "createdAt": "2026-03-10T11:19:29.664Z",
+          "investmentIdeas": [
+            {
+              "asset": "Gold (Fiscal Dominance)",
+              "tickers": "GLD, IAU, GDX",
+              "direction": "Long",
+              "timestamp": "12:30",
+              "thesis": "Stage 3 fiscal dominance — Fed actively suppresses yields or monetizes debt — is the single most bullish macro environment for gold in monetary history. Beckworth's framework: this is structural, not political. US deficit >7% GDP, debt at $38T+. Central banks buying 60t/month. Goldman $5,400 year-end target. 95% of CBs expecting to grow gold reserves.",
+              "podConviction": 5,
+              "myConviction": 4,
+              "myAnalysis": "David Beckworth is one of the most credible monetary economists on fiscal-monetary interaction — his Stage 3 framing adds theoretical rigour to what gold bulls have been arguing. The institutional data confirms: 95% of central banks growing reserves, 60t/month buying rate, China 15+ consecutive months of purchases. Already at year-end targets but structural tailwinds persist beyond 2026."
+            },
+            {
+              "asset": "Long-Duration Bonds",
+              "tickers": "TBT, PFIX, TMV (short TLT)",
+              "direction": "Short",
+              "timestamp": "24:15",
+              "thesis": "If Fed suppresses yields artificially to fund deficits while inflation re-accelerates, long-end bond holders face deeply negative real rates. US $601B borrowed in first 3 months of FY2026. Term premium re-rating underway. Structurally elevated supply of Treasuries with waning foreign demand (China and Japan reducing holdings).",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "Conviction upgraded vs. Deluard episode — Beckworth's fiscal dominance framework adds the Fed credibility mechanism, which is the key driver of the long-end re-rating over a 2-5 year horizon. Near-term execution risk remains (recession + flight to safety could temporarily spike bonds). Use options or leveraged ETFs to size asymmetrically; don't short TLT outright in a size that can't be held through drawdowns."
+            },
+            {
+              "asset": "Bitcoin (Debasement Hedge)",
+              "tickers": "BTC, IBIT, FBTC",
+              "direction": "Long",
+              "timestamp": "38:45",
+              "thesis": "Bitcoin is an alternative monetary system for Stage 3 fiscal dominance. US Strategic Bitcoin Reserve holds 328,372 BTC. ETF AUM at $103B with 24.5% institutional ownership. Grayscale forecasts ETFs to absorb 100%+ of new BTC supply in 2026. 20 millionth BTC mined March 2026 — only ~1M BTC left ever to mine.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "Institutional infrastructure is real and the debasement narrative is sound. However, BTC at $69K is meaningfully underperforming gold ($5,170 ATH) in 2026 — suggesting the debasement trade is currently flowing toward gold rather than crypto. BTC carries higher vol and risk-off correlation. Position as a smaller satellite allocation (5-10%) alongside a core gold position. Citigroup base case: $143K for 2026, implying ~2x from current levels."
+            },
+            {
+              "asset": "Stablecoin Ecosystem",
+              "tickers": "COIN, USDC/Circle (pre-IPO)",
+              "direction": "Watch",
+              "timestamp": "45:20",
+              "thesis": "Stablecoin issuers hold $200B+ in T-bills and growing rapidly. GENIUS Act (signed July 2025) created regulatory clarity. If stablecoin supply reaches $1T+, issuers become a structural T-bill buyer at scale — potentially a significant policy lever for Treasury funding and an investable theme via stablecoin operators.",
+              "podConviction": 3,
+              "myConviction": 2,
+              "myAnalysis": "Fascinating structural dynamic identified by Beckworth but the investable universe is limited. Coinbase (COIN) is the most direct public exposure. Circle IPO is anticipated but not yet public. The T-bill buyer thesis reduces Treasury funding risk marginally but doesn't yet translate into a high-conviction trade. Worth monitoring as Circle's IPO process progresses."
+            },
+            {
+              "asset": "TIPS / Inflation-Linked Bonds",
+              "tickers": "TIP, SCHP, VTIP",
+              "direction": "Watch",
+              "timestamp": "30:05",
+              "thesis": "If Stage 3 fiscal dominance materialises, inflation becomes structurally elevated while nominal yields are suppressed — exactly the environment where TIPS outperform nominal bonds. Real yields become deeply negative, TIPS outperform both nominal Treasuries and cash.",
+              "podConviction": 3,
+              "myConviction": 2,
+              "myAnalysis": "TIPS are the logical instrument for the fiscal dominance scenario but require a specific macro path: Fed suppresses nominal yields while inflation rises above target. Current path (Fed staying on hold, inflation at 3%) is not yet the Stage 3 scenario. Prefer gold over TIPS as the cleaner fiscal dominance hedge — gold has no counterparty risk and stronger historical performance in debasement cycles."
+            }
+          ]
+        },
+        {
+          "id": "1773141569656",
+          "title": "Weekly Roundup: AI Productivity, NVIDIA & Capital Rotation",
+          "date": "2026-03-09",
+          "guests": "Felix Jauvin, Tyler, Quinn",
+          "url": "https://blockworks.co/podcast/forwardguidance",
+          "summary": "The Forward Guidance team reviews the week in markets: NVIDIA earnings confirming the AI CapEx cycle, the accelerating software sector sell-off, the LNG risk/opportunity trade, and why Citrini Research's humanoid robotics thesis is gaining institutional traction. The overarching theme: capital is rotating from the digital layer to the physical layer of the AI economy.",
+          "insights": "- AI productivity is starting to show measurable disruption effects on software company earnings and multiples\n- NVIDIA earnings confirm the AI CapEx cycle is intact — hyperscalers are not pulling back\n- Capital rotation is underway: money moving from Mag7/software toward real assets, energy, and commodities\n- LNG identified as a structural energy security trade — US export capacity growing +15% in 2026, European demand remains elevated\n- Market dispersion is exploding — passive strategies increasingly disadvantaged vs. active/thematic\n- Policy volatility (tariffs, DOGE, Fed uncertainty) creating noise but underlying energy infrastructure buildout is proceeding regardless",
+          "opportunities": "- Long real assets / commodities vs. short software (rotation trade)\n- Energy sector benefiting from AI data centre power demand — structural tailwind\n- Robotics identified as the next great secular investment theme (per Citrini Research)\n- Volatility plays around NVIDIA and AI CapEx cycle inflection points\n- Reduce concentration in passive/market-cap-weighted index exposure",
+          "createdAt": "2026-03-10T11:19:29.656Z",
+          "investmentIdeas": [
+            {
+              "asset": "US LNG Exporters",
+              "tickers": "LNG (Cheniere), VG (Venture Global)",
+              "direction": "Long",
+              "timestamp": "33:04",
+              "thesis": "US LNG export capacity growing from 17 Bcf/d to 19+ Bcf/d in 2026 (+15% YoY). European energy security permanently altered post-Russia — structural demand for US LNG for decades. Cheniere Q4 2025: $6.9B EBITDA, 95%+ capacity contracted for 10 years, record 670 cargoes (46M+ tons) in 2025. Trump administration actively expanding LNG permitting. Henry Hub prices up ~20% YoY as AI data centre gas demand tightens domestic supply.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "Cheniere (LNG) is the highest-conviction vehicle — 95%+ contracted revenue makes it a 10-year cash compounder with predictable FCF. UBS raised target to $301, 14-analyst consensus Buy. AVOID New Fortress Energy (NFE): missed $163.8M interest payment, in creditor forbearance, $510M 2026 bond maturity — this is a restructuring story, not a LNG thesis play. VG (Venture Global) is higher-beta execution risk with below-consensus EBITDA guidance. Key long-term risk: Qatar North Field expansion doubles their capacity by 2030, creating global supply glut."
+            },
+            {
+              "asset": "Real Assets vs. Software (Pair Trade)",
+              "tickers": "XLE, XME, COPX (long) vs. IGV (short)",
+              "direction": "Long",
+              "timestamp": "18:22",
+              "thesis": "AI agents causing 'seat compression' in enterprise software — a single AI agent replaces dozens of SaaS seats, compressing per-seat licensing revenue. MSCI Software Index -21% YTD Feb 2026. Meanwhile ExxonMobil/Chevron +25% YTD, Caterpillar +28% YTD with record $39.9B backlog, Freeport-McMoRan surging on copper multi-year highs. Capital is rotating from the digital layer to the physical layer of the AI economy.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "The trade is well-underway — the MSCI Software Index -21% YTD means the easy money has been made. Better to be selective within real assets (power infrastructure and copper look most durable) than just buying the broad rotation. The AI physical infrastructure buildout (data centres, grid, copper wiring) is the enduring thesis; pair XLE/COPX long vs. IGV short is the cleanest expression. Don't enter the Mag7 short aggressively here — too much FCF and too much prior decline already."
+            },
+            {
+              "asset": "Humanoid Robotics",
+              "tickers": "BOTZ, HUMN, KOID, TER",
+              "direction": "Long",
+              "timestamp": "48:15",
+              "thesis": "Citrini Research identifies humanoid robotics as the next secular investment theme. AI has solved the 'brain' problem (large language models as robot controllers). Tesla Optimus Gen 3 in production Jan 2026 for internal use; Boston Dynamics Atlas entering commercial deployment at Hyundai's Georgia facility. Citi forecasts $7T market by 2050. Component suppliers (actuators, sensors) at cyclical trough valuations in depressed auto/industrial sectors.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "The secular case is one of the most compelling long-term narratives available. However, 2026 global humanoid shipments are in the tens of thousands — still tiny relative to the TAM. Boston Dynamics beat Tesla to commercial deployment, but China controls ~90% of the current humanoid market. Deployment timelines consistently slip. Best expressed via BOTZ/HUMN ETFs for diversified exposure, or Teradyne (TER) which already reported 44% Q4 2025 revenue growth from Universal Robots and AI semiconductor testing demand."
+            },
+            {
+              "asset": "NVIDIA & AI CapEx Cycle",
+              "tickers": "NVDA, SMCI, ALAB",
+              "direction": "Watch",
+              "timestamp": "05:30",
+              "thesis": "NVIDIA Q4 2025 earnings confirmed hyperscalers are not pulling back on AI infrastructure spend — $39.3B revenue, data centre segment up 93% YoY. Blackwell architecture driving next upgrade cycle. However, DeepSeek efficiency claims and rising competition from AMD MI300X create uncertainty about whether NVDA's GPU dominance is durable at current 35x+ forward earnings.",
+              "podConviction": 3,
+              "myConviction": 2,
+              "myAnalysis": "NVDA has extraordinary earnings power but the market has already priced in 5+ years of AI infrastructure dominance. The real play on AI infrastructure is at the power and physical layer (CEG, VST, copper/COPX) rather than at the chip layer where competitive supply is increasing and efficiency improvements reduce hardware demand per workload. Watch as a bellwether; don't chase at current multiples."
+            }
+          ]
+        }
+      ],
+      "name": "Forward Guidance",
+      "publisher": "Blockworks",
+      "website": "https://blockworks.co/podcast/forwardguidance",
+      "description": "Macro-focused podcast hosted by Felix Jauvin covering monetary policy, global liquidity, fiscal dynamics, and markets. Weekly interviews and roundups with top macro investors.",
+      "createdAt": "2026-03-10T11:19:29.485Z"
+    },
+    {
+      "id": "1773285281611",
+      "episodes": [
+        {
+          "id": "1773285281630",
+          "title": "Middle East War Threatens Global Economic Shock | Joseph Stiglitz (Nobel Laureate Economist)",
+          "date": "2026-03-11",
+          "guests": "Joseph Stiglitz",
+          "url": "https://www.youtube.com/watch?v=4wob38gZ2yQ",
+          "summary": "Nobel Laureate economist Joseph Stiglitz joins Jack Farley to discuss the macroeconomic consequences of the U.S. war in Iran, warning of a potential 1970s-style stagflationary energy shock. They also revisit themes from Stiglitz's work on globalization and inequality, and discuss the probability of an AI bubble collapse and its downstream effects on the broader economy.",
+          "insights": "- The war in Iran poses a severe disruption risk to global energy supply, with Stiglitz warning of a stagflationary shock comparable to the 1973-74 oil embargo era\n- Regime change operations historically do not go smoothly, meaning prolonged instability in Iran could keep energy markets in a sustained risk premium environment\n- A 1970s-style energy shock would be particularly damaging now because the Fed has less room to maneuver given already-elevated inflation concerns and high debt levels\n- Stiglitz views the probability of an AI bubble as high, with a potential collapse having broad negative spillover effects on investment, employment, and growth\n- Globalization discontents have worsened; trade policy uncertainty (tariffs) compounds the supply-side inflation risk from an energy shock\n- AI's impact on employment could be deflationary for wages in knowledge-work sectors while simultaneously reducing consumer spending power, creating a complex policy dilemma\n- Agricultural commodities (soybeans) are highlighted as a potential beneficiary of geopolitical disruption to trade routes and energy-intensive farming inputs",
+          "investmentIdeas": [
+            {
+              "asset": "Crude Oil / Energy Futures",
+              "tickers": "USO, UCO, CL=F",
+              "direction": "Long",
+              "timestamp": "01:35",
+              "thesis": "A U.S.-Iran war threatens to severely disrupt Middle Eastern energy production and shipping lanes through the Strait of Hormuz, potentially triggering a supply shock analogous to the 1973 oil embargo and driving crude prices sharply higher.",
+              "podConviction": 5,
+              "myConviction": 4,
+              "myAnalysis": "Iran produces roughly 3-3.5 mb/d and controls the Strait of Hormuz through which ~20% of global oil trade passes. As of early 2026, Brent crude had already been elevated on geopolitical risk premiums. Historical precedent from the 1973 and 1979 shocks shows oil prices can double or triple in sustained conflict scenarios. Key risk is demand destruction from a simultaneous global slowdown, but supply-side constraints in a hot war scenario would likely dominate. UCO offers 2x levered exposure for shorter-term trades; USO is more appropriate for longer-duration hedges."
+            },
+            {
+              "asset": "Energy Sector Equities",
+              "tickers": "XLE, CVX, XOM, OXY",
+              "direction": "Long",
+              "timestamp": "07:00",
+              "thesis": "A sustained energy price spike benefits integrated oil majors and U.S. shale producers as their earnings are highly leveraged to realized oil and gas prices, while domestic production may partially offset import disruptions.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "XLE constituents like ExxonMobil and Chevron trade at roughly 12-14x forward earnings as of early 2026, relatively cheap vs. the S&P 500 at ~21x. Every $10/bbl increase in Brent adds approximately $2-3B in annual free cash flow to each major. OXY, with its high operating leverage to oil prices and Buffett backing, stands out for upside capture. Risk: if conflict triggers a global recession, demand destruction could cap oil price upside. Geopolitical insurance value remains high."
+            },
+            {
+              "asset": "Natural Gas / LNG Exporters",
+              "tickers": "LNG, UNG, TELL",
+              "direction": "Long",
+              "timestamp": "07:00",
+              "thesis": "Middle East conflict disrupting Persian Gulf gas flows would accelerate European and Asian demand for U.S. LNG exports, benefiting Cheniere Energy and other LNG infrastructure operators.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "Cheniere (LNG) has long-term contracted cash flows covering ~85% of capacity, providing a floor, while spot LNG prices spike in supply disruption scenarios. European TTF gas prices remain structurally elevated post-Russia war, and any Middle East disruption would compound this. LNG trades near ~$180-190/share with a ~1.8% yield and robust buyback program. TELL (Tellurian) is higher-risk/higher-reward for pure LNG infrastructure play. Key risk is U.S. regulatory interference with exports or a rapid de-escalation."
+            },
+            {
+              "asset": "Inflation-Protected Securities / TIPS",
+              "tickers": "TIP, SCHP, I-Bonds",
+              "direction": "Long",
+              "timestamp": "07:00",
+              "thesis": "A 1970s-style stagflationary energy shock would push realized CPI significantly higher, directly benefiting TIPS holders whose principal adjusts with inflation while nominal bonds suffer.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "The 5-year breakeven inflation rate was hovering around 2.5-2.7% in early 2026. If an energy shock pushes headline CPI to 5-7% (as seen in 1974-1980), TIPS would dramatically outperform nominal Treasuries. The 1970s analogy is apt: stagflation crushed real returns on nominal bonds for a decade. TIP ETF has ~$35B AUM and provides liquid exposure. Key risk is that if the Fed responds aggressively with rate hikes (as Volcker did), real yields could rise and TIPS prices still fall despite inflation compensation — duration risk remains."
+            },
+            {
+              "asset": "Soybean ETF",
+              "tickers": "SOYB",
+              "direction": "Long",
+              "timestamp": "00:47",
+              "thesis": "Geopolitical disruption to global trade routes, combined with energy-cost inflation driving up fertilizer and farming input costs, could push agricultural commodity prices higher, with soybeans benefiting from both supply disruption and biofuel demand.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "Soybeans are energy-intensive to produce (fertilizer is natural-gas-derived) and heavily traded through global shipping lanes. SOYB holds front and back-month soybean futures with ~$100M AUM. As of early 2026, CBOT soybean prices had been range-bound near $10-11/bushel — well below the 2022 highs of ~$17. A Middle East conflict raising energy input costs while disrupting South American export logistics could be a catalyst. Key risks: a U.S.-China trade war dampening Chinese soybean imports from the U.S. is a significant headwind for this trade."
+            },
+            {
+              "asset": "Defense / Aerospace Equities",
+              "tickers": "LMT, RTX, NOC, ITA",
+              "direction": "Long",
+              "timestamp": "18:00",
+              "thesis": "An active U.S. military engagement in Iran would dramatically accelerate defense procurement, replenishment of munitions stockpiles, and allied defense spending, directly benefiting major U.S. defense contractors.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "Lockheed Martin (LMT) trades at ~18x forward earnings with a ~2.8% dividend yield and a backlog exceeding $165B as of late 2025. Raytheon (RTX) is particularly levered to missile/munitions demand — a category that has seen explosive order growth since Russia-Ukraine. ITA ETF provides broad sector exposure. The risk here is war fatigue in Washington leading to budget constraints, but in an active Iran conflict, procurement acceleration would be near-certain. Historically, defense stocks have outperformed during active U.S. military engagements."
+            },
+            {
+              "asset": "AI / Technology Growth Stocks (Short/Underweight)",
+              "tickers": "QQQ, SMH, NVDA, ARKK",
+              "direction": "Short",
+              "timestamp": "1:07:00",
+              "thesis": "Stiglitz views the probability of an AI bubble as high; a collapse in AI-driven capital expenditure would mirror prior tech bubbles (2000 dot-com), causing sharp multiple compression in AI-levered equities and cascading negative wealth effects.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "NVDA traded at ~30-35x forward sales at its 2025 peak — valuations historically associated with bubble territory. The key debate is whether AI monetization (revenue from inference workloads) scales fast enough to justify hyperscaler capex of $250B+ annually. If ROI disappoints, a capex retrenchment would directly hit NVDA, SMCI, and cloud providers. QQQ at ~22x forward earnings is less extreme but still vulnerable to a derating if AI growth narratives deflate. The stagflation risk from Iran would compound this by raising discount rates, further pressuring high-duration growth assets. Not a near-term catalyst-driven short, but a structural risk to monitor."
+            },
+            {
+              "asset": "Gold",
+              "tickers": "GLD, GDX, GOLD",
+              "direction": "Long",
+              "timestamp": "07:00",
+              "thesis": "A combination of Middle East war risk, stagflationary energy shock, potential loss of confidence in fiscal policy, and AI bubble uncertainty creates a multi-factor tailwind for gold as a safe-haven and inflation hedge.",
+              "podConviction": 2,
+              "myConviction": 5,
+              "myAnalysis": "Gold crossed $3,000/oz in early 2026, driven by central bank buying (especially EM central banks), geopolitical hedging, and dollar diversification concerns. In 1970s stagflation, gold rose over 2,000% in nominal terms. Real yields remaining elevated is the primary headwind, but if the Fed is forced to tolerate inflation (as in the 1970s) rather than crush it with rate hikes, gold's real return case strengthens. GDX (miners) offers levered upside to gold prices with current P/NAV discounts at several senior miners. Key risk: rapid conflict de-escalation could trigger a sharp pullback from elevated levels."
+            }
+          ],
+          "createdAt": "2026-03-12T03:14:41.630Z"
+        },
+        {
+          "id": "1773285281626",
+          "title": "This Macro Cycle Is Flashing Warning Signs!",
+          "date": "2026-03-11",
+          "guests": "Michael Howell (Crossborder Capital)",
+          "url": "https://www.youtube.com/watch?v=M3iLSmzKDLk",
+          "summary": "Michael Howell of Crossborder Capital warns that his proprietary liquidity cycle analysis is flashing warning signs, suggesting global financial markets are sitting at a fragile 'knife-edge equilibrium' that may be starting to tip downward. He argues the macro cycle is potentially turning, which would make the next phase for risk assets significantly more challenging than the prior bull run. Howell outlines which assets are most vulnerable and which may offer relative safety in a liquidity downturn.",
+          "insights": "- Howell's liquidity cycle framework is signaling a potential cyclical peak, meaning the tailwind that drove risk assets higher since 2022-2023 lows may be fading or reversing\n- Global liquidity — not just central bank balance sheets but also private credit creation and cross-border capital flows — is the primary driver of asset prices over a 6-18 month horizon\n- A 'knife-edge equilibrium' describes a market state where small shocks can tip the system into a more pronounced downturn, increasing tail risk for leveraged positions\n- Bitcoin and gold have historically been among the most sensitive assets to global liquidity cycles, rising sharply in expansion phases and falling hard in contraction phases\n- U.S. equities, particularly high-multiple growth/tech names, are most vulnerable in a liquidity contraction scenario given elevated valuations and dependence on loose financial conditions\n- Emerging market assets and other high-beta risk assets face compounded risk if the dollar strengthens during a global liquidity squeeze\n- Defensive positioning — cash, short-duration assets, and gold as a liquidity hedge rather than pure safe haven — may outperform in the near term if Howell's cycle turn is confirmed\n- The Federal Reserve's balance sheet trajectory and Chinese PBoC liquidity injections are key variables to watch as leading indicators of whether the cycle deteriorates further",
+          "investmentIdeas": [
+            {
+              "asset": "U.S. Equities / S&P 500",
+              "tickers": "SPY, SPX",
+              "direction": "Short",
+              "timestamp": "",
+              "thesis": "Howell's liquidity cycle analysis suggests the macro tailwind that drove equities higher is turning, making high-multiple U.S. stocks vulnerable to a meaningful correction as financial conditions tighten at the margin.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "As of early 2026, the S&P 500 trades at approximately 21-22x forward earnings, well above the long-run average of ~16x, leaving little margin of safety if earnings disappoint or discount rates rise. The Fed has been in a cautious easing cycle but real rates remain elevated. A global liquidity contraction, if confirmed by declining M2 and cross-border capital flows, historically precedes equity drawdowns of 15-25%. Key risk to the short thesis: any surprise Fed pivot or Chinese stimulus could re-ignite the cycle."
+            },
+            {
+              "asset": "Bitcoin",
+              "tickers": "BTC",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "Bitcoin is one of the most liquidity-sensitive assets in Howell's framework — it performs exceptionally well during global liquidity expansions but is among the first and hardest hit when the cycle turns down.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "Bitcoin has historically had a 0.8+ correlation with global liquidity cycles on a 3-6 month lag. After its post-halving rally through 2025, BTC entered 2026 at elevated levels relative to on-chain cost basis metrics. If Howell's liquidity downturn is confirmed, historical drawdowns of 40-70% from cycle peaks are not uncommon. However, growing institutional adoption (ETF inflows) and the supply shock from the 2024 halving provide structural support. Investors should watch the Global Liquidity Index closely before adding or reducing exposure."
+            },
+            {
+              "asset": "Gold",
+              "tickers": "GLD, GC=F",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Howell distinguishes gold as a liquidity hedge that can hold up even in a risk-off environment, driven by central bank demand and its role as a store of value when fiat liquidity deteriorates.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "Gold has been in a strong structural uptrend, with central banks globally purchasing record quantities in 2023-2025 as de-dollarization trends accelerate. Real yields remain a headwind, but gold has shown remarkable resilience even with positive real rates, suggesting demand is structurally driven. At current prices (~$2,900-$3,100/oz range in early 2026), gold trades above its 200-day moving average and analyst consensus targets have been repeatedly revised higher. The asset offers genuine diversification in a portfolio where equities and crypto face liquidity headwinds."
+            },
+            {
+              "asset": "Emerging Market Equities",
+              "tickers": "EEM, VWO",
+              "direction": "Short",
+              "timestamp": "",
+              "thesis": "EM equities face a double compression risk in a global liquidity contraction — falling risk appetite hits valuations while potential USD strength squeezes local currency returns and tightens local financial conditions.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "The DXY dollar index is a critical variable: historically, EM assets underperform sharply when the dollar strengthens alongside a global liquidity squeeze. EEM has underperformed the S&P 500 for much of the past decade. China accounts for a large weight and faces ongoing property sector headwinds and deflationary pressure, though PBoC stimulus could partially offset this. Current EEM P/E around 12-13x looks cheap optically, but cheap can get cheaper in a risk-off cycle."
+            },
+            {
+              "asset": "U.S. Dollar / Cash",
+              "tickers": "UUP, DXY",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "In a global liquidity contraction, the dollar tends to strengthen as cross-border capital flows reverse and risk appetite deteriorates, making cash and dollar-denominated short-duration assets a defensive allocation.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "The dollar's role as the global reserve currency means it typically rallies in risk-off environments as global dollar funding demand spikes. U.S. T-bills currently yield approximately 4.3-4.5%, offering positive real returns for the first time in years. Holding cash optionality while the liquidity cycle resolves is a reasonable strategy. The main risk: a surprise fiscal expansion or Fed balance sheet growth could weaken the dollar even in a risk-off scenario."
+            },
+            {
+              "asset": "Long-Duration U.S. Treasuries",
+              "tickers": "TLT, TMF",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "Howell's framework suggests that in a genuine risk-off liquidity contraction, long bonds could rally as a safe haven, but the massive U.S. fiscal deficit and term premium repricing create significant uncertainty about whether the traditional flight-to-quality dynamic holds.",
+              "podConviction": 2,
+              "myConviction": 2,
+              "myAnalysis": "TLT has been a difficult trade since 2021, with the 10-year Treasury yield oscillating between 3.8% and 5%. The U.S. fiscal deficit running at ~6-7% of GDP in 2025-2026 creates persistent supply pressure, meaning bonds may not rally as cleanly as in prior recessions. Duration risk is elevated. A 'bearish steepener' scenario — where short rates fall but long rates stay elevated due to fiscal concerns — is a credible alternative to the classic flight-to-quality rally."
+            },
+            {
+              "asset": "High-Yield / Junk Bonds",
+              "tickers": "HYG, JNK",
+              "direction": "Short",
+              "timestamp": "",
+              "thesis": "Credit spreads in high-yield bonds are highly sensitive to liquidity cycles, and a turning point in the macro cycle would likely trigger spread widening, hurting HY bond prices particularly for the most levered issuers.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "U.S. high-yield spreads have been compressed near post-GFC tights, around 300-350 bps over Treasuries, implying the market is pricing in a relatively benign default environment. Historically, when Howell-style liquidity indicators peak and roll over, HY spreads widen by 150-300 bps over the following 6-12 months. Refinancing risk is elevated as a large wall of HY debt matures in 2026-2027. CCC-rated bonds are most vulnerable; BB-rated names have more cushion. HYG provides a liquid vehicle to express a spread-widening view."
+            },
+            {
+              "asset": "Nasdaq 100 / Big Tech",
+              "tickers": "QQQ, NDX",
+              "direction": "Short",
+              "timestamp": "",
+              "thesis": "High-multiple technology and growth stocks are the most leveraged to loose financial conditions, meaning a liquidity cycle contraction would disproportionately compress their valuations versus the broader market.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "The Nasdaq 100 trades at approximately 28-30x forward earnings versus the S&P 500 at ~21x, with the Magnificent 7 stocks representing over 30% of the index by weight. Duration risk in growth stocks means that even modest yield increases or liquidity tightening can drive outsized P/E multiple compression. In 2022, the QQQ fell ~35% as the Fed tightened. AI-driven earnings growth is a genuine offset, but the setup requires continued liquidity support to maintain premium multiples. Concentration risk in the index exacerbates downside scenarios."
+            }
+          ],
+          "createdAt": "2026-03-12T03:14:41.626Z"
+        },
+        {
+          "id": "1773285281623",
+          "title": "The Liquidity Cycle Is Turning Down (Here's How) | Michael Howell",
+          "date": "2026-03-10",
+          "guests": "Michael Howell",
+          "url": "https://www.youtube.com/watch?v=i0lm-mmBlQM",
+          "summary": "Michael Howell of CrossBorderCapital argues that the global liquidity cycle peaked in fall 2025 and is now turning down, signaling a shift toward defensive positioning. He identifies China as a key independent liquidity source driving gold higher, while warning that Bitcoin serves as the canary in the coal mine for liquidity deterioration. Despite overall caution, he sees selective opportunities in Chinese tech equities and precious metals even as the broader 'everything bubble' deflates.",
+          "insights": "- Global liquidity cycle peaked in fall 2025 and is now decelerating, historically a negative signal for risk assets over the subsequent 6-12 months\n- US economic strength is paradoxically bearish for Wall Street: a robust real economy absorbs liquidity that would otherwise flow into financial markets\n- China is printing money independently of Western central bank cycles to manage its debt burden, making Chinese assets a diversified source of return uncorrelated to US liquidity\n- Gold's recent surge is primarily China-driven rather than Western investor-led, suggesting the rally has structural rather than purely speculative foundations\n- Bitcoin has historically shown the highest beta to global liquidity momentum and is therefore the first asset to signal a liquidity downturn—its recent underperformance is a warning\n- The Fed's balance sheet trajectory in 2026 is constrained by debt ceiling dynamics and QT, limiting the liquidity boost that markets have come to expect\n- SOFR spreads and the Treasury basis trade are stress indicators worth monitoring as liquidity tightens—a blowup here could force Fed intervention\n- The debt maturity wall (heavy Treasury refinancing needs) is net bearish for private-sector liquidity as government absorbs available funding, crowding out risk assets",
+          "investmentIdeas": [
+            {
+              "asset": "Gold / Gold ETF",
+              "tickers": "GLD, IAU, GC=F",
+              "direction": "Long",
+              "timestamp": "1:02:50",
+              "thesis": "China is the dominant marginal buyer of gold, printing money to manage its domestic debt burden and deliberately decoupling from Western liquidity cycles. This structural bid from a sovereign actor with massive balance sheet capacity is not sentiment-driven and is unlikely to reverse quickly.",
+              "podConviction": 5,
+              "myConviction": 4,
+              "myAnalysis": "Gold crossed $2,900/oz in early 2026 and has outperformed nearly every major asset class on a risk-adjusted basis. Central bank purchases (led by China and emerging markets) hit a third consecutive record year above 1,000 tonnes in 2024, providing a durable demand floor. The primary risk is a sharp USD rally or a resolution of US fiscal concerns reducing safe-haven demand, but Howell's liquidity framework and dedollarization trends support continued accumulation. GLD's expense ratio of 0.40% is reasonable for liquid exposure; miners (GDX) offer leveraged upside if gold holds above $2,700."
+            },
+            {
+              "asset": "Chinese Technology Stocks",
+              "tickers": "KWEB, FXI, BABA, BIDU, 9988.HK",
+              "direction": "Long",
+              "timestamp": "56:03",
+              "thesis": "China is in an independent easing cycle, injecting liquidity domestically to combat deflationary pressures and a real estate debt overhang. This monetary stimulus, combined with beaten-down valuations after years of regulatory crackdowns, creates a compelling asymmetric opportunity in Chinese tech equities.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "KWEB trades at roughly 14-15x forward earnings as of early 2026, a steep discount to US tech peers at 25-30x, reflecting regulatory and geopolitical risk premia. Alibaba and Baidu have shown improving earnings momentum and resumed buybacks. Key risks include US-China trade escalation (additional tariffs under the current administration), potential ADR delisting threats, and China's deflationary trap limiting the effectiveness of monetary stimulus. Position sizing should account for binary geopolitical risk; Hong Kong-listed H-shares (9988.HK) reduce some ADR delisting risk."
+            },
+            {
+              "asset": "Bitcoin",
+              "tickers": "BTC-USD, IBIT, MSTR",
+              "direction": "Watch",
+              "timestamp": "1:18:40",
+              "thesis": "Bitcoin is the highest-beta asset to global liquidity momentum and historically leads risk-off moves by several weeks. Its recent underperformance relative to gold and equities is Howell's primary 'canary in the coal mine' signaling that the liquidity downturn is already underway.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "Bitcoin peaked near $108,000 in late 2024/early 2025 and has experienced notable drawdowns in early 2026, consistent with Howell's liquidity peak thesis. On-chain data shows long-term holder distribution and declining exchange inflows, typically bearish near-term signals. However, institutional adoption via spot ETFs (IBIT has accumulated $40B+ AUM) provides a structural demand layer absent in prior cycles. The risk/reward for new longs is poor if liquidity is indeed tightening; a better entry would emerge at confirmed liquidity cycle re-acceleration, likely monitored via CrossBorderCapital's GLI indicator."
+            },
+            {
+              "asset": "US Treasury Long-Duration Bonds",
+              "tickers": "TLT, IEF, ZROZ",
+              "direction": "Watch",
+              "timestamp": "33:04",
+              "thesis": "Howell argues for a flattening yield curve as short rates remain sticky while long rates could stabilize or decline if liquidity tightening slows growth. However, the debt maturity wall and heavy Treasury issuance create supply headwinds that complicate a clean long-duration trade.",
+              "podConviction": 3,
+              "myConviction": 2,
+              "myAnalysis": "The 10-year Treasury yield has oscillated between 4.2%-4.8% in 2025-2026, with the curve bear-steepening as term premium rebuilds. The US Treasury needs to refinance an estimated $9-10 trillion in debt over 2025-2026, creating persistent supply pressure on long-end yields. TLT has been a serial value trap; duration risk remains elevated with a modified duration near 17. Howell's flattening thesis has merit if growth disappoints, but the supply/demand technicals for long bonds remain unfavorable. A barbell of short T-bills (SGOV) plus a small long-duration allocation may be more prudent than outright TLT."
+            },
+            {
+              "asset": "Short-Term US Treasuries / T-Bills",
+              "tickers": "SGOV, BIL, SHV",
+              "direction": "Long",
+              "timestamp": "16:30",
+              "thesis": "As the liquidity cycle turns down and risk assets face headwinds, short-duration Treasuries offer a defensive store of value with meaningful nominal yield while avoiding duration risk from the heavy issuance calendar and flattening curve dynamics.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "3-month T-bills yield approximately 4.3-4.5% as of early 2026, offering positive real returns with minimal duration or credit risk. SGOV (0-3 month T-Bill ETF) has $25B+ AUM and negligible tracking error. In prior liquidity downturns (2022, Q4 2018), cash and short bills significantly outperformed equities and long bonds. This is a high-conviction defensive position while waiting for the liquidity cycle to bottom and re-accelerate before re-risking into equities and Bitcoin."
+            },
+            {
+              "asset": "Gold Mining Equities",
+              "tickers": "GDX, GDXJ, NEM, AEM",
+              "direction": "Long",
+              "timestamp": "1:02:50",
+              "thesis": "If gold's structural bid from China and global central banks persists, gold miners offer leveraged upside with operating margins expanding rapidly as gold prices exceed all-in sustaining costs (AISC) by historically wide margins.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "The GDX/GLD ratio remains historically depressed despite gold's rally, suggesting miners are undervalued relative to the commodity. Newmont (NEM) trades at approximately 15x 2026 estimated earnings with AISC around $1,500/oz versus spot gold near $2,900, implying ~$1,400/oz margins—near record levels. Key risks include cost inflation (energy, labor), geopolitical exposure of mine locations, and operational execution. GDXJ offers higher-beta junior miner exposure for more aggressive positioning within the gold thesis."
+            },
+            {
+              "asset": "US Equities (Broad Market)",
+              "tickers": "SPY, QQQ",
+              "direction": "Short",
+              "timestamp": "16:30",
+              "thesis": "With global liquidity peaking and turning down, and US economic strength paradoxically acting as a sponge that absorbs liquidity away from financial markets, the risk/reward for US equities broadly is unfavorable heading into mid-2026.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "The S&P 500 forward P/E of approximately 21-22x as of early 2026 remains elevated relative to historical averages near 16x, leaving limited margin of safety if earnings growth disappoints or liquidity contracts. The Shiller CAPE ratio above 33x historically precedes below-average 10-year real returns. Howell's framework suggests the 6-month lag between liquidity peaks and equity market tops is now operative. However, the structural AI capex cycle and buyback programs provide cushion; a tactical underweight rather than outright short is more appropriate given these countervailing forces."
+            },
+            {
+              "asset": "Fundrise Income Real Estate Fund (Private Credit/Real Estate)",
+              "tickers": "",
+              "direction": "Long",
+              "timestamp": "00:16",
+              "thesis": "As a sponsored product in the episode, Fundrise's Income Fund offers private real estate debt exposure with a targeted yield of approximately 8-9%, providing income generation that is less correlated to public market liquidity cycles than equities or crypto.",
+              "podConviction": 2,
+              "myConviction": 2,
+              "myAnalysis": "Private real estate credit has benefited from traditional banks retreating from CRE lending, creating an opportunity for non-bank lenders. However, commercial real estate fundamentals remain stressed in office (vacancy rates near 20%+ in major cities) and some retail segments. Liquidity risk is material—private funds like Fundrise restrict redemptions, which is a significant drawback if investors need capital during a liquidity crunch. Suitable only for long-term, illiquid capital as a yield enhancer within a diversified portfolio; not a core macro trade."
+            }
+          ],
+          "createdAt": "2026-03-12T03:14:41.623Z"
+        },
+        {
+          "id": "1773285281618",
+          "title": "Discussing A.I. Displacement with Nobel Laureate in Economics Peter Howitt",
+          "date": "2026-03-05",
+          "guests": "Peter Howitt",
+          "url": "https://www.youtube.com/watch?v=aKSmMLOj8SM",
+          "summary": "Nobel laureate economist Peter Howitt joins Jack Farley to discuss his foundational work on creative destruction and Schumpeterian growth theory, examining whether AI represents a fundamentally different technological disruption than past innovations. The conversation covers potential mass unemployment risks from AI, historical parallels to the Great Depression's technological transition, and the productivity and monopoly implications of AI capital expenditure. Howitt offers a measured, historically-grounded perspective on whether AI can drive outsized economic growth or primarily reshuffles existing economic activity.",
+          "insights": "- AI may not be economically unique compared to past general-purpose technologies (electricity, computing), but its speed of adoption and breadth of cognitive task displacement could amplify labor market disruption beyond historical norms\n- Creative destruction theory predicts that while aggregate GDP grows from technological change, the transition period creates genuine losers — displaced workers and obsolete firms — whose pain is real even if aggregate welfare improves\n- The Great Depression may have been partly caused by rapid technological displacement (mechanization of agriculture, electrification of industry) that outpaced workers' ability to retrain, a potential cautionary parallel for the AI era\n- Productivity gains from AI are theoretically large but empirically elusive so far — similar to the 'productivity paradox' observed with computing in the 1970s-1980s before gains materialized in the 1990s\n- AI capital expenditure by hyperscalers is historically large relative to GDP, but past infrastructure booms (railroads, internet) show that massive capex doesn't guarantee proportional returns for investors even if societal benefits accrue\n- Monopoly risk from AI is elevated because of network effects, data moats, and scale economics — winner-take-most dynamics could concentrate AI productivity gains in very few firms\n- Labor displacement from AI disproportionately threatens white-collar cognitive workers, reversing the historical pattern where automation primarily displaced blue-collar manufacturing labor\n- Policy response (retraining programs, social safety nets, potential AI taxation) will heavily influence the distributional outcomes of AI adoption and could create significant investment risks or opportunities in affected sectors",
+          "investmentIdeas": [
+            {
+              "asset": "AI Hyperscalers / Cloud Infrastructure (Microsoft, Google, Amazon, Meta)",
+              "tickers": "MSFT, GOOGL, AMZN, META",
+              "direction": "Watch",
+              "timestamp": "59:17",
+              "thesis": "Howitt and Farley discuss the historically unprecedented scale of AI capex by large technology firms; while infrastructure buildout could generate monopoly-like returns if AI productivity gains materialize, historical infrastructure booms (railroads, dotcom) warn that capex leaders don't always capture the value they create.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "The four hyperscalers collectively guided over $300 billion in combined 2025 capex, with MSFT, GOOGL, and META all raising 2026 guidance further. Price/FCF multiples remain elevated (MSFT ~35x, GOOGL ~24x) relative to historical norms, pricing in substantial AI monetization. The railroad analogy is apt — Vanderbilt-era rail builders often went bankrupt even as the economy boomed; the risk is that AI commoditizes quickly, compressing margins across the group. Entry is more attractive on pullbacks toward 20x FCF for GOOGL given its search moat and YouTube optionality."
+            },
+            {
+              "asset": "NVIDIA Corporation",
+              "tickers": "NVDA",
+              "direction": "Long",
+              "timestamp": "59:17",
+              "thesis": "As AI capex accelerates, NVIDIA remains the primary infrastructure picks-and-shovels beneficiary, analogous to selling shovels during a gold rush — Howitt's discussion of massive AI investment cycles supports the near-term demand case regardless of which AI application ultimately wins.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "NVDA trades around 25-28x forward earnings (as of early 2026) after significant multiple compression from 2024 highs, with data center revenue growing over 100% YoY in recent quarters. Blackwell GPU demand appears supply-constrained through at least mid-2026. The key risk is hyperscaler capex rationalization or custom silicon (Google TPU, Amazon Trainium, Microsoft Maia) eroding NVDA's dominance — monitoring custom chip progress is critical. Current valuation offers a better risk/reward entry than 2024 peak levels."
+            },
+            {
+              "asset": "AI-Displaced White-Collar Labor Sectors (Legal Services, Accounting, Financial Analysis)",
+              "tickers": "",
+              "direction": "Short",
+              "timestamp": "10:03",
+              "thesis": "Howitt explicitly discusses AI's unprecedented displacement of cognitive/white-collar work, suggesting firms in knowledge-work industries face structural revenue pressure as AI agents replace billable human hours in legal, accounting, and financial research workflows.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "Large law firms and Big Four accounting partnerships are private, but publicly traded legal/professional services firms like Conduent or Gartner face margin pressure as AI reduces headcount-driven revenue models. More directly, companies like Wolters Kluwer or Thomson Reuters (which sell legal/tax research tools) face a dual risk: disruption of their data products AND reduced customer base. Thomson Reuters trades at ~40x earnings, a premium that assumes successful AI integration rather than disruption — a high bar given aggressive AI-native legal tools from Harvey AI and others."
+            },
+            {
+              "asset": "Retraining / Workforce Development / EdTech",
+              "tickers": "COUR, UDMY",
+              "direction": "Watch",
+              "timestamp": "17:44",
+              "thesis": "If AI causes significant labor displacement as Howitt discusses, demand for retraining and upskilling programs could surge, particularly for online education platforms that can scale rapidly to meet worker transition needs.",
+              "podConviction": 2,
+              "myConviction": 2,
+              "myAnalysis": "Coursera (COUR) and Udemy (UDMY) are both trading near multi-year lows with significant revenue growth slowdowns — COUR reported single-digit revenue growth in recent quarters with ongoing losses. While the thematic case for retraining is compelling, monetization in EdTech remains difficult, employer-sponsored learning budgets are cyclical, and AI itself (via free tools like ChatGPT) competes with paid online courses. These are high-risk, speculative positions; only suitable for small, patient allocations with long time horizons."
+            },
+            {
+              "asset": "US Equities Broad Market (S&P 500)",
+              "tickers": "SPY, VOO",
+              "direction": "Neutral",
+              "timestamp": "34:17",
+              "thesis": "Howitt's discussion of the Great Depression as a partial consequence of technological disruption that outpaced economic adaptation serves as a cautionary macro signal — if AI displacement accelerates faster than productivity gains materialize in GDP data, aggregate equity market valuations could face a growth disappointment scenario.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "The S&P 500 trades at approximately 21-22x forward earnings as of early 2026, above the 15-17x historical median, implying above-trend earnings growth. If AI-driven productivity gains are slower to appear in macro data (the 'productivity paradox' Howitt references), while simultaneously causing unemployment to rise and consumer spending to weaken, the multiple could compress materially. Counterbalancing this, AI capex itself adds to GDP and corporate earnings in the near term. Net neutral positioning with attention to initial jobless claims and productivity data as key leading indicators."
+            },
+            {
+              "asset": "Semiconductor Equipment (Applied Materials, ASML, Lam Research)",
+              "tickers": "AMAT, ASML, LRCX",
+              "direction": "Long",
+              "timestamp": "59:17",
+              "thesis": "The sustained AI infrastructure capex cycle discussed in the episode requires continued leading-edge semiconductor fabrication capacity expansion, benefiting equipment makers who supply the tools regardless of which chip design ultimately wins the AI compute race.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "ASML's EUV monopoly for sub-3nm lithography makes it an irreplaceable infrastructure beneficiary — the company has a multi-year backlog with TSMC, Samsung, and Intel as primary customers. ASML trades around 28-32x forward earnings with ~15% revenue growth expected through 2027. AMAT and LRCX are cheaper at 18-22x forward earnings with strong free cash flow. Key risk is export controls limiting sales to China (already ~15% revenue headwind) and any softening in TSMC capex guidance. These names offer better risk/reward than the hyperscalers themselves given less competition and higher barriers to entry."
+            },
+            {
+              "asset": "Monopoly-Positioned AI Platform (Alphabet / Google)",
+              "tickers": "GOOGL",
+              "direction": "Long",
+              "timestamp": "01:04:40",
+              "thesis": "Howitt's discussion of AI and monopoly dynamics highlights that winner-take-most outcomes in platform AI could entrench existing incumbents with data advantages; Google's search data moat, YouTube, and Gemini integration across a billion-user ecosystem represents a defensible AI monopoly position.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "GOOGL trades at approximately 18-22x 2026 earnings, a discount to the Magnificent 7 peers, despite maintaining ~90% global search share and rapidly monetizing AI Overviews in search. Waymo is an underappreciated optionality asset with no current revenue credit in most DCF models. Key risk is AI-native search disruption from Perplexity or OpenAI's SearchGPT eroding query volume — early data shows modest but real search share shifts among 18-34 year olds. The valuation discount relative to MSFT and META appears excessive given Google's data advantages."
+            },
+            {
+              "asset": "Long-Duration US Treasuries",
+              "tickers": "TLT, ZROZ",
+              "direction": "Watch",
+              "timestamp": "17:44",
+              "thesis": "If AI causes mass unemployment as discussed in the episode, the deflationary demand shock from labor displacement could push the Fed toward rate cuts and boost long-duration bonds; conversely, AI-driven productivity growth is inherently disinflationary and also bond-friendly.",
+              "podConviction": 1,
+              "myConviction": 3,
+              "myAnalysis": "10-year Treasury yields hover around 4.3-4.6% in early 2026, pricing in sticky inflation and elevated neutral rates. Both scenarios Howitt describes (mass unemployment causing demand collapse OR productivity boom causing disinflation) are ultimately constructive for long-duration bonds. The primary risk to this thesis is fiscal expansion — AI capex-related corporate tax credits, workforce retraining programs, or defense spending could widen deficits and push yields higher despite disinflationary AI trends. TLT offers convexity as an asymmetric hedge against the downside unemployment scenario."
+            }
+          ],
+          "createdAt": "2026-03-12T03:14:41.618Z"
+        }
+      ],
+      "name": "The Monetary Matters Network",
+      "publisher": "",
+      "website": "https://www.youtube.com/watch?v=i0lm-mmBlQM",
+      "description": "",
+      "createdAt": "2026-03-12T03:14:41.611Z"
+    },
+    {
+      "id": "1777644239810",
+      "episodes": [
+        {
+          "id": "1777644239849",
+          "title": "Why the Nukes Analogy for AI Is Wrong",
+          "date": "2026-05-01",
+          "guests": "",
+          "url": "https://www.youtube.com/watch?v=yiaKkyx8g3s",
+          "summary": "This episode challenges the popular analogy comparing AI development to nuclear weapons proliferation, arguing the comparison is fundamentally flawed and leads to misguided policy and investment conclusions. The hosts explore the implications of AI as a broadly accessible, economically productive technology rather than a weapon of mass destruction. The discussion touches on geopolitical competition, AI investment cycles, and which sectors stand to benefit most from widespread AI adoption.",
+          "insights": "- The nuclear analogy for AI is misleading because nuclear weapons derive value from exclusivity and deterrence, while AI derives value from widespread deployment and network effects\n- AI proliferation may actually reduce geopolitical risk rather than increase it, as economic interdependence historically correlates with reduced conflict\n- The US-China AI competition framing may cause policymakers to over-restrict AI diffusion in ways that harm US competitiveness rather than protect it\n- Capital expenditure cycles in AI infrastructure (data centers, chips, power) appear durable and multi-year in nature, not a one-time buildout\n- AI productivity gains are likely to accrue unevenly, with knowledge-work-heavy industries seeing the earliest and largest margin improvements\n- Export controls on AI chips risk accelerating Chinese domestic semiconductor development, potentially undermining the strategic goal\n- The 'safety' framing around AI regulation may be capturing legitimate concerns but is also being used as competitive moat-building by incumbent players",
+          "investmentIdeas": [
+            {
+              "asset": "NVIDIA Corporation",
+              "tickers": "NVDA",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "NVIDIA remains the dominant supplier of AI training and inference compute; if AI proliferates broadly rather than being locked down like nuclear tech, the total addressable market for GPU accelerators expands dramatically beyond current projections.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "NVDA trades around 28-30x forward earnings as of mid-2025 after significant multiple compression from 2023 highs. Data center revenue grew ~400% YoY in fiscal 2024 and remains on a strong trajectory with Blackwell ramp. Key risk is export control escalation to China (roughly 15-20% of prior revenue) and potential AMD/custom ASIC competition. At current levels the risk/reward remains favorable for investors with 2-3 year horizons given the multi-year capex supercycle from hyperscalers."
+            },
+            {
+              "asset": "Broadcom Inc.",
+              "tickers": "AVGO",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Broadcom's custom AI ASIC business (XPUs for Google TPUs, Meta's MTIA) benefits directly from the thesis that AI compute will proliferate broadly, as hyperscalers seek to diversify away from NVIDIA dependence with purpose-built chips.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "AVGO's AI revenue surpassed $12B in fiscal 2024 and management guided to a $60-90B serviceable addressable market for custom AI accelerators by fiscal 2027. The stock trades at roughly 25-27x forward earnings, reasonable given double-digit revenue growth and ~60% EBITDA margins. The VMware integration adds software recurring revenue, reducing hardware cyclicality risk. Main risk is customer concentration (Google alone is a large portion of AI segment) and timeline slippage on next-gen XPU designs."
+            },
+            {
+              "asset": "Constellation Energy",
+              "tickers": "CEG",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "If AI compute proliferates broadly rather than being concentrated in a few government-controlled facilities (as the nuclear analogy would suggest), power demand from data centers will be sustained and geographically distributed, benefiting nuclear baseload providers like Constellation with long-term offtake agreements.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "CEG's deal with Microsoft for Three Mile Island restart (20-year PPA) is a template for similar AI-driven nuclear offtake agreements. The company's nuclear fleet produces roughly 10% of US clean energy. Forward P/E is approximately 30x, elevated but justifiable given the scarcity of 24/7 carbon-free baseload power. Key risk is regulatory/NRC license extensions and cost overruns on restart projects. IRA nuclear production tax credits (~$15/MWh) provide meaningful earnings floor support."
+            },
+            {
+              "asset": "Vistra Energy",
+              "tickers": "VST",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Broad AI proliferation creates persistent electricity demand growth; Vistra's diversified generation fleet (nuclear, natural gas) and retail operations position it to capture power price upside in key markets like ERCOT and PJM.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "VST was one of the best-performing S&P 500 stocks in 2024, up over 200%, driven by data center power demand narratives. Forward EV/EBITDA around 12-14x reflects significant re-rating from utility-like multiples. The Energy Harbor nuclear acquisition added ~4GW of nuclear capacity. Risk is that power price spikes may be mean-reverting and some AI infrastructure development timelines could slip. Position sizing should be modest given the significant run already in the stock."
+            },
+            {
+              "asset": "Taiwan Semiconductor Manufacturing",
+              "tickers": "TSM",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "A rejection of the nuclear analogy implies AI chips should flow more freely globally, reducing export restriction risk for TSMC's customer base; meanwhile TSMC remains the irreplaceable manufacturer of leading-edge AI silicon regardless of geopolitical framing.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "TSM trades at roughly 20-22x forward earnings, a discount to US semiconductor peers despite superior technology leadership at 3nm/2nm nodes. CoWoS advanced packaging capacity remains a bottleneck for AI chip supply, giving TSMC pricing power. Revenue guidance for 2025 implies mid-20% growth. Key risks are Taiwan geopolitical risk premium and potential US tariff/forced onshoring costs, though the Arizona fab buildout partially addresses this. ADS holders should monitor USD/TWD dynamics."
+            },
+            {
+              "asset": "Microsoft Corporation",
+              "tickers": "MSFT",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "If AI is analogous to electricity or internet rather than nuclear weapons, the winners are those embedding AI deeply into existing enterprise workflows; Microsoft's Copilot integration across Office 365, Azure, and GitHub positions it as the default AI layer for enterprise productivity.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "MSFT trades at roughly 30-32x forward earnings. Azure growth re-accelerated to ~33% in the most recent quarter driven by AI workloads. Copilot M365 seat monetization ($30/user/month premium tier) is still in early innings with penetration rates below 10% of the installed base. Key risk is that AI productivity gains compress software spend overall (a deflationary headwind for the industry) and that OpenAI dependency creates strategic concentration risk. FCF yield around 2.5% limits downside cushion at current valuations."
+            },
+            {
+              "asset": "iShares Semiconductor ETF",
+              "tickers": "SOXX",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "If the nuclear analogy is rejected by policymakers and export controls are loosened, the entire semiconductor complex benefits from a larger addressable global market; SOXX provides diversified exposure to this potential policy catalyst.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "SOXX has lagged broader tech indices in 2025 partly due to export control uncertainty and inventory digestion in non-AI segments (PC, mobile, industrial). The ETF's P/E is approximately 25-28x blended forward, with NVDA, AVGO, and TSM as top holdings. A policy shift away from aggressive export restrictions could be a meaningful re-rating catalyst. Investors should watch Congressional export control legislation and BIS rule updates as near-term binary events. Consider as a hedge to single-name AI chip concentration."
+            },
+            {
+              "asset": "Palantir Technologies",
+              "tickers": "PLTR",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "The debate over whether AI should be treated as a national security asset (nuclear analogy) vs. a commercial proliferating technology has direct implications for Palantir, which straddles government AI contracts and commercial enterprise deployment.",
+              "podConviction": 2,
+              "myConviction": 2,
+              "myAnalysis": "PLTR trades at an extremely elevated valuation — roughly 150-180x forward earnings and 40-50x forward revenue — pricing in near-perfect execution. US government AI spending tailwinds are real, and the AIP platform commercial growth (~40% YoY) is accelerating. However, the stock's valuation leaves virtually no margin of safety. If the podcast's thesis is correct that AI proliferates broadly rather than being government-controlled, Palantir's moat in classified/government AI could be smaller than the market currently prices. Watch for entry on significant pullbacks."
+            }
+          ],
+          "createdAt": "2026-05-01T14:03:59.849Z"
+        },
+        {
+          "id": "1777644239840",
+          "title": "The Man Who Saved the World by Disobeying and What It Means for AI",
+          "date": "2026-04-29",
+          "guests": "",
+          "url": "https://www.youtube.com/watch?v=ocNtu-p7DeE",
+          "summary": "This episode draws a parallel between Vasili Arkhipov's decision to disobey orders during the 1962 Cuban Missile Crisis—potentially preventing nuclear war—and the emerging question of whether AI systems should be designed with similar override capabilities or deference to human judgment. The discussion explores the macro and investment implications of AI safety, autonomous AI agents, and the governance frameworks being built around artificial intelligence. Key themes include the tension between AI autonomy and human control, the geopolitical race in AI development, and how these dynamics shape investment opportunities across the AI value chain.",
+          "insights": "- The Arkhipov analogy suggests that rigid rule-following in high-stakes systems can be catastrophic, raising fundamental questions about whether AI should be given ethical override capabilities or kept strictly corrigible\n- The AI safety debate is bifurcating capital allocation: companies building 'corrigible' AI (following human instructions) vs. 'autonomous' AI (capable of independent ethical judgment) may face very different regulatory and commercial outcomes\n- Geopolitical competition between the US and China in AI is accelerating timelines, potentially forcing corners to be cut on safety—a systemic risk that investors in AI infrastructure must price in\n- The 'human in the loop' design philosophy is becoming a key differentiator for enterprise AI adoption, particularly in regulated industries like defense, healthcare, and finance\n- AI governance frameworks (EU AI Act, US executive orders) are creating compliance moats for larger incumbents and headwinds for smaller AI startups\n- The compute arms race remains the most durable investment theme: regardless of which AI philosophy wins, massive infrastructure buildout in chips, data centers, and energy is required\n- Tail-risk scenarios from AI misalignment—analogous to nuclear near-misses—may be underpriced by markets, suggesting optionality value in AI safety-focused companies and hedges",
+          "investmentIdeas": [
+            {
+              "asset": "NVIDIA Corporation",
+              "tickers": "NVDA",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "As the episode underscores the acceleration of the AI arms race between the US and China, NVIDIA remains the dominant supplier of GPU compute that underpins both corrigible and autonomous AI development, making it the most direct beneficiary regardless of which AI governance philosophy prevails.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "NVDA trades around 24x forward earnings (as of early 2026), elevated but justified by ~100% YoY data center revenue growth. The Blackwell architecture ramp and GB200 NVL72 cluster demand from hyperscalers remains robust. Key risk is US export controls tightening further toward China, which could impair ~20% of addressable market. Entry on pullbacks toward $100-110 range offers better risk/reward given geopolitical overhang."
+            },
+            {
+              "asset": "Palantir Technologies",
+              "tickers": "PLTR",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "The podcast's emphasis on 'human in the loop' AI design and AI systems operating within tightly controlled governance frameworks plays directly into Palantir's AIP (Artificial Intelligence Platform) architecture, which is purpose-built for defense and enterprise clients demanding human oversight and auditability.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "PLTR reported Q1 2026 US commercial revenue growth of ~71% YoY, with government revenue accelerating as defense AI spending rises. The stock trades at a steep ~80x forward earnings, reflecting significant growth premium. The AI safety/governance narrative is a secular tailwind for their 'ontology' approach. Valuation is the primary risk; position sizing accordingly and watch for US government budget volatility under continuing resolution environments."
+            },
+            {
+              "asset": "Microsoft Corporation",
+              "tickers": "MSFT",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Microsoft's deep integration of OpenAI models into enterprise software, combined with its investment in AI safety research through OpenAI's governance structure, positions it as a key beneficiary of the trend toward controlled, auditable AI deployments that enterprises and regulators are demanding.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "MSFT trades at approximately 32x forward earnings with Azure AI services growing ~33% YoY as of recent quarters. The company's $13B+ investment in OpenAI creates both upside optionality and concentration risk. Copilot monetization across Office 365's ~400M seat base remains underpenetrated. At current levels, MSFT offers a more reasonable entry than pure-play AI names with significant downside protection from its legacy software moat."
+            },
+            {
+              "asset": "Alphabet Inc.",
+              "tickers": "GOOGL",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Google DeepMind's work on AI alignment and safety research (including Constitutional AI concepts) positions Alphabet as a key player in the governance-compliant AI infrastructure space, while its TPU infrastructure and Gemini models compete aggressively in the AI race discussed in the episode.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "GOOGL trades at approximately 20x forward earnings—a notable discount to MSFT—despite comparable AI capabilities and superior advertising cash flow generation (~$70B+ operating cash flow annually). The AI Overviews rollout in Search and Gemini integration into GCP are early-stage monetization vectors. Antitrust risk (DOJ search remedies) is the key overhang but may be a buying opportunity if core search remains intact. Strong risk/reward at current valuation."
+            },
+            {
+              "asset": "Vistra Energy / Nuclear Power Operators",
+              "tickers": "VST",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "The episode's focus on the scale of AI compute buildout implies massive, sustained electricity demand growth; nuclear power as 24/7 carbon-free baseload is increasingly contracted by hyperscalers, making nuclear operators direct beneficiaries of the AI infrastructure arms race.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "VST has rallied sharply but pulled back ~30% from 2024 highs, offering a re-entry point. The company generates ~$4B+ in adjusted EBITDA annually and is aggressively pursuing data center power purchase agreements. Nuclear relicensing (e.g., Three Mile Island restart for Microsoft) validates the thesis. Key risks include regulatory delays and power purchase agreement pricing pressure. Constellation Energy (CEG) is an alternative pure-play nuclear operator worth monitoring."
+            },
+            {
+              "asset": "Anthropic / AI Safety-Focused Private Companies",
+              "tickers": "",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "The episode's Arkhipov framing suggests that AI companies explicitly building in ethical override capabilities and safety-first architectures (like Anthropic's Constitutional AI) may gain significant regulatory favor and enterprise contracts as governance frameworks tighten globally.",
+              "podConviction": 4,
+              "myConviction": 3,
+              "myAnalysis": "Anthropic is private, valued at ~$60B+ in recent funding rounds, with Claude models gaining enterprise share. Exposure is available indirectly through Amazon (AMZN), which has committed $4B+ to Anthropic and integrates Claude into AWS Bedrock. AMZN trades at ~35x forward earnings with AWS growing ~17% YoY. The AI safety regulatory moat thesis is compelling but early—monitor EU AI Act enforcement timelines as a catalyst."
+            },
+            {
+              "asset": "iShares Semiconductor ETF",
+              "tickers": "SOXX",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Broad semiconductor exposure captures the AI compute arms race theme discussed throughout the episode without single-stock concentration risk, as the US-China AI competition ensures sustained capital expenditure on chip manufacturing and advanced packaging regardless of which AI governance model wins.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "SOXX holds diversified exposure across NVDA, AMD, AVGO, AMAT, LRCX, and TSM ADRs. The ETF has corrected ~20-25% from late 2024 peaks, offering better entry than recent highs. The Philadelphia Semiconductor Index forward P/E is approximately 22x, below the 5-year average of 25x. Key risk is escalating US-China chip war restrictions and a potential global capex slowdown. Dollar-cost averaging into weakness aligns with the multi-year AI infrastructure buildout thesis."
+            },
+            {
+              "asset": "Defense AI / Autonomous Systems ETF Basket (ANDURIL, Shield AI proxies)",
+              "tickers": "DFEN, ITA",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "The geopolitical AI race framing in the episode—where the US and adversaries compete for AI superiority—directly benefits defense technology companies building autonomous and semi-autonomous AI systems for military applications, an area seeing rapid government budget prioritization.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "ITA (iShares US Aerospace & Defense ETF) holds RTX, LMT, NOC, and GD as top positions and trades at ~22x forward earnings. Defense budgets are rising globally (NATO 2% GDP commitments being revised upward). Pure-play defense AI companies like Anduril and Shield AI remain private. The 'human in the loop' AI mandate in US DoD procurement (DoD Directive 3000.09) creates compliance moats for established primes over purely autonomous systems, which may limit upside from the full autonomy thesis discussed in the episode."
+            }
+          ],
+          "createdAt": "2026-05-01T14:03:59.840Z"
+        },
+        {
+          "id": "1777644239830",
+          "title": "How GPT-5, Claude, and Gemini are actually trained and served – Reiner Pope",
+          "date": "2026-04-29",
+          "guests": "Reiner Pope",
+          "url": "https://www.youtube.com/watch?v=xmkSf5IS-zw",
+          "summary": "Reiner Pope, CEO of MatX and former Google TPU architect, delivers a technical blackboard lecture on how frontier LLMs like GPT-5, Claude, and Gemini are actually trained and served. He uses first-principles math — batch sizes, memory bandwidth, compute costs — to deduce what the major AI labs are doing operationally. The episode touches on hardware economics, inference efficiency, MoE architectures, pipeline parallelism, RL over-training beyond Chinchilla-optimal, and the true memory cost of long-context models.",
+          "insights": "- Batch size is the central lever in LLM inference economics: larger batches amortize memory bandwidth costs and drive down per-token cost, but increase latency — labs must constantly trade off throughput vs. response speed\n- From public API prices alone, you can back-calculate the number of GPUs a lab is using per query, their utilization rates, and rough hardware capex — this is a powerful competitive intelligence tool\n- Mixture-of-Experts (MoE) models like Gemini require careful rack-level topology planning; routing experts across nodes introduces network bottlenecks that constrain how MoE can scale\n- Pipeline parallelism spreads model layers across racks but introduces 'pipeline bubbles' — idle compute time — which Ilya Sutskever famously warned is not wise at scale, suggesting dense all-to-all interconnects are preferred\n- Because of reinforcement learning (RL/RLHF), modern frontier models may be trained 100x beyond Chinchilla-optimal token counts on a given parameter count, meaning compute efficiency per parameter has radically improved and smaller models can now match older larger ones\n- Long-context (e.g. 1M token) inference is extremely memory-intensive due to KV cache size; API pricing for long-context reveals the true hardware cost and suggests long-context is still a premium, capital-intensive capability\n- Custom silicon (TPUs, Trainium, MatX chips) is increasingly decisive: the gap between a well-optimized custom chip and a generic GPU for transformer workloads is widening, making chip design a critical moat\n- Convergent evolution between neural net architectures and cryptographic primitives suggests the math of efficient computation is narrowing toward a small set of optimal operations, which has implications for which hardware designs will dominate",
+          "investmentIdeas": [
+            {
+              "asset": "NVIDIA",
+              "tickers": "NVDA",
+              "direction": "Long",
+              "timestamp": "00:00",
+              "thesis": "NVIDIA GPUs remain the dominant compute substrate for both training and inference of frontier LLMs; the episode's math on batch sizes, memory bandwidth, and parallelism strategies all implicitly validate the H100/H200/B200 as the baseline against which all alternatives are measured.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "NVDA trades at ~28x forward earnings (April 2026) with data center revenue run-rating above $40B/quarter. The podcast's analysis of inference scaling and RL over-training implies sustained, growing GPU demand well beyond initial training runs. Key risk is custom silicon displacement (Google TPUs, AWS Trainium, MatX), but NVIDIA's CUDA ecosystem and supply chain scale remain formidable moats. Pullbacks toward the $800–900 range (post-split adjusted) have historically offered attractive entry points."
+            },
+            {
+              "asset": "MatX (Private)",
+              "tickers": "",
+              "direction": "Watch",
+              "timestamp": "00:00",
+              "thesis": "MatX is building custom inference chips designed from the ground up for transformer workloads, targeting the cost and latency inefficiencies of using general-purpose GPUs for LLM serving; Reiner Pope's background spanning chip design, compilers, and TPU architecture at Google gives the team unusual full-stack credibility.",
+              "podConviction": 5,
+              "myConviction": 4,
+              "myAnalysis": "Private company — no public ticker. Host Dwarkesh Patel discloses angel investment, signaling early-stage. The custom silicon opportunity is real: Google's TPUs deliver ~3–5x better perf/$ on transformer inference vs. H100s in some benchmarks. The hyperscaler captive chip trend (TPU, Trainium, Inferentia, Maia) validates the market but also represents competition. Watch for Series A/B funding rounds and any hyperscaler or lab partnership announcements as key catalysts."
+            },
+            {
+              "asset": "Google / Alphabet",
+              "tickers": "GOOGL",
+              "direction": "Long",
+              "timestamp": "31:59",
+              "thesis": "Google's TPU infrastructure and deep expertise in MoE architectures (Gemini is MoE) give it a structural cost advantage in serving large models at scale; the episode highlights how Google's vertical integration from chip to model is difficult to replicate.",
+              "podConviction": 3,
+              "myConviction": 4,
+              "myAnalysis": "GOOGL trades at ~18x forward earnings with Google Cloud growing ~28% YoY as of Q1 2026. TPU v5/v6 gives Google potentially 40–60% lower inference cost vs. GPU-based rivals, which is a durable margin advantage in the AI services race. Risks include antitrust scrutiny, Search disruption from AI competitors, and execution risk on Gemini product rollouts. The stock's relatively low multiple vs. pure-play AI names offers a margin of safety for the AI infrastructure thesis."
+            },
+            {
+              "asset": "Amazon Web Services / Amazon",
+              "tickers": "AMZN",
+              "direction": "Long",
+              "timestamp": "47:02",
+              "thesis": "AWS Trainium and Inferentia chips position Amazon to capture inference workloads at lower cost than NVIDIA GPU-based alternatives; as pipeline parallelism and MoE serving complexity grow, hyperscalers with custom silicon have a natural advantage in efficient large-scale deployment.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "AMZN trades at ~32x forward earnings; AWS operating income grew ~61% YoY in Q1 2026, now representing ~60% of total company operating income. Trainium2 benchmarks show competitive performance on training workloads vs. H100s, and Inferentia3 targets inference cost reduction. Key risk is that AWS custom silicon lags NVIDIA on software ecosystem maturity (no equivalent to CUDA), limiting adoption outside Amazon's own workloads. Strong free cash flow generation supports continued capex investment."
+            },
+            {
+              "asset": "Microsoft / Azure",
+              "tickers": "MSFT",
+              "direction": "Long",
+              "timestamp": "00:00",
+              "thesis": "Microsoft's exclusive OpenAI partnership means it serves GPT-5 and future frontier models via Azure; the episode's analysis of inference economics — showing how batch size and hardware utilization determine profitability — directly maps to Azure AI's ability to monetize at scale.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "MSFT trades at ~30x forward earnings with Azure growing ~35% YoY as of Q1 2026. Azure AI services (Copilot, OpenAI API) are becoming a meaningful revenue contributor. The podcast's insight that long-context inference is disproportionately expensive is relevant: if OpenAI/Azure's long-context pricing is not adequately premium, margin pressure could emerge. The Maia custom chip effort is nascent but directionally correct. Core risk is OpenAI relationship dependency and potential conflict of interest as OpenAI expands direct distribution."
+            },
+            {
+              "asset": "Broadcom",
+              "tickers": "AVGO",
+              "direction": "Long",
+              "timestamp": "31:59",
+              "thesis": "Broadcom designs custom AI accelerators (XPUs) for Google, Meta, and others, and its networking silicon (Tomahawk, Jericho) is critical to the rack-level topology required for MoE and pipeline-parallel model serving described in the episode.",
+              "podConviction": 2,
+              "myConviction": 4,
+              "myAnalysis": "AVGO trades at ~24x forward earnings with AI revenue guided to $4.7B+ per quarter in FY2026. The episode explicitly highlights how MoE routing and pipeline parallelism create intense inter-node networking demands — this is Broadcom's core networking silicon market. Three hyperscaler XPU design wins (Google TPU, Meta MTIA, rumored Apple) provide revenue visibility. Valuation is reasonable relative to growth; key risk is customer concentration and the long design-to-revenue cycle of custom silicon."
+            },
+            {
+              "asset": "Arista Networks",
+              "tickers": "ANET",
+              "direction": "Long",
+              "timestamp": "31:59",
+              "thesis": "As MoE models require expert routing across hundreds of GPUs/TPUs within and across racks, ultra-low-latency, high-bandwidth networking becomes a bottleneck; Arista's Ethernet-based AI cluster networking is positioned as an alternative to InfiniBand for AI fabric.",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "ANET trades at ~35x forward earnings; AI/cloud networking revenue is accelerating with multiple hyperscaler wins. The podcast's discussion of MoE cross-rack communication directly validates the need for high-radix, low-latency switches. Key risk is Infiniband/NVLink competition from NVIDIA's own networking stack, which remains dominant in the highest-performance clusters. Watch for hyperscaler capex commentary on Ethernet-based AI networking as a catalyst."
+            },
+            {
+              "asset": "Long-Context AI API Providers (OpenAI, Anthropic via proxies)",
+              "tickers": "",
+              "direction": "Watch",
+              "timestamp": "1:32:52",
+              "thesis": "The episode demonstrates that 1M-token context windows require massive KV-cache memory, implying long-context inference is 10–100x more expensive per token than short-context; current API pricing may not fully reflect this cost, suggesting either pricing increases ahead or margin compression for providers.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "Anthropic (private) and OpenAI (private) are not directly investable, but this thesis has implications for memory chip demand. A 1M-token context window at FP16 for a 100B parameter model requires hundreds of GBs of HBM just for KV cache per concurrent user — this is a direct tailwind for HBM suppliers. SK Hynix and Samsung (KRX: 000660, 005930) are primary beneficiaries; Micron (MU) is the U.S.-listed proxy. MU trades at ~10x forward earnings with HBM revenue expected to triple in 2025–2026, making it an attractive way to play the long-context memory demand theme."
+            }
+          ],
+          "createdAt": "2026-05-01T14:03:59.830Z"
+        },
+        {
+          "id": "1777644239821",
+          "title": "AI Regulation's Authoritarian Problem",
+          "date": "2026-04-28",
+          "guests": "",
+          "url": "https://www.youtube.com/watch?v=5Wvpc_2-7-U",
+          "summary": "The episode examines the geopolitical and regulatory landscape surrounding AI development, focusing on the tension between democratic oversight frameworks and authoritarian AI deployment models. The discussion explores how differing regulatory approaches between the US, EU, and China may shape competitive dynamics in the AI industry. Investment implications span AI infrastructure, semiconductor supply chains, and the companies best positioned to navigate or benefit from the evolving regulatory environment.",
+          "insights": "- Authoritarian governments face fewer friction points in deploying AI at scale, potentially accelerating their competitive position versus democracies hamstrung by regulatory debate\n- US AI regulation remains fragmented at the federal level, creating both uncertainty for incumbents and potential moats for compliant large-cap players\n- The EU AI Act is creating compliance costs that disproportionately burden smaller AI startups relative to hyperscalers, consolidating market power among big tech\n- China's state-directed AI investment model prioritizes strategic sectors (defense, surveillance, manufacturing) over consumer applications, diverging fundamentally from US/EU approaches\n- Semiconductor export controls remain the most powerful lever democratic governments hold over adversarial AI development, keeping NVIDIA and ASML in a geopolitically sensitive position\n- Companies with established government/defense AI contracts (defense primes, cloud hyperscalers with FedRAMP authorization) have durable revenue visibility regardless of civilian regulatory outcomes\n- The regulatory overhang on open-source AI models could bifurcate the market between heavily regulated proprietary systems and a less-governed open-source ecosystem",
+          "investmentIdeas": [
+            {
+              "asset": "NVIDIA Corporation",
+              "tickers": "NVDA",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "NVIDIA remains the dominant supplier of AI training and inference chips globally; export control regimes reinforce its domestic moat while government AI buildout programs sustain hyperscaler capex cycles that flow directly to GPU demand.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "NVDA trades around 24x forward earnings (as of late April 2026) following a period of multiple compression from 2024 highs, yet data center revenue continues to grow at 40%+ YoY. Export controls on H20 chips to China create near-term headwinds (~$15B in potential lost revenue flagged in recent filings) but also reduce the risk of enabling a strategic rival. Blackwell architecture ramp and sovereign AI deals (UAE, Saudi Arabia, EU member states) provide demand diversification. Key risk is a cyclical capex pullback from hyperscalers if AI monetization disappoints."
+            },
+            {
+              "asset": "Microsoft Corporation",
+              "tickers": "MSFT",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Microsoft's deep integration across government, enterprise, and consumer AI through Azure and Copilot positions it as the default compliant AI platform in regulated Western markets; its FedRAMP High authorization gives it durable government AI revenue regardless of civilian regulatory shifts.",
+              "podConviction": 4,
+              "myConviction": 4,
+              "myAnalysis": "MSFT Azure OpenAI Service is embedded in the US federal cloud framework with existing JEDI/JWCC contract lineage. The stock trades around 30x forward earnings with 15% revenue growth guided for FY2026. EU AI Act compliance costs are manageable for a company of MSFT's scale but create barriers for smaller competitors. Primary risk is antitrust scrutiny of the OpenAI relationship and potential forced structural changes to bundling."
+            },
+            {
+              "asset": "Alphabet Inc.",
+              "tickers": "GOOGL",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Google's vertically integrated AI stack (TPUs, Gemini models, Cloud, Search) and heavy investment in regulatory engagement across the EU and US positions it as a key beneficiary of a consolidated, compliance-focused AI market where scale and legal resources matter.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "GOOGL trades at approximately 19x forward earnings, a discount to peers, with Search ad revenue showing resilience despite AI chatbot disruption fears. Google Cloud is growing ~28% YoY and approaching meaningful profitability. The EU's AI Act creates compliance overhead, but Google has the legal and technical infrastructure to absorb it. Key risk is a DOJ-mandated break-up of Search/Advertising or Chrome, which remains an overhang that the market has not fully priced."
+            },
+            {
+              "asset": "Palantir Technologies",
+              "tickers": "PLTR",
+              "direction": "Long",
+              "timestamp": "",
+              "thesis": "Palantir is uniquely positioned at the intersection of AI and government/defense deployment, with its AIP platform gaining traction in both US federal agencies and allied nation-states that need trustworthy, auditable AI systems—a direct play on the 'democratic AI governance' theme.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "PLTR has seen US government revenue accelerate, with Q1 2026 government segment growth reported above 40% YoY. The stock remains expensive at roughly 80x forward earnings, pricing in substantial execution. NATO and Five Eyes partner deployments provide international diversification. The valuation is the primary risk—any growth deceleration or government budget sequestration could compress multiples significantly. Not a value entry but a structural thematic hold."
+            },
+            {
+              "asset": "ASML Holding",
+              "tickers": "ASML",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "ASML is the sole supplier of EUV lithography equipment globally; its position in the AI regulatory debate is asymmetric—export controls to China reduce its TAM but also reinforce Western semiconductor supply chain security narratives that justify government support and domestic capex.",
+              "podConviction": 3,
+              "myConviction": 3,
+              "myAnalysis": "ASML trades around 25x forward earnings after de-rating from peak valuations. China represented ~27% of 2024 revenue; further export restrictions targeting DUV tools (DSMR) could create a meaningful headwind. However, TSMC, Samsung, and Intel advanced node ramps are multi-year demand drivers. The watch rating reflects the binary nature of export control escalation risk before adding to positions. Longer-term, ASML has no substitute in EUV—its moat is arguably the deepest in the semiconductor stack."
+            },
+            {
+              "asset": "iShares Semiconductor ETF",
+              "tickers": "SOXX",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "Broad semiconductor exposure captures the AI infrastructure buildout theme while diversifying single-stock regulatory and export control risk; regulatory fragmentation between US and China is both a risk (revenue loss) and opportunity (domestic capex incentives under CHIPS Act).",
+              "podConviction": 2,
+              "myConviction": 3,
+              "myAnalysis": "SOXX has underperformed QQQ YTD 2026 due to China trade tensions and export control uncertainty, creating a potentially attractive relative entry. CHIPS Act-related domestic fab investments (Intel, TSMC Arizona, Samsung Texas) are multi-year capex catalysts. The ETF's P/E is around 20x forward, below the S&P 500 tech sector average. Risk is a prolonged US-China tech decoupling that reduces the global addressable market for US-designed chips."
+            },
+            {
+              "asset": "C3.ai",
+              "tickers": "AI",
+              "direction": "Short",
+              "timestamp": "",
+              "thesis": "C3.ai faces significant execution risk as an enterprise AI vendor without the scale to absorb EU AI Act compliance costs or compete with hyperscaler bundled offerings; revenue growth has been inconsistent and the path to profitability remains unclear in an increasingly consolidating market.",
+              "podConviction": 2,
+              "myConviction": 2,
+              "myAnalysis": "AI stock has repeatedly failed to sustain revenue growth above 20% YoY despite heavy marketing spend; the company remains unprofitable with a burn rate that requires capital market access. At roughly 8x forward revenue, the valuation assumes a growth acceleration that has not materialized. Regulatory complexity actually hurts mid-tier AI vendors more than hyperscalers, squeezing C3.ai's niche. Short thesis risk: the stock is heavily retail-sentiment driven and could squeeze on any positive government contract news."
+            },
+            {
+              "asset": "VanEck Semiconductor ETF (China-exposed names via short)",
+              "tickers": "SMH",
+              "direction": "Watch",
+              "timestamp": "",
+              "thesis": "If US-China AI regulatory decoupling accelerates, names within SMH with high China revenue exposure (Qualcomm, Broadcom, Texas Instruments) face asymmetric downside from additional export controls or Chinese retaliatory measures.",
+              "podConviction": 2,
+              "myConviction": 2,
+              "myAnalysis": "Qualcomm derives ~60% of revenue from China-linked customers; QCOM trades at ~13x forward earnings suggesting some risk is priced but not fully. A selective pair trade—long NVDA/ASML vs short QCOM within the semiconductor complex—could isolate AI infrastructure tailwinds from China trade risk. SMH as a whole trades at a 10% discount to its 3-year average forward P/E, making outright short exposure less compelling than tactical hedges around specific earnings events or export control announcements."
+            }
+          ],
+          "createdAt": "2026-05-01T14:03:59.822Z"
+        }
+      ],
+      "name": "Dwarkesh Patel",
+      "publisher": "",
+      "website": "https://youtu.be/xmkSf5IS-zw?si=zt3xdz7QXIbZEY0S",
+      "description": "",
+      "createdAt": "2026-05-01T14:03:59.810Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "1775702985780",
+      "name": "Joel Fleischman",
+      "company": "Enduring",
+      "role": "Partner",
+      "email": "joel@enduringinvestments.com.au",
+      "phone": "",
+      "type": "LP",
+      "status": "Active",
+      "lastContact": "2026-04-09",
+      "notes": "",
+      "createdAt": "2026-04-09T02:49:45.780Z",
+      "owner": "Joel"
+    },
+    {
+      "id": "1776214237488",
+      "name": "Chris Wheldon",
+      "company": "Kindred Partners",
+      "role": "",
+      "email": "chris.wheldon@kindredpartners.au",
+      "phone": "",
+      "type": "Potential LP",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-15T00:50:37.488Z"
+    },
+    {
+      "id": "1776214651927",
+      "name": "Anthony Ryan",
+      "company": "Kotti Capital",
+      "role": "",
+      "email": "anthony@kotti.capital",
+      "phone": "",
+      "type": "Potential LP",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-15T00:57:31.927Z"
+    },
+    {
+      "id": "1776214877598",
+      "name": "Tom Batterbury",
+      "company": "",
+      "role": "",
+      "email": "tom@harth.build",
+      "phone": "",
+      "type": "Potential LP",
+      "status": "Active",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-15T01:01:17.598Z"
+    },
+    {
+      "id": "1776214943891",
+      "name": "Luke",
+      "company": "Peter's",
+      "role": "",
+      "email": "luke@lilyum.com.au",
+      "phone": "",
+      "type": "Potential LP",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Joel",
+      "notes": "",
+      "createdAt": "2026-04-15T01:02:23.891Z"
+    },
+    {
+      "id": "1776216092490",
+      "name": "John Kelly",
+      "company": "",
+      "role": "",
+      "email": "john.t.kelly@outlook.com",
+      "phone": "",
+      "type": "Advisor",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-15T01:21:32.490Z"
+    },
+    {
+      "id": "1777461599055",
+      "name": "Antony Delo",
+      "company": "",
+      "role": "",
+      "email": "antony.delo@williambuck.com",
+      "phone": "",
+      "type": "Advisor",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-29T11:19:59.055Z"
+    },
+    {
+      "id": "1777461961322",
+      "name": "Dan Atkin",
+      "company": "",
+      "role": "",
+      "email": "",
+      "phone": "",
+      "type": "Advisor",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-29T11:26:01.323Z"
+    },
+    {
+      "id": "1777465993340",
+      "name": "Mike Thanos",
+      "company": "",
+      "role": "",
+      "email": "",
+      "phone": "",
+      "type": "Potential LP",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-29T12:33:13.340Z"
+    },
+    {
+      "id": "1777466434692",
+      "name": "Illan",
+      "company": "",
+      "role": "",
+      "email": "",
+      "phone": "",
+      "type": "Existing LP",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-04-29T12:40:34.692Z"
+    },
+    {
+      "id": "1778130624766",
+      "name": "Dan Cohen",
+      "company": "",
+      "role": "",
+      "email": "",
+      "phone": "",
+      "type": "Potential LP",
+      "status": "Prospect",
+      "lastContact": "",
+      "owner": "Rohen",
+      "notes": "",
+      "createdAt": "2026-05-07T05:10:24.766Z"
+    }
+  ]
+}
